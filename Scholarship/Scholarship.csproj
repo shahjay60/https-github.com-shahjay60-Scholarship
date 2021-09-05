@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminDashbordController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -814,6 +815,7 @@
     <Content Include="ScholarshipModel.edmx.diagram">
       <DependentUpon>ScholarshipModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\AdScholarship\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
