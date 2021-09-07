@@ -158,7 +158,7 @@
             mdata.PrincipalName = $("#PrincipleName").val();
             mdata.SchoolEmailId = $("#SchoolEmailId").val();
             mdata.Goal_In_Life = $("#Goal").val();
-            mdata.Apply_Scholarship = $('input[name="inlineRadioOptions"]:checked').val();;
+            mdata.Apply_Scholarship = $('input[name="inlineRadioOptions"]:checked').val();
 
             $.ajax({
                 type: "POST",
@@ -167,7 +167,6 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-
                     if (result != 0) {
                         console.log(result);
                         var sid = result;

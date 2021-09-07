@@ -25,6 +25,17 @@
           <Property Name="InnerMessage" Type="nvarchar(max)" />
           <Property Name="CreatedDatetime" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblScholarship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ExamDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblStudentDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -53,6 +64,7 @@
         <EntityContainer Name="ScholarshipModelStoreContainer">
           <EntitySet Name="tbl_login" EntityType="Self.tbl_login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -71,6 +83,7 @@
           <EntitySet Name="tbl_login" EntityType="Self.tbl_login" />
           <EntitySet Name="tblExceptions" EntityType="ScholarshipModel.tblException" />
           <EntitySet Name="tblStudentDetails" EntityType="ScholarshipModel.tblStudentDetail" />
+          <EntitySet Name="tblScholarships" EntityType="ScholarshipModel.tblScholarship" />
         </EntityContainer>
         <EntityType Name="tblException">
           <Key>
@@ -108,6 +121,17 @@
           <Property Name="Apply_Scholarship" Type="Boolean" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblScholarship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ExamDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -158,6 +182,18 @@
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
                 <ScalarProperty Name="SurName" ColumnName="SurName" />
                 <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblScholarships">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblScholarship">
+              <MappingFragment StoreEntitySet="tblScholarship">
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

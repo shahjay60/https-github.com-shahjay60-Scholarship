@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminDashbordController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
+    <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -141,6 +142,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminLoginDomain.cs" />
+    <Compile Include="Models\StudentLoginDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScholarshipModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -158,6 +160,9 @@
       <DependentUpon>ScholarshipModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="tblException.cs">
+      <DependentUpon>ScholarshipModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblScholarship.cs">
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStudentDetail.cs">
@@ -229,6 +234,32 @@
     <Content Include="Areas\Admin\Assets\plugins\chart.js\Chart.js" />
     <Content Include="Areas\Admin\Assets\plugins\chart.js\Chart.min.css" />
     <Content Include="Areas\Admin\Assets\plugins\chart.js\Chart.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-bs4\css\dataTables.bootstrap4.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-bs4\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-bs4\js\dataTables.bootstrap4.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-bs4\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\css\buttons.bootstrap4.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.bootstrap4.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.flash.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.flash.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.html5.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.print.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\buttons.print.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\css\responsive.bootstrap4.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\js\dataTables.responsive.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\js\responsive.bootstrap4.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables-responsive\js\responsive.bootstrap4.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Areas\Admin\Assets\plugins\datatables\jquery.dataTables.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\daterangepicker\daterangepicker.css" />
     <Content Include="Areas\Admin\Assets\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Areas\Admin\Assets\plugins\fontawesome-free\css\all.css" />
@@ -250,6 +281,10 @@
     <Content Include="Areas\Admin\Assets\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Areas\Admin\Assets\plugins\icheck-bootstrap\icheck-bootstrap.css" />
     <Content Include="Areas\Admin\Assets\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="Areas\Admin\Assets\plugins\inputmask\inputmask.js" />
+    <Content Include="Areas\Admin\Assets\plugins\inputmask\inputmask.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\inputmask\jquery.inputmask.js" />
+    <Content Include="Areas\Admin\Assets\plugins\inputmask\jquery.inputmask.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\jquery-knob\jquery.knob.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
     <Content Include="Areas\Admin\Assets\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
@@ -270,6 +305,8 @@
     <Content Include="Areas\Admin\Assets\plugins\jquery\jquery.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\jquery\jquery.slim.js" />
     <Content Include="Areas\Admin\Assets\plugins\jquery\jquery.slim.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\jszip\jszip.js" />
+    <Content Include="Areas\Admin\Assets\plugins\jszip\jszip.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\moment\locales.js" />
     <Content Include="Areas\Admin\Assets\plugins\moment\locales.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\moment\locale\af.js" />
@@ -416,6 +453,9 @@
     <Content Include="Areas\Admin\Assets\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
     <Content Include="Areas\Admin\Assets\plugins\overlayScrollbars\js\OverlayScrollbars.js" />
     <Content Include="Areas\Admin\Assets\plugins\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\pdfmake\pdfmake.js" />
+    <Content Include="Areas\Admin\Assets\plugins\pdfmake\pdfmake.min.js" />
+    <Content Include="Areas\Admin\Assets\plugins\pdfmake\vfs_fonts.js" />
     <Content Include="Areas\Admin\Assets\plugins\sparklines\sparkline.js" />
     <Content Include="Areas\Admin\Assets\plugins\summernote\lang\summernote-ar-AR.js" />
     <Content Include="Areas\Admin\Assets\plugins\summernote\lang\summernote-ar-AR.min.js" />
@@ -816,6 +856,10 @@
       <DependentUpon>ScholarshipModel.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\AdScholarship\Index.cshtml" />
+    <Content Include="Areas\Admin\Assets\plugins\pdfmake\pdfmake.js.map" />
+    <Content Include="Areas\Admin\Assets\plugins\pdfmake\pdfmake.min.js.map" />
+    <Content Include="Areas\Admin\Views\AdScholarship\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\AdScholarship\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -847,6 +891,7 @@
     <Content Include="Views\Scholarship\Index.cshtml" />
     <Content Include="Views\Exception\Index.cshtml" />
     <Content Include="Views\Login\ChangePwd.cshtml" />
+    <Content Include="Views\Scholarship\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
