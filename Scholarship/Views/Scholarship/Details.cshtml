@@ -3,32 +3,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .container {
-        padding: 2rem 0rem;
-    }
 
-
-    .modal-header .close {
-        margin-top: -1.5rem;
-    }
-
-    .form-title {
-        margin: -2rem 0rem 2rem;
-    }
-
-    .btn-round {
-        border-radius: 3rem;
-    }
-
-    .delimiter {
-        padding: 1rem;
-    }
-
-    .signup-section {
-        padding: 0.3rem 0rem;
-    }
-</style>
 
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
     <div class="container">
@@ -53,7 +28,7 @@
 </div>
 
 <div class="site-section">
-    <input type="hiddend" id="hdnScholarshipid" value="@Model.Id" />
+    <input type="hidden" id="hdnScholarshipid" value="@Model.Id" />
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">

@@ -30,7 +30,7 @@ namespace Scholarship.Controllers
             try
             {
                 mdata.UserName = mdata.EmailId;
-                mdata.Password = RandomString(4, false);
+                mdata.Password = RandomString(6, false);
 
                 entity.tblStudentDetails.Add(mdata);
                 entity.SaveChanges();

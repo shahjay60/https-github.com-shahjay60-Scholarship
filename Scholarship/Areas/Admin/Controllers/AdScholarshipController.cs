@@ -27,6 +27,10 @@ namespace Scholarship.Areas.Admin.Controllers
         {
             try
             {
+                System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex( " <.*?> ");
+
+
+                model.Details= rx.Replace(model.Details, "");
                 entity.tblScholarships.Add(model);
                 entity.SaveChanges();
 
