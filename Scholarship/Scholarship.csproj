@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminDashbordController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdStudentDetailsController.cs" />
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
@@ -647,6 +648,7 @@
     <Content Include="Assests\images\course_5.jpg" />
     <Content Include="Assests\images\course_6.jpg" />
     <Content Include="Assests\images\hero_1.jpg" />
+    <Content Include="Assests\images\Logo Design-01.jpg" />
     <Content Include="Assests\images\logo.jpg" />
     <Content Include="Assests\images\logo.png" />
     <Content Include="Assests\images\person_1.jpg" />
@@ -860,6 +862,8 @@
     <Content Include="Areas\Admin\Assets\plugins\pdfmake\pdfmake.min.js.map" />
     <Content Include="Areas\Admin\Views\AdScholarship\Add.cshtml" />
     <Content Include="Areas\Admin\Views\AdScholarship\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdStudentDetails\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdStudentDetails\Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
