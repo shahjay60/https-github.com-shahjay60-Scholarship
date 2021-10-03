@@ -31,6 +31,18 @@ namespace Scholarship.Controllers
             else
                 return Json(Message, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult StudentLogin(StudentLoginDomain model)
+        {
+            var data = entity.tblStudentDetails.ToList().Where(x => x.UserName == model.UserName && x.Password == model.Password);
+            string Message = "Invalid email or password";
+
+            if (data != null)
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            else
+                return Json(Message, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ChangePwd()
         {
             return View();

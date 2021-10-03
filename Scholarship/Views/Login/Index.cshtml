@@ -43,8 +43,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="submit" value="Log In" class="btn btn-primary btn-lg px-5">
-                        <a href="@Url.Action("Index","Register")"  class="btn btn-info btn-lg px-5">Register</a>
+                        <input type="submit" value="Log In" class="btn btn-primary btn-lg px-5" id="btnLogin">
+                        <a href="@Url.Action("Index","Register")" class="btn btn-info btn-lg px-5">Register</a>
                     </div>
                 </div>
             </div>
@@ -52,4 +52,37 @@
     </div>
 </div>
 
+<script src="~/Assests/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).on('keypress', function (e) {
+        if (e.which == 13) {
+            fnCheckLogin();
+        }
+    });
+    $("#btnLogin").click(function () {
+        fnCheckLogin();
+    });
+    function fnCheckLogin() {
+
+        var StudentLoginDomain = {};
+        StudentLoginDomain.UserName = $("#username").val();
+        StudentLoginDomain.Password = $("#pword").val();
+            $.ajax({
+                type: "POST",
+                url:'@Url.Action("StudentLogin", "Login")',
+                data: JSON.stringify(StudentLoginDomain),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    if (response == "Success") {
+                        window.location.href = '@Url.Action("Index", "Student/STStudent")'
+                    }
+                    else {
+                        $("#error").text(response).css('color','red')
+                    }
+                }
+            });
+        }
+</script>
 

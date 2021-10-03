@@ -11,4 +11,5 @@ namespace Scholarship.Models
         public string Password { get; set; }
 
     }
+    
 }

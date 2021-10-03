@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -133,6 +136,8 @@
     <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdStudentDetailsController.cs" />
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
+    <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
+    <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -683,6 +688,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Log.txt" />
     <Content Include="ScholarshipModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ScholarshipModel.Context.cs</LastGenOutput>
@@ -864,6 +870,9 @@
     <Content Include="Areas\Admin\Views\AdScholarship\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AdStudentDetails\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdStudentDetails\Detail.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Areas\Student\Views\STStudent\Index.cshtml" />
+    <Content Include="Areas\Student\Views\STLogin\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -900,9 +909,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Data\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>

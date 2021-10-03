@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -12,10 +13,11 @@ namespace Scholarship.Controllers
 {
     public class RegisterController : Controller
     {
-        private string Host = ConfigurationManager.AppSettings["Host"];
-        private string Port = ConfigurationManager.AppSettings["Port"];
-        private string Email = ConfigurationManager.AppSettings["Email"];
-        private string Password = ConfigurationManager.AppSettings["Password"];
+        private string Host = ConfigurationManager.AppSettings["host"];
+        private string Port = ConfigurationManager.AppSettings["port"];
+        private string Email = ConfigurationManager.AppSettings["emailId"];
+        private string Password = ConfigurationManager.AppSettings["password"];
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));
 
         // GET: Register
         ScholarshipEntities entity = new ScholarshipEntities();
@@ -30,34 +32,45 @@ namespace Scholarship.Controllers
             try
             {
                 mdata.UserName = mdata.EmailId;
-                mdata.Password = RandomString(6, false);
+                mdata.Password = RandomString(8, false);
 
                 entity.tblStudentDetails.Add(mdata);
                 entity.SaveChanges();
                 int id = mdata.Id;
+                logger.Info("Data saved ");
+
                 if (id != 0)
                 {
                     #region SendEmail & Password
                     //Log.Info("Register Mail started...");
                     try
                     {
-
+                        logger.Info("Start : Email to student registration");
                         MailMessage msgs = new MailMessage();
                         msgs.To.Add(mdata.EmailId);
                         MailAddress address = new MailAddress(Email);
                         msgs.From = address;
+                        string body = string.Empty;
+                        using (StreamReader reader = new StreamReader(Server.MapPath("../EmailTemplate/RegistraionEmailTemplate.html")))
+                        {
+
+                            body = reader.ReadToEnd();
+
+                        }
+                        body = body.Replace("{Name}", mdata.Name); //replacing the required things  
+
+                        body = body.Replace("{username}", mdata.EmailId);
+
+                        body = body.Replace("{password}", mdata.Password);
                         //   msgs.BodyEncoding = System.Text.Encoding.GetEncoding("utf-8");
                         msgs.Subject = "Thanks for creating your account and welcome to EduXam.";
-                        string htmlBody = "Your";
+                        string htmlBody = body;
                         msgs.Body = htmlBody;
                         msgs.IsBodyHtml = true;
                         SmtpClient client = new SmtpClient();
                         client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                         client.EnableSsl = false;
-
-                        //client.Host = "smtp.gmail.com";
-                        //client.Port = 587;
                         client.Host = Host;
                         client.Port = Convert.ToInt32(Port);
 
@@ -67,14 +80,22 @@ namespace Scholarship.Controllers
                         client.Credentials = credentials;
                         //Send the msgs  
                         client.Send(msgs);
-
+                        logger.Info("End : Email to student registration");
                     }
                     catch (Exception ex)
                     {
-                        //Log.Error("Register Mail Failed..." + ex.Message.ToString());
-                    }
+                        logger.Info(string.Format("Error Message {0} , Stracktrace {1} :" , ex.Message.ToString(),ex.StackTrace.ToString())) ;
+                        tblException mobj = new tblException();
+                        mobj.ControllerName = "Register";
+                        mobj.MethodName = "StudentRegister";
+                        mobj.Message = ex.Message;
+                        mobj.StackTrace = ex.StackTrace;
+                        mobj.CreatedDatetime = DateTime.Now;
+                        entity.tblExceptions.Add(mobj);
+                        entity.SaveChanges();
 
-                    //Log.Info("Register Mail end...");
+                        return RedirectToAction("Index", "Exception");
+                    }
 
 
                     #endregion
@@ -85,7 +106,7 @@ namespace Scholarship.Controllers
             {
                 tblException mobj = new tblException();
                 mobj.ControllerName = "Register";
-                mobj.ControllerName = "StudentRegister";
+                mobj.MethodName = "StudentRegister";
                 mobj.Message = ex.Message;
                 mobj.StackTrace = ex.StackTrace;
                 mobj.CreatedDatetime = DateTime.Now;
