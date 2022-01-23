@@ -25,8 +25,25 @@
     </div>
 
 </div>
-<div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-success modal-frame modal-top modal-notify" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #293794; border-color: #293794;color:white">
+                <h5 class="modal-title" id="exampleModalLabel" >Future is based on learning, and learning is also rewarding.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="color:black">
+                    “Teachers are Successful only when their students succeed in their life.  Students are successful when they achieve their goals of life and Education is only useful when your knowledge helps you to earn you goals in life and makes humans to live better life.”
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #293794; border-color: #293794">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="site-section">
@@ -114,9 +131,10 @@
                 <div class="owl-slide-3 owl-carousel">
                     <div class="course-1-item">
                         <figure class="thumnail">
-                            <a href="course-single.html"><img src="~/Assests/images/course_1.jpg" alt="Image" class="img-fluid"></a>
-                            <div class="category"><h3>FULFILL YOUR DREAMS </h3>
-                            <p></p></div>
+                            <a href="course-single.html"><img src="~/Assests/images/fulfillyourdreams.jpg" alt="Image" class="img-fluid" style="height:192px;"></a>
+                            <div class="category">
+                                <h3>FULFILL YOUR DREAMS </h3>
+                            </div>
                         </figure>
                         <div class="course-1-content pb-4">
                             <h2>Std 4th,5th,6th</h2>
@@ -126,7 +144,7 @@
 
                     <div class="course-1-item">
                         <figure class="thumnail">
-                            <a href="course-single.html"><img src="~/Assests/images/course_2.jpg" alt="Image" class="img-fluid"></a>
+                            <a href="course-single.html"><img src="~/Assests/images/familysupport.jpg" alt="Image" class="img-fluid"  style="height:192px;"></a>
                             <div class="category"><h3>SUPPORT YOUR FAMILIES</h3></div>
                         </figure>
                         <div class="course-1-content pb-4">
@@ -137,8 +155,8 @@
 
                     <div class="course-1-item">
                         <figure class="thumnail">
-                            <a href="course-single.html"><img src="~/Assests/images/course_3.jpg" alt="Image" class="img-fluid"></a>
-                           
+                            <a href="course-single.html"><img src="~/Assests/images/reward.png" alt="Image" class="img-fluid"></a>
+
                             <div class="category"><h3>Earn your pay award</h3></div>
                         </figure>
                         <div class="course-1-content pb-4">
@@ -162,7 +180,8 @@
             <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
                 <span class="icon flaticon-mortarboard"></span>
                 <h3>Our Philosphy</h3>
-                <p>At Eduxam We believe in equal opportunity, and we work with same principle
+                <p>
+                    At Eduxam We believe in equal opportunity, and we work with same principle
                 </p>
             </div>
             <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
@@ -283,3 +302,13 @@
         </div>
     </div>
 </div>
+<script src="~/Assests/js/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').modal('show');
+        setTimeout(function () {
+            $('#exampleModal').modal('hide');
+        }, 7000);
+    });
+</script>
+

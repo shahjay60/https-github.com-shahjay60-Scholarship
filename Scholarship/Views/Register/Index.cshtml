@@ -58,12 +58,12 @@
                     </div>
 
                     <div class="col-md-4 form-group">
-                        <label for="pword2">Alternate EmailID</label>
-                        <input type="text" id="AltEmail" class="form-control form-control-lg">
-                    </div>
-                    <div class="col-md-4 form-group">
                         <label for="pword2">Standard<span style="color:red">*</span></label>
                         <input type="text" id="Std" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2" id="lblstream">Stream</label>
+                        <input type="text" id="AltEmail" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="pword2">Address<span style="color:red">*</span></label>
@@ -139,6 +139,8 @@
 <script type="text/javascript">
     $("#failure").hide();
     $("#success").hide();
+    $("#AltEmail").hide();
+    $("#lblstream").hide();
 
     $("#btnSubmit").click(function () {
         var res = validation();
@@ -198,6 +200,7 @@
             });
         }
     });
+
     $('#ContactNo1').keypress(function (e) {
 
         var charCode = (e.which) ? e.which : event.keyCode
@@ -206,6 +209,27 @@
 
             return false;
 
+    });
+
+    $('#Std').keypress(function (e) {
+
+        var charCode = (e.which) ? e.which : event.keyCode
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+            return false;
+
+    });
+
+    $("#Std").focusout(function () {
+        if ($("#Std").val() == "11" || $("#Std").val() == "12") {
+            $("#AltEmail").show();
+            $("#lblstream").show();
+        }
+        else {
+            $("#AltEmail").hide();
+            $("#lblstream").hide();
+        }
     });
 
     $('#SchoolContactNumber').keypress(function (e) {
