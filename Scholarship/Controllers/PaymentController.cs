@@ -1,6 +1,7 @@
 ﻿using Scholarship.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,6 +14,12 @@ namespace Scholarship.Controllers
     {
         // GET: Payment
         ScholarshipEntities entity = new ScholarshipEntities();
+        private string Psurl = ConfigurationManager.AppSettings["surl"];
+        private string Pfurl = ConfigurationManager.AppSettings["furl"];
+        private string PUrl = ConfigurationManager.AppSettings["Url"];
+        private string Pkey = ConfigurationManager.AppSettings["key"];
+        private string Psalt = ConfigurationManager.AppSettings["salt"];
+        private string Pservice_provider = ConfigurationManager.AppSettings["service_provider"];
 
         public ActionResult Index(int stdid, int ScholarshipId)
         {
@@ -41,16 +48,16 @@ namespace Scholarship.Controllers
             //string salt = "e5iIg1jwi8";
 
             //for production purpose
-            string key = "ECmL0f";
-            string salt = "UJptQ40mBaaFGIY6zj7eIeVKHIofiI2V";
+            string key = Pkey;
+            string salt = Psalt;
 
 
             //posting all the parameters required for integration.
 
-            myremotepost.Url = "https://secure.payu.in/_payment";
+            myremotepost.Url = PUrl;
 
 
-           // myremotepost.Url = "https://test.payu.in/_payment";
+            // myremotepost.Url = "https://test.payu.in/_payment";
 
 
             myremotepost.Add("key", key);
@@ -61,13 +68,13 @@ namespace Scholarship.Controllers
             myremotepost.Add("firstname", model.Name);
             myremotepost.Add("phone", model.ContactNumber);
             myremotepost.Add("email", model.Email);
-            myremotepost.Add("surl", "http://eduxam.in/Return/Success" + model.StdId);//Change the success url here depending upon the port number of your local system.
-            myremotepost.Add("furl", "http://eduxam.in/Return/Fail");//Change the failure url here depending upon the port number of your local system.
+            myremotepost.Add("surl", Psurl);//Change the success url here depending upon the port number of your local system.
+            myremotepost.Add("furl", Pfurl);//Change the failure url here depending upon the port number of your local system.
 
             //myremotepost.Add("surl", "https://localhost:44372/Return/Success");//Change the success url here depending upon the port number of your local system.
             //myremotepost.Add("furl", "https://localhost:44372/Return/Fail");//Change the failure url here depending upon the port number of your local system.
 
-            myremotepost.Add("service_provider", "payu_paisa");
+            myremotepost.Add("service_provider", Pservice_provider);
             string hashString = key + "|" + txnid + "|" + model.ScholarshipAmount + "|" + model.ScholarshipName + "|" + model.Name + "|" + model.Email + "|||||||||||" + salt;
             //string hashString = "3Q5c3q|2590640|3053.00|OnlineBooking|vimallad|ladvimal@gmail.com|||||||||||mE2RxRwx";
             string hash = Generatehash512(hashString);
@@ -75,7 +82,7 @@ namespace Scholarship.Controllers
 
             tblStdPaymentDetail mtblStdPaymentDetail = new tblStdPaymentDetail();
             mtblStdPaymentDetail.Stdid = model.StdId;
-            mtblStdPaymentDetail.ScholarshipId =Convert.ToString(model.ScholarshipId);
+            mtblStdPaymentDetail.ScholarshipId = Convert.ToString(model.ScholarshipId);
             mtblStdPaymentDetail.Amount = model.ScholarshipAmount;
             mtblStdPaymentDetail.TransacrtionId = txnid;
             mtblStdPaymentDetail.TransactionDate = DateTime.Now;
