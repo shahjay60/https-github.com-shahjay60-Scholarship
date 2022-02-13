@@ -71,15 +71,16 @@ namespace Scholarship.Controllers
                         client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                         client.EnableSsl = false;
-                        client.Host = Host;
+                        client.Host = "relay-hosting.secureserver.net"; ;
                         client.Port = Convert.ToInt32(Port);
+                        client.UseDefaultCredentials = false;
 
                         // client.Credentials = new System.Net.NetworkCredential("email@gmail.com", "pass@");
                         NetworkCredential credentials = new NetworkCredential(Email, Password);
-                        client.UseDefaultCredentials = false;
                         client.Credentials = credentials;
                         //Send the msgs  
                         client.Send(msgs);
+                        Console.Write("success");
                         logger.Info("End : Email to student registration");
                     }
                     catch (Exception ex)

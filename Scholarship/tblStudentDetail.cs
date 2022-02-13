@@ -22,7 +22,7 @@ namespace Scholarship
         public string EmailId { get; set; }
         public string Address { get; set; }
         public string AlternetContactNumber { get; set; }
-        public string AlternateEmailId { get; set; }
+        public string Stream { get; set; }
         public int STD { get; set; }
         public string SubjectInterested { get; set; }
         public string SchoolName { get; set; }
@@ -34,5 +34,10 @@ namespace Scholarship
         public bool Apply_Scholarship { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public Nullable<bool> IsTCaccept { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Medium { get; set; }
+        public string Country { get; set; }
     }
 }

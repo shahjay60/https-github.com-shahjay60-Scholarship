@@ -1,8 +1,7 @@
-﻿@model tblStudentDetail
-
+﻿@model List<Scholarship.Areas.Admin.Domain.PaymentInfo>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutcshtml.cshtml";
 }
 
 
@@ -10,63 +9,52 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Students Details</h1>
+                <h1>Payment Details</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href=@Url.Action("Index","AdminDashbord")>Home</a></li>
-                    <li class="breadcrumb-item active">Students Details</li>
+                    <li class="breadcrumb-item active">Scholarship Details</li>
                 </ol>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 
+<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
+                    
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     @*<th>Id</th>*@
-                                    <th>Name</th>
-                                    <th>ParentName</th>
-                                    <th>Sur Name</th>
-                                    <th>ContactNumber</th>
-                                    <th>EmailId</th>
-                                    <th>School Name</th>
-
-                                    <th>Edit</th>
+                                    <th>Student Name</th>
+                                    <th>Scholarship</th>
+                                    <th>Amount</th>
+                                    <th>TransactionId</th>
+                                    <th>TransactionDate</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach (var item in Model)
+                                {
                                 <tr>
                                     @*<td>@item.Id</td>*@
                                     <td>
-                                        @Model.Name
+                                        @item.StudentName
                                     </td>
-                                    <td>@Model.ParentName</td>
-                                    <td>@Model.SurName</td>
-                                    <td> @Model.ContactNumber</td>
-                                    <td>
-                                        @Model.EmailId
-                                    </td>
-                                    <td>
-                                        @Model.SchoolName
-                                    </td>
-                                    <td>
-                                        <a href="@Url.Action("Edit","STStudentDetails",new {id=@Model.Id })" class="btn btn-block btn-info">Detail</a>
-                                    </td>
+                                    <td>@item.ScholarshipName</td>
+                                    <td>@item.Amount</td>
+                                    <td> @item.TransactionId</td>
+                                    <td> @item.TransactionDate</td>
                                 </tr>
-                                
-
-
+                                }
                             </tbody>
 
                         </table>

@@ -133,8 +133,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminDashbordController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdPaymentDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdStudentDetailsController.cs" />
+    <Compile Include="Areas\Admin\Domain\PaymentInfo.cs" />
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
     <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
@@ -143,13 +145,16 @@
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ReturnController.cs" />
     <Compile Include="Controllers\ScholarshipController.cs" />
     <Compile Include="Controllers\TermsConditionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminLoginDomain.cs" />
+    <Compile Include="Models\PaymentClass.cs" />
     <Compile Include="Models\StudentLoginDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScholarshipModel.Context.cs">
@@ -171,6 +176,9 @@
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblScholarship.cs">
+      <DependentUpon>ScholarshipModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStdPaymentDetail.cs">
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStudentDetail.cs">
@@ -879,6 +887,7 @@
     <Content Include="Areas\Student\Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Areas\Student\Views\STStudent\Index.cshtml" />
     <Content Include="Areas\Student\Views\STLogin\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\AdPaymentDetails\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -913,6 +922,9 @@
     <Content Include="Views\Scholarship\Details.cshtml" />
     <Content Include="Views\FAQ\Index.cshtml" />
     <Content Include="Views\TermsConditions\Index.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Return\Success.cshtml" />
+    <Content Include="Views\Return\Fail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

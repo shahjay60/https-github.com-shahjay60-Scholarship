@@ -10,7 +10,7 @@
         <div class="row align-items-end justify-content-center text-center">
             <div class="col-lg-7">
                 <h2 class="mb-0">Student Login</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+
             </div>
         </div>
     </div>
@@ -75,8 +75,9 @@
                 dataType: "json",
                 success: function (response) {
 
-                    if (response == "Success") {
-                        window.location.href = '@Url.Action("Index", "Student/STStudent")'
+                    if (response !=0) {
+                        window.location.href = "/Student/STStudent/Index?id=" + response;
+
                     }
                     else {
                         $("#error").text(response).css('color','red')

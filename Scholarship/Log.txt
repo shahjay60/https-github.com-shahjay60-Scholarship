@@ -1,1 +1,12 @@
-﻿
+﻿2022-01-26 10:27:25,243 [11] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-01-26 10:27:25,252 [11] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-01-26 10:27:29,438 [11] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-01-26 10:27:57,115 [8] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-01-26 10:27:57,115 [8] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-01-26 10:28:01,222 [8] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-09 20:20:10,190 [16] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-09 20:20:10,199 [16] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-09 20:20:14,408 [16] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :

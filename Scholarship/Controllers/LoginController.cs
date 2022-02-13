@@ -35,11 +35,11 @@ namespace Scholarship.Controllers
         [HttpPost]
         public ActionResult StudentLogin(StudentLoginDomain model)
         {
-            var data = entity.tblStudentDetails.ToList().Where(x => x.UserName == model.UserName && x.Password == model.Password);
+            var data = entity.tblStudentDetails.ToList().Where(x => x.UserName == model.UserName && x.Password == model.Password).FirstOrDefault();
             string Message = "Invalid email or password";
 
             if (data != null)
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                return Json(data.Id, JsonRequestBehavior.AllowGet);
             else
                 return Json(Message, JsonRequestBehavior.AllowGet);
         }

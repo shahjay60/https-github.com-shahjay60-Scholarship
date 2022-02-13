@@ -9,8 +9,7 @@
     <div class="container">
         <div class="row align-items-end">
             <div class="col-lg-7">
-                <h2 class="mb-0">How To Create Mobile Apps Using Ionic</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+
             </div>
         </div>
     </div>
@@ -20,15 +19,13 @@
 <div class="custom-breadcrumns border-bottom">
     <div class="container">
         <a href="index.html">Home</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <a href="@Url.Action("Index","Scholarship")">Scholarship List</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">Scholarship</span>
+        <span class="current">Scholarship Details</span>
     </div>
 </div>
 
 <div class="site-section">
     <input type="hidden" id="hdnScholarshipid" value="@Model.Id" />
+    <input type="hidden" id="hdnPriceid" value="@Model.Amount" />
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">
@@ -47,6 +44,10 @@
                 <p>
                     <strong class="text-black d-block">Details :</strong>
                     @Model.Details
+                </p>
+
+                <p>
+                    <strong class="text-black d-block">Price :&nbsp; <span  id="price">@Model.Amount.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</span></strong>
                 </p>
 
                 <p>
@@ -104,10 +105,10 @@
         fnCheckLogin();
     });
     function fnCheckLogin() {
-
         var StudentLoginDomain = {};
         StudentLoginDomain.UserName = $("#username").val();
         StudentLoginDomain.Password = $("#pword").val();
+        StudentLoginDomain.ScholarshipId = $("#hdnScholarshipid").val();
             $.ajax({
                 type: "POST",
                 url:'@Url.Action("LoginForScholarship", "Scholarship")',
@@ -115,14 +116,18 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var Scholarshipid = $("#hdnScholarshipid").val();
-                    if (response == "Success") {
-                       
+                    if (response != 0) {
+                        window.location.href = "/Payment/Index?stdid=" + response.ID + "&ScholarshipId=" + response.ScholarshipId;
                     }
                     else {
-                        $("#error").text(response).css('color', 'red')
+                        $("#error").text("Invalid email or password").css('color', 'red')
                     }
                 }
             });
+    }
+
+    function funRedirectToPaymentPage(response, Scholarshipid) {
+
+
     }
 </script>

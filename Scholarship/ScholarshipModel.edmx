@@ -36,6 +36,17 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="ExamDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblStdPaymentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stdid" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ScholarshipId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TransacrtionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblStudentDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,7 +59,7 @@
           <Property Name="EmailId" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AlternetContactNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="AlternateEmailId" Type="nvarchar" MaxLength="100" />
+          <Property Name="Stream" Type="nvarchar" MaxLength="100" />
           <Property Name="STD" Type="int" Nullable="false" />
           <Property Name="SubjectInterested" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SchoolName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -60,11 +71,17 @@
           <Property Name="Apply_Scholarship" Type="bit" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsTCaccept" Type="bit" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Medium" Type="nvarchar" MaxLength="500" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="ScholarshipModelStoreContainer">
           <EntitySet Name="tbl_login" EntityType="Self.tbl_login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -82,8 +99,9 @@
         <EntityContainer Name="ScholarshipEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_login" EntityType="Self.tbl_login" />
           <EntitySet Name="tblExceptions" EntityType="ScholarshipModel.tblException" />
-          <EntitySet Name="tblStudentDetails" EntityType="ScholarshipModel.tblStudentDetail" />
           <EntitySet Name="tblScholarships" EntityType="ScholarshipModel.tblScholarship" />
+          <EntitySet Name="tblStudentDetails" EntityType="ScholarshipModel.tblStudentDetail" />
+          <EntitySet Name="tblStdPaymentDetails" EntityType="ScholarshipModel.tblStdPaymentDetail" />
         </EntityContainer>
         <EntityType Name="tblException">
           <Key>
@@ -97,6 +115,17 @@
           <Property Name="InnerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="tblScholarship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ExamDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="tblStudentDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -109,7 +138,7 @@
           <Property Name="EmailId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AlternetContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AlternateEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Stream" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="STD" Type="Int32" Nullable="false" />
           <Property Name="SubjectInterested" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -121,17 +150,22 @@
           <Property Name="Apply_Scholarship" Type="Boolean" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsTCaccept" Type="Boolean" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Medium" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tblScholarship">
+        <EntityType Name="tblStdPaymentDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ExamDate" Type="DateTime" Precision="3" />
+          <Property Name="Stdid" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ScholarshipId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransacrtionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -161,9 +195,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblScholarships">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblScholarship">
+              <MappingFragment StoreEntitySet="tblScholarship">
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblStudentDetails">
             <EntityTypeMapping TypeName="ScholarshipModel.tblStudentDetail">
               <MappingFragment StoreEntitySet="tblStudentDetails">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="IsTCaccept" ColumnName="IsTCaccept" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Apply_Scholarship" ColumnName="Apply_Scholarship" />
@@ -175,7 +226,7 @@
                 <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
                 <ScalarProperty Name="SubjectInterested" ColumnName="SubjectInterested" />
                 <ScalarProperty Name="STD" ColumnName="STD" />
-                <ScalarProperty Name="AlternateEmailId" ColumnName="AlternateEmailId" />
+                <ScalarProperty Name="Stream" ColumnName="Stream" />
                 <ScalarProperty Name="AlternetContactNumber" ColumnName="AlternetContactNumber" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
@@ -187,14 +238,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblScholarships">
-            <EntityTypeMapping TypeName="ScholarshipModel.tblScholarship">
-              <MappingFragment StoreEntitySet="tblScholarship">
-                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <EntitySetMapping Name="tblStdPaymentDetails">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblStdPaymentDetail">
+              <MappingFragment StoreEntitySet="tblStdPaymentDetail">
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TransacrtionId" ColumnName="TransacrtionId" />
+                <ScalarProperty Name="ScholarshipId" ColumnName="ScholarshipId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Stdid" ColumnName="Stdid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

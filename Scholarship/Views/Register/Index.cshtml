@@ -9,7 +9,7 @@
         <div class="row align-items-end justify-content-center text-center">
             <div class="col-lg-7">
                 <h2 class="mb-0">Register</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+
             </div>
         </div>
     </div>
@@ -62,9 +62,26 @@
                         <input type="text" id="Std" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-4 form-group">
+                        <label for="pword2" id="lblMedium">Medium</label>
+                        <input type="text" id="txtMedium" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
                         <label for="pword2" id="lblstream">Stream</label>
                         <input type="text" id="AltEmail" class="form-control form-control-lg">
                     </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2" id="lblMedium">Country</label>
+                        <input type="text" id="txtCountry" value="India" disabled class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2" id="lblMedium">State</label>
+                        <input type="text" id="txtState" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2" id="lblCity">City</label>
+                        <input type="text" id="txtCity" class="form-control form-control-lg">
+                    </div>
+
                     <div class="col-md-12 form-group">
                         <label for="pword2">Address<span style="color:red">*</span></label>
                         <textarea style="width:100%" id="address"></textarea>
@@ -78,7 +95,7 @@
                         <input type="text" id="SchoolName" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="pword2">Principle Name<span style="color:red">*</span></label>
+                        <label for="pword2">Principal Name<span style="color:red">*</span></label>
                         <input type="text" id="PrincipleName" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-4 form-group">
@@ -111,6 +128,9 @@
                             <label class="form-check-label" for="inlineRadio2">No</label>
                         </div>
                     </div>
+                    <div class="col-md-12 form-group">
+                        <p><input type="checkbox"> By clicking here, I state that I have read and understood the terms and conditions.</p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -141,10 +161,22 @@
     $("#success").hide();
     $("#AltEmail").hide();
     $("#lblstream").hide();
+    $("#btnSubmit").attr('disabled', 'disabled');
 
+    $('input[type="checkbox"]').click(function () {
+        if ($(this).prop("checked") == true) {
+            $("#btnSubmit").removeAttr('disabled');
+
+        }
+        else if ($(this).prop("checked") == false) {
+            $("#btnSubmit").attr('disabled', 'disabled');
+        }
+    });
     $("#btnSubmit").click(function () {
         var res = validation();
         if (res == true) {
+            $("#btnSubmit").attr('disabled', 'disabled');
+
             var mdata = {};
             mdata.Name = $("#Fname").val();
             mdata.ParentName = $("#FatherName").val();
@@ -153,9 +185,13 @@
             mdata.EmailId = $("#EmailID").val();
             mdata.Address = $("#address").val();
             mdata.AlternetContactNumber = $("#AltContact").val();
-            mdata.AlternateEmailId = $("#AltEmail").val();
+            mdata.Stream = $("#AltEmail").val();
             mdata.STD = $("#Std").val();
             mdata.SubjectInterested = $("#SubInt").val();
+            mdata.Medium = $("#txtMedium").val();
+            mdata.Country = $("#txtCountry").val();
+            mdata.State = $("#txtState").val();
+            mdata.City = $("#txtCity").val();
             mdata.SchoolName = $("#SchoolName").val();
             mdata.SchoolAddress = $("#schlAddress").val();
             mdata.SchoolContactNumber = $("#SchoolContactNumber").val();
@@ -163,6 +199,7 @@
             mdata.SchoolEmailId = $("#SchoolEmailId").val();
             mdata.Goal_In_Life = $("#Goal").val();
             mdata.Apply_Scholarship = $('input[name="inlineRadioOptions"]:checked').val();
+            mdata.IsTCaccept = true;
 
             $.ajax({
                 type: "POST",
@@ -194,6 +231,8 @@
             });
         }
         else {
+            $("#btnSubmit").removeAttr('disabled');
+
             $("#failure").show();
             $("#failure").fadeTo(2000, 500).slideUp(500, function () {
                 $("#failure").slideUp(500);

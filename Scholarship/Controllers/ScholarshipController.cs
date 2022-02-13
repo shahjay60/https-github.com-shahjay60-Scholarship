@@ -26,13 +26,14 @@ namespace Scholarship.Controllers
 
         public ActionResult LoginForScholarship(StudentLoginDomain model)
         {
-            var data = entity.tbl_login.ToList().Where(x => x.UserName == model.UserName && x.Password == model.Password);
-            string Message = "Invalid email or password";
-
+            var data = entity.tblStudentDetails.ToList().Where(x => x.UserName == model.UserName && x.Password == model.Password).FirstOrDefault();
             if (data != null)
-                return Json("Success", JsonRequestBehavior.AllowGet);
+            {
+                var result = new { ScholarshipId = model.ScholarshipId, ID = data.Id };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
             else
-                return Json(Message, JsonRequestBehavior.AllowGet);
+                return Json(0, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Apply(int id)
