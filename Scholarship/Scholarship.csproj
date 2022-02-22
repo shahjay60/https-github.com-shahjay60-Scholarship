@@ -142,6 +142,7 @@
     <Compile Include="Areas\Student\Controllers\STPaymentDetailController.cs" />
     <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\Student\StudentLoginModel.cs" />
     <Compile Include="Controllers\ComingSoonController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
