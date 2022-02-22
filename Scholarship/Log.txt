@@ -10,3 +10,56 @@
 2022-02-09 20:20:10,199 [16] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
 2022-02-09 20:20:14,408 [16] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
    at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-19 21:22:33,432 [18] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-19 21:22:33,440 [18] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-19 21:22:54,650 [18] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-19 21:24:50,767 [20] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-19 21:24:50,767 [20] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-19 21:25:11,813 [20] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-19 21:29:03,451 [27] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-19 21:29:03,451 [27] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-19 21:29:24,526 [27] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-19 21:32:52,112 [27] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-19 21:32:52,112 [27] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-19 21:33:13,175 [27] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-19 21:40:27,762 [11] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-19 21:40:27,762 [11] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-20 19:59:39,710 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-20 19:59:39,713 [6] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-20 20:00:01,373 [6] INFO  Scholarship.Controllers.HomeController Error Message Failure sending mail. , Stracktrace    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 82 :
+2022-02-21 22:03:49,477 [7] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-21 22:10:49,905 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-21 22:21:51,560 [5] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 20:44:00,577 [5] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 20:45:05,483 [5] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 20:59:10,576 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:00:07,976 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:15:17,588 [7] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:15:17,591 [7] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:15:17,688 [7] INFO  Scholarship.Controllers.HomeController End : Email to student registration
+2022-02-22 21:18:42,022 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:18:42,022 [6] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:18:42,099 [6] INFO  Scholarship.Controllers.HomeController Error Message An invalid character was found in the mail header: '.'. , Stracktrace    at System.Net.Mail.DotAtomReader.ReadReverse(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at Scholarship.Controllers.RegisterController.StudentRegister(tblStudentDetail mdata) in C:\Users\91903\source\repos\Scholarship\Scholarship\Controllers\RegisterController.cs:line 52 :
+2022-02-22 21:19:45,024 [9] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:19:45,024 [9] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:19:45,025 [9] INFO  Scholarship.Controllers.HomeController End : Email to student registration
+2022-02-22 21:20:19,091 [6] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:20:19,091 [6] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:20:19,093 [6] INFO  Scholarship.Controllers.HomeController End : Email to student registration
+2022-02-22 21:21:21,970 [8] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:21:21,970 [8] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:21:21,972 [8] INFO  Scholarship.Controllers.HomeController End : Email to student registration
+2022-02-22 21:22:26,709 [17] INFO  Scholarship.Controllers.HomeController Data saved 
+2022-02-22 21:22:26,709 [17] INFO  Scholarship.Controllers.HomeController Start : Email to student registration
+2022-02-22 21:22:26,711 [17] INFO  Scholarship.Controllers.HomeController End : Email to student registration

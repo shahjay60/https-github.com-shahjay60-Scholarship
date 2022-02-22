@@ -139,8 +139,10 @@
     <Compile Include="Areas\Admin\Domain\PaymentInfo.cs" />
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
+    <Compile Include="Areas\Student\Controllers\STPaymentDetailController.cs" />
     <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Controllers\ComingSoonController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -633,9 +635,11 @@
     <Content Include="Assests\css\bootstrap.min.css" />
     <Content Include="Assests\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Assests\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Assests\css\CommingSoonstyles.css" />
     <Content Include="Assests\css\jquery-ui.css" />
     <Content Include="Assests\css\jquery.fancybox.min.css" />
     <Content Include="Assests\css\jquery.mb.YTPlayer.min.css" />
+    <Content Include="Assests\css\Loader.css" />
     <Content Include="Assests\css\magnific-popup.css" />
     <Content Include="Assests\css\mediaelementplayer.css" />
     <Content Include="Assests\css\owl.carousel.min.css" />
@@ -691,6 +695,7 @@
     <Content Include="Assests\js\mediaelement-and-player.min.js" />
     <Content Include="Assests\js\owl.carousel.min.js" />
     <Content Include="Assests\js\popper.min.js" />
+    <Content Include="Assests\js\scriptsComingsoon.js" />
     <Content Include="Assests\js\slick.min.js" />
     <Content Include="Assests\js\typed.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -888,6 +893,7 @@
     <Content Include="Areas\Student\Views\STStudent\Index.cshtml" />
     <Content Include="Areas\Student\Views\STLogin\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\AdPaymentDetails\Index.cshtml" />
+    <Content Include="Areas\Student\Views\STStudent\PaymentDetail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -925,11 +931,14 @@
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Return\Success.cshtml" />
     <Content Include="Views\Return\Fail.cshtml" />
+    <Content Include="Views\ComingSoon\Index1.cshtml" />
+    <Content Include="Views\ComingSoon\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Student\Data\" />
+    <Folder Include="Areas\Student\Views\STPaymentDetail\" />
     <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>

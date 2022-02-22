@@ -41,65 +41,81 @@ namespace Scholarship.Controllers
 
                 if (id != 0)
                 {
-                    #region SendEmail & Password
-                    //Log.Info("Register Mail started...");
-                    try
+                    if (mdata.Apply_Scholarship == false)
                     {
-                        logger.Info("Start : Email to student registration");
-                        MailMessage msgs = new MailMessage();
-                        msgs.To.Add(mdata.EmailId);
-                        MailAddress address = new MailAddress(Email);
-                        msgs.From = address;
-                        string body = string.Empty;
-                        using (StreamReader reader = new StreamReader(Server.MapPath("../EmailTemplate/RegistraionEmailTemplate.html")))
+                        #region SendEmail & Password
+                        //Log.Info("Register Mail started...");
+                        try
                         {
+                            logger.Info("Start : Email to student registration");
+                            MailMessage msgs = new MailMessage();
+                            msgs.To.Add(mdata.EmailId);
+                            MailAddress address = new MailAddress(Email);
+                            msgs.From = address;
+                            string body = string.Empty;
+                            using (StreamReader reader = new StreamReader(Server.MapPath("../EmailTemplate/RegistraionEmailTemplate.html")))
+                            {
 
-                            body = reader.ReadToEnd();
+                                body = reader.ReadToEnd();
 
+                            }
+                            body = body.Replace("{Name}", mdata.Name); //replacing the required things  
+
+                            body = body.Replace("{username}", mdata.EmailId);
+
+                            body = body.Replace("{password}", mdata.Password);
+                            //   msgs.BodyEncoding = System.Text.Encoding.GetEncoding("utf-8");
+                            msgs.Subject = "Thanks for creating your account and welcome to EduXam.";
+                            string htmlBody = body;
+                            msgs.Body = htmlBody;
+                            msgs.IsBodyHtml = true;
+                            SmtpClient client = new SmtpClient();
+                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                            client.EnableSsl = false;
+                            client.Host = "relay-hosting.secureserver.net"; ;
+                            client.Port = Convert.ToInt32(Port);
+                            client.UseDefaultCredentials = false;
+
+                            // client.Credentials = new System.Net.NetworkCredential("email@gmail.com", "pass@");
+                            NetworkCredential credentials = new NetworkCredential(Email, Password);
+                            client.Credentials = credentials;
+                            //Send the msgs  
+                            client.Send(msgs);
+                            Console.Write("success");
+                            logger.Info("End : Email to student registration");
                         }
-                        body = body.Replace("{Name}", mdata.Name); //replacing the required things  
+                        catch (Exception ex)
+                        {
+                            logger.Info(string.Format("Error Message {0} , Stracktrace {1} :", ex.Message.ToString(), ex.StackTrace.ToString()));
+                            tblException mobj = new tblException();
+                            mobj.ControllerName = "Register";
+                            mobj.MethodName = "StudentRegister";
+                            mobj.Message = ex.Message;
+                            mobj.StackTrace = ex.StackTrace;
+                            mobj.CreatedDatetime = DateTime.Now;
+                            entity.tblExceptions.Add(mobj);
+                            entity.SaveChanges();
 
-                        body = body.Replace("{username}", mdata.EmailId);
+                            return RedirectToAction("Index", "Exception");
+                        }
 
-                        body = body.Replace("{password}", mdata.Password);
-                        //   msgs.BodyEncoding = System.Text.Encoding.GetEncoding("utf-8");
-                        msgs.Subject = "Thanks for creating your account and welcome to EduXam.";
-                        string htmlBody = body;
-                        msgs.Body = htmlBody;
-                        msgs.IsBodyHtml = true;
-                        SmtpClient client = new SmtpClient();
-                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                        client.EnableSsl = false;
-                        client.Host = "relay-hosting.secureserver.net"; ;
-                        client.Port = Convert.ToInt32(Port);
-                        client.UseDefaultCredentials = false;
+                        #endregion
+                        var details = new { id = 0, scholarshipid = 0 };
+                        return Json(details, JsonRequestBehavior.AllowGet);
 
-                        // client.Credentials = new System.Net.NetworkCredential("email@gmail.com", "pass@");
-                        NetworkCredential credentials = new NetworkCredential(Email, Password);
-                        client.Credentials = credentials;
-                        //Send the msgs  
-                        client.Send(msgs);
-                        Console.Write("success");
-                        logger.Info("End : Email to student registration");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        logger.Info(string.Format("Error Message {0} , Stracktrace {1} :" , ex.Message.ToString(),ex.StackTrace.ToString())) ;
-                        tblException mobj = new tblException();
-                        mobj.ControllerName = "Register";
-                        mobj.MethodName = "StudentRegister";
-                        mobj.Message = ex.Message;
-                        mobj.StackTrace = ex.StackTrace;
-                        mobj.CreatedDatetime = DateTime.Now;
-                        entity.tblExceptions.Add(mobj);
-                        entity.SaveChanges();
+                        var scholarshipdetails = entity.tblScholarships.ToList();
+                        int stdId = id;
+                        int scholarshipid = entity.tblScholarships.Where(x => x.MinStd <= mdata.STD && x.MaxStd >= mdata.STD)
+                                                                  .Select(x => x.Id).FirstOrDefault();
+                        var details = new { id = id, scholarshipid = scholarshipid };
+                        return Json(details, JsonRequestBehavior.AllowGet);
 
-                        return RedirectToAction("Index", "Exception");
                     }
-
-
-                    #endregion
                 }
                 return Json(id, JsonRequestBehavior.AllowGet);
             }

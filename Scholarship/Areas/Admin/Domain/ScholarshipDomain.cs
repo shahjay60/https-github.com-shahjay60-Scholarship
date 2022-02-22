@@ -14,5 +14,7 @@ namespace Scholarship.Areas.Admin.Domain
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> ExamDate { get; set; }
         public string DisplayDatetime { get; set; }
+        public int? MinStd { get; set; }
+        public int? MaxStd { get; set; }
     }
 }

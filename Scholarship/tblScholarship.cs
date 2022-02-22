@@ -20,5 +20,7 @@ namespace Scholarship
         public int Amount { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> ExamDate { get; set; }
+        public Nullable<int> MinStd { get; set; }
+        public Nullable<int> MaxStd { get; set; }
     }
 }

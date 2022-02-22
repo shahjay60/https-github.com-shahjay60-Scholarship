@@ -60,6 +60,8 @@ namespace Scholarship.Areas.Admin.Controllers
             mData.Name = data.Name;
             mData.IsActive = data.IsActive;
             mData.Details = data.Details;
+            mData.MinStd = data.MinStd;
+            mData.MaxStd = data.MaxStd;
             var localDateTime = data.ExamDate.Value.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T');
             mData.DisplayDatetime = localDateTime;
             return View(mData);
@@ -79,6 +81,8 @@ namespace Scholarship.Areas.Admin.Controllers
                 data.IsActive = model.IsActive;
                 data.Details = model.Details;
                 data.ExamDate = model.ExamDate;
+                data.MinStd = model.MinStd;
+                data.MaxStd = model.MaxStd;
                 entity.tblScholarships.Add(data);
                 entity.SaveChanges();
                 return Json(true, JsonRequestBehavior.AllowGet);

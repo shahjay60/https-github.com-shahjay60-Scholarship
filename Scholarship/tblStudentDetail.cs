@@ -24,13 +24,8 @@ namespace Scholarship
         public string AlternetContactNumber { get; set; }
         public string Stream { get; set; }
         public int STD { get; set; }
-        public string SubjectInterested { get; set; }
         public string SchoolName { get; set; }
-        public string SchoolAddress { get; set; }
-        public string SchoolContactNumber { get; set; }
-        public string PrincipalName { get; set; }
-        public string SchoolEmailId { get; set; }
-        public string Goal_In_Life { get; set; }
+        public string SchoolCity { get; set; }
         public bool Apply_Scholarship { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

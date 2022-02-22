@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scholarship.Areas.Admin.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,10 @@ namespace Scholarship.Areas.Student.Controllers
 
         public ActionResult Index(int id)
         {
-            var model = entity.tblStudentDetails.ToList().Where(x=>x.Id==id).FirstOrDefault();
+            var model = entity.tblStudentDetails.ToList().Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.scholarshipid = entity.tblScholarships.Where(x => x.MinStd <= model.STD && x.MaxStd >= model.STD)
+                                                                  .Select(x => x.Id).FirstOrDefault();
+
             return View(model);
         }
 
@@ -29,6 +33,27 @@ namespace Scholarship.Areas.Student.Controllers
             //return View(model);
 
             return View();
+        }
+
+        public ActionResult PaymentDetail(int id)
+        {
+            var Scholarships = entity.tblScholarships.ToList();
+            PaymentInfo mPaymentInfo = new PaymentInfo();
+
+            mPaymentInfo = (from sp in entity.tblStdPaymentDetails.ToList()
+                            join sc in Scholarships.ToList() on sp.ScholarshipId equals Convert.ToString(sc.Id)
+                            join s in entity.tblStudentDetails.ToList() on sp.Stdid equals s.Id
+                            where s.Id == id
+                            select new PaymentInfo
+                            {
+                                StudentName = s.Name + " " + s.ParentName + " " + s.SurName,
+                                ScholarshipName = sc.Name,
+                                Amount = sp.Amount,
+                                TransactionDate = sp.TransactionDate,
+                                TransactionId = sp.TransacrtionId
+                            }).FirstOrDefault();
+
+            return View(mPaymentInfo);
         }
     }
 }

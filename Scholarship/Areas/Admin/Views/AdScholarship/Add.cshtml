@@ -42,9 +42,21 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Min Std <span style="color:red">*</span> </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="minstd" placeholder="Min STD">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Max Std <span style="color:red">*</span> </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="maxstd" placeholder="Max STD">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Details <span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <textarea id="txtDetails"  class="form-control"> </textarea>
+                                <textarea id="txtDetails" class="form-control"> </textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -107,6 +119,8 @@
             model.Details = $("#txtDetails").val();
             model.Amount = $("#txtPrice").val();
             model.ExamDate = $("#birthdaytime").val();
+            model.MinStd = $("#minstd").val();
+            model.MaxStd = $("#maxstd").val();
             if ($('input[name="isActive"]:checked').val() == "Yes")
                 model.IsActive = true;
             else

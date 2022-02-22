@@ -6,12 +6,13 @@ using System.Web.Mvc;
 
 namespace Scholarship.Areas.Student.Controllers
 {
-    public class STLoginController : Controller
+    public class STPaymentDetailController : Controller
     {
-        // GET: Student/STLOGin
-        public ActionResult ChangePassword(int id)
+        // GET: Student/STPaymentDetail
+        ScholarshipEntities entity = new ScholarshipEntities();
+
+        public ActionResult Index()
         {
-            ViewBag.stid = id;
             return View();
         }
     }

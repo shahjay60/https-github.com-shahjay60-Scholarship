@@ -63,10 +63,11 @@
                     </tr>
                     <tr>
                         <td>Scholarship Amount :</td>
-                        <td>@Html.TextBoxFor(Model => Model.ScholarshipAmount, new { @class = "form-control", @readonly = "readonly" })</td>
-
+                        <td>@Html.TextBoxFor(Model => Model.ScholarshipAmount, 
+                           new { @class = "form-control", @readonly = "readonly" })
+                        <span style="color:red;">(Including all taxes)</span></td>
                     </tr>
-
+                   
                 </table>
                 <div style="text-align:center;">
                     <button type="submit" class="btn btn-Success" style="background-color:green;color:white;">Submit</button>

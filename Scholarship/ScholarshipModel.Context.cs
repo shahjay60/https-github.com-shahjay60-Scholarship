@@ -27,8 +27,8 @@ namespace Scholarship
     
         public virtual DbSet<tbl_login> tbl_login { get; set; }
         public virtual DbSet<tblException> tblExceptions { get; set; }
-        public virtual DbSet<tblScholarship> tblScholarships { get; set; }
-        public virtual DbSet<tblStudentDetail> tblStudentDetails { get; set; }
         public virtual DbSet<tblStdPaymentDetail> tblStdPaymentDetails { get; set; }
+        public virtual DbSet<tblStudentDetail> tblStudentDetails { get; set; }
+        public virtual DbSet<tblScholarship> tblScholarships { get; set; }
     }
 }

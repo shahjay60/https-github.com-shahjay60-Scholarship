@@ -42,10 +42,11 @@
                                     <th>School Name</th>
 
                                     <th>Edit</th>
+                                    <th>Payment Details</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                                 <tr>
                                     @*<td>@item.Id</td>*@
                                     <td>
@@ -63,8 +64,18 @@
                                     <td>
                                         <a href="@Url.Action("Edit","STStudentDetails",new {id=@Model.Id })" class="btn btn-block btn-info">Detail</a>
                                     </td>
+                                    <td>
+                                        @if (Model.Apply_Scholarship == true)
+                                        {
+                                            <a href="@Url.Action("PaymentDetail","STStudentDetails",new {id=@Model.Id })" class="btn btn-block btn-info">Payment Detail</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("Index","../Payment",new {stdid=@Model.Id,ScholarshipId=@ViewBag.scholarshipid })" class="btn btn-block btn-info">Make a payment</a>
+                                        }
+                                    </td>
                                 </tr>
-                                
+
 
 
                             </tbody>

@@ -27,7 +27,7 @@ namespace Scholarship.Controllers
             var Scholarshipmodel = entity.tblScholarships.ToList().Where(x => x.Id == ScholarshipId).FirstOrDefault();
             PaymentClass mPaymentClass = new PaymentClass();
 
-            mPaymentClass.ScholarshipAmount = Scholarshipmodel.Amount;
+            mPaymentClass.ScholarshipAmount =121;
             mPaymentClass.ScholarshipName = Scholarshipmodel.Name;
             mPaymentClass.StdId = model.Id;
             mPaymentClass.Name = model.Name + " " + model.ParentName + " " + model.SurName;
@@ -42,24 +42,9 @@ namespace Scholarship.Controllers
         public ActionResult Index(PaymentClass model)
         {
             RemotePost myremotepost = new RemotePost();
-
-            //for testing purpose
-            //string key = "rjQUPktU";
-            //string salt = "e5iIg1jwi8";
-
-            //for production purpose
             string key = Pkey;
             string salt = Psalt;
-
-
-            //posting all the parameters required for integration.
-
             myremotepost.Url = PUrl;
-
-
-            // myremotepost.Url = "https://test.payu.in/_payment";
-
-
             myremotepost.Add("key", key);
             string txnid = Generatetxnid();
             myremotepost.Add("txnid", txnid);
@@ -70,10 +55,6 @@ namespace Scholarship.Controllers
             myremotepost.Add("email", model.Email);
             myremotepost.Add("surl", Psurl);//Change the success url here depending upon the port number of your local system.
             myremotepost.Add("furl", Pfurl);//Change the failure url here depending upon the port number of your local system.
-
-            //myremotepost.Add("surl", "https://localhost:44372/Return/Success");//Change the success url here depending upon the port number of your local system.
-            //myremotepost.Add("furl", "https://localhost:44372/Return/Fail");//Change the failure url here depending upon the port number of your local system.
-
             myremotepost.Add("service_provider", Pservice_provider);
             string hashString = key + "|" + txnid + "|" + model.ScholarshipAmount + "|" + model.ScholarshipName + "|" + model.Name + "|" + model.Email + "|||||||||||" + salt;
             //string hashString = "3Q5c3q|2590640|3053.00|OnlineBooking|vimallad|ladvimal@gmail.com|||||||||||mE2RxRwx";

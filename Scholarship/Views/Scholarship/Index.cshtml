@@ -36,10 +36,9 @@
                 <div class="owl-slide-3 owl-carousel">
                     @foreach (var item in Model)
                     {
-
                         <div class="course-1-item">
                             <figure class="thumnail">
-                                <div class="price"> @item.Amount.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</div>
+                              @*  <div class="price"> @item.Amount.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</div>*@
                                 <div class="category"><h3>@item.Name</h3></div>
                             </figure>
                             <div class="course-1-content pb-4">
