@@ -20,5 +20,6 @@ namespace Scholarship
         public string ScholarshipId { get; set; }
         public string TransacrtionId { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
+        public Nullable<int> ReceiptNumber { get; set; }
     }
 }

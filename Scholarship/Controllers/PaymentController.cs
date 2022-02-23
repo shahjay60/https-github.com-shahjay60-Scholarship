@@ -1,8 +1,14 @@
-﻿using Scholarship.Models;
+﻿using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
+using Scholarship.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -20,14 +26,17 @@ namespace Scholarship.Controllers
         private string Pkey = ConfigurationManager.AppSettings["key"];
         private string Psalt = ConfigurationManager.AppSettings["salt"];
         private string Pservice_provider = ConfigurationManager.AppSettings["service_provider"];
-
+        private string Host = ConfigurationManager.AppSettings["host"];
+        private string Port = ConfigurationManager.AppSettings["port"];
+        private string Email = ConfigurationManager.AppSettings["emailId"];
+        private string Password = ConfigurationManager.AppSettings["password"];
         public ActionResult Index(int stdid, int ScholarshipId)
         {
             var model = entity.tblStudentDetails.ToList().Where(x => x.Id == stdid).FirstOrDefault();
             var Scholarshipmodel = entity.tblScholarships.ToList().Where(x => x.Id == ScholarshipId).FirstOrDefault();
             PaymentClass mPaymentClass = new PaymentClass();
 
-            mPaymentClass.ScholarshipAmount =121;
+            mPaymentClass.ScholarshipAmount = 121;
             mPaymentClass.ScholarshipName = Scholarshipmodel.Name;
             mPaymentClass.StdId = model.Id;
             mPaymentClass.Name = model.Name + " " + model.ParentName + " " + model.SurName;
@@ -61,15 +70,73 @@ namespace Scholarship.Controllers
             string hash = Generatehash512(hashString);
             myremotepost.Add("hash", hash);
 
+            int? paymentRecid = entity.tblStdPaymentDetails.ToList()
+                                     .OrderByDescending(x => x.Id)
+                                     .Select(c => c.ReceiptNumber)
+                                     .FirstOrDefault();
+            if (paymentRecid == null || paymentRecid == 0)
+            {
+                paymentRecid = 1;
+            }
+            else
+            {
+                paymentRecid = paymentRecid + 1;
+            }
             tblStdPaymentDetail mtblStdPaymentDetail = new tblStdPaymentDetail();
             mtblStdPaymentDetail.Stdid = model.StdId;
             mtblStdPaymentDetail.ScholarshipId = Convert.ToString(model.ScholarshipId);
             mtblStdPaymentDetail.Amount = model.ScholarshipAmount;
             mtblStdPaymentDetail.TransacrtionId = txnid;
             mtblStdPaymentDetail.TransactionDate = DateTime.Now;
+            mtblStdPaymentDetail.ReceiptNumber = paymentRecid;
 
             entity.tblStdPaymentDetails.Add(mtblStdPaymentDetail);
             entity.SaveChanges();
+
+            #region Send payment receipt
+            var path = Server.MapPath("~/EmailTemplate/paymentreceipt.html");
+            string rcptNo = "";
+            if (paymentRecid <= 99)
+            {
+                 rcptNo = "GVB000" + paymentRecid;
+            }
+            else
+            {
+                 rcptNo = "GVB00" + paymentRecid;
+            }
+            StreamReader sr = new StreamReader(path);
+            string s = sr.ReadToEnd();
+            s.Replace("#rcptno", rcptNo).Replace("#rcptdate", DateTime.Now.ToString("dd, MMMM yyyy"));
+            sr.Close();
+
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                pdfDoc.Open();
+                htmlparser.Parse(sr);
+                pdfDoc.Close();
+                byte[] bytes = memoryStream.ToArray();
+                memoryStream.Close();
+
+                MailMessage mm = new MailMessage("sender@gmail.com", "receiver@gmail.com");
+                mm.Subject = "Payment Receipt";
+                mm.Body = "Thank you for applying scholarship.";
+                mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "PaymentReceipt.pdf"));
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "relay-hosting.secureserver.net";
+                smtp.EnableSsl = false;
+                smtp.Port = Convert.ToInt32(Port);
+                smtp.UseDefaultCredentials = false;
+
+                NetworkCredential credentials = new NetworkCredential(Email, Password);
+                smtp.Credentials = credentials;
+
+                smtp.Send(mm);
+            }
+            #endregion
 
             myremotepost.Post();
             return View();

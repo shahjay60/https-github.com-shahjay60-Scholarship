@@ -48,6 +48,7 @@
           <Property Name="ScholarshipId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TransacrtionId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="ReceiptNumber" Type="int" />
         </EntityType>
         <EntityType Name="tblStudentDetails">
           <Key>
@@ -96,9 +97,9 @@
         <EntityContainer Name="ScholarshipEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_login" EntityType="Self.tbl_login" />
           <EntitySet Name="tblExceptions" EntityType="ScholarshipModel.tblException" />
-          <EntitySet Name="tblStdPaymentDetails" EntityType="ScholarshipModel.tblStdPaymentDetail" />
           <EntitySet Name="tblStudentDetails" EntityType="ScholarshipModel.tblStudentDetail" />
           <EntitySet Name="tblScholarships" EntityType="ScholarshipModel.tblScholarship" />
+          <EntitySet Name="tblStdPaymentDetails" EntityType="ScholarshipModel.tblStdPaymentDetail" />
         </EntityContainer>
         <EntityType Name="tblException">
           <Key>
@@ -111,17 +112,6 @@
           <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InnerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tblStdPaymentDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Stdid" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ScholarshipId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransacrtionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tblStudentDetail">
           <Key>
@@ -161,6 +151,18 @@
           <Property Name="MinStd" Type="Int32" />
           <Property Name="MaxStd" Type="Int32" />
         </EntityType>
+        <EntityType Name="tblStdPaymentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stdid" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ScholarshipId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransacrtionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceiptNumber" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -185,18 +187,6 @@
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="MethodName" ColumnName="MethodName" />
                 <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblStdPaymentDetails">
-            <EntityTypeMapping TypeName="ScholarshipModel.tblStdPaymentDetail">
-              <MappingFragment StoreEntitySet="tblStdPaymentDetail">
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="TransacrtionId" ColumnName="TransacrtionId" />
-                <ScalarProperty Name="ScholarshipId" ColumnName="ScholarshipId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Stdid" ColumnName="Stdid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -237,6 +227,19 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStdPaymentDetails">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblStdPaymentDetail">
+              <MappingFragment StoreEntitySet="tblStdPaymentDetail">
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TransacrtionId" ColumnName="TransacrtionId" />
+                <ScalarProperty Name="ScholarshipId" ColumnName="ScholarshipId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Stdid" ColumnName="Stdid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
