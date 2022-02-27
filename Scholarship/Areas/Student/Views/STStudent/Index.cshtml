@@ -62,12 +62,12 @@
                                         @Model.SchoolName
                                     </td>
                                     <td>
-                                        <a href="@Url.Action("Edit","STStudentDetails",new {id=@Model.Id })" class="btn btn-block btn-info">Detail</a>
+                                        <a href="@Url.Action("Edit","STStudent",new {id=@Model.Id })" class="btn btn-block btn-info">Detail</a>
                                     </td>
                                     <td>
-                                        @if (Model.Apply_Scholarship == true)
+                                        @if (ViewBag.ispaymentDone != null)
                                         {
-                                            <a href="@Url.Action("PaymentDetail","STStudentDetails",new {id=@Model.Id })" class="btn btn-block btn-info">Payment Detail</a>
+                                            <a href="@Url.Action("PaymentDetail","STStudent",new {id=@Model.Id })" class="btn btn-block btn-info">Payment Detail</a>
                                         }
                                         else
                                         {

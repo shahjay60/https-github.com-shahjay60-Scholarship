@@ -42,7 +42,7 @@
                                 <div class="category"><h3>@item.Name</h3></div>
                             </figure>
                             <div class="course-1-content pb-4">
-                                <h2>Date : @item.ExamDate</h2>
+                                <h2>Date : @item.ExamDate.Value.ToString("dd/MMM/yyyy")</h2>
                                 @if (item.Details.Length > 150)
                                 {
                                     <p class="desc mb-4">@item.Details.Substring(1, 150)</p>

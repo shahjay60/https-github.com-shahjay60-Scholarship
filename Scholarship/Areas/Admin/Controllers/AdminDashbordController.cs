@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Scholarship.Areas.Admin.Controllers
 {
+    [Authorize]
     public class AdminDashbordController : Controller
     {
         // GET: Admin/Home

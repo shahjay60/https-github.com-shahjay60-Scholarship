@@ -1,0 +1,108 @@
+﻿@model tblStudentDetail
+@{
+    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div class="site-section">
+        <div class="container">
+            @using (Html.BeginForm("Edit", "STStudent", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.UserName)
+                @Html.HiddenFor(m => m.Password)
+                @Html.HiddenFor(m => m.Apply_Scholarship)
+                @Html.HiddenFor(m => m.IsTCaccept)
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label for="username">First Name <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2">Middle Name / Father's Name<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword">Last Name<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.SurName, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label for="pword2">ContactNo<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2">Alternate ContactNo</label>
+                                @Html.TextBoxFor(m => m.AlternetContactNumber, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2">EmailID<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label for="pword2">Standard<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.STD, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2" id="lblMedium">Medium</label>
+                                @Html.TextBoxFor(m => m.Medium, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2" id="lblstream">Stream</label>
+                                @Html.TextBoxFor(m => m.Stream, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2" id="lblMedium">Country</label>
+                                @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2" id="lblMedium">State</label>
+                                @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="pword2" id="lblCity">City</label>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label for="pword2">Address<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="pword2">School Name<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.SchoolName, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="pword2">School City<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.SchoolCity, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-Success" style="background-color:green;color:white;">Update</button>
+
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

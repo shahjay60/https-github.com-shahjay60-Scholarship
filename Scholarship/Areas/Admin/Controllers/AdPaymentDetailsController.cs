@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Scholarship.Areas.Admin.Controllers
 {
+    [Authorize]
     public class AdPaymentDetailsController : Controller
     {
         // GET: Admin/AdPaymentDetails

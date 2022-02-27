@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ScholarshipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tbl_login">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="tblException">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,7 +22,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
@@ -75,31 +67,74 @@
           <Property Name="Medium" Type="nvarchar" MaxLength="500" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblUserActivation">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ActivationCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="Validate_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ScholarshipModelStoreContainer">
-          <EntitySet Name="tbl_login" EntityType="Self.tbl_login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserActivation" EntityType="Self.tblUserActivation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblUserActivation].[UserId] AS [UserId], 
+    [tblUserActivation].[ActivationCode] AS [ActivationCode]
+    FROM [dbo].[tblUserActivation] AS [tblUserActivation]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ScholarshipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tbl_login">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="ScholarshipEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbl_login" EntityType="Self.tbl_login" />
           <EntitySet Name="tblExceptions" EntityType="ScholarshipModel.tblException" />
           <EntitySet Name="tblStudentDetails" EntityType="ScholarshipModel.tblStudentDetail" />
-          <EntitySet Name="tblScholarships" EntityType="ScholarshipModel.tblScholarship" />
           <EntitySet Name="tblStdPaymentDetails" EntityType="ScholarshipModel.tblStdPaymentDetail" />
+          <EntitySet Name="tblScholarships" EntityType="ScholarshipModel.tblScholarship" />
+          <EntitySet Name="tblUsers" EntityType="ScholarshipModel.tblUser" />
+          <FunctionImport Name="Validate_User">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(Int32)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblUserActivations" EntityType="ScholarshipModel.tblUserActivation" />
+          <FunctionImport Name="Validate_Student" ReturnType="Collection(Int32)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateStudent" ReturnType="Collection(Int32)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblException">
           <Key>
@@ -138,19 +173,6 @@
           <Property Name="Medium" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tblScholarship">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ExamDate" Type="DateTime" Precision="3" />
-          <Property Name="MinStd" Type="Int32" />
-          <Property Name="MaxStd" Type="Int32" />
-        </EntityType>
         <EntityType Name="tblStdPaymentDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -163,21 +185,43 @@
           <Property Name="TransactionDate" Type="DateTime" Precision="3" />
           <Property Name="ReceiptNumber" Type="Int32" />
         </EntityType>
+        <EntityType Name="tblScholarship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ExamDate" Type="DateTime" Precision="3" />
+          <Property Name="MinStd" Type="Int32" />
+          <Property Name="MaxStd" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblUserActivation">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ScholarshipModelStoreContainer" CdmEntityContainer="ScholarshipEntities">
-          <EntitySetMapping Name="tbl_login">
-            <EntityTypeMapping TypeName="ScholarshipModel.tbl_login">
-              <MappingFragment StoreEntitySet="tbl_login">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblExceptions">
             <EntityTypeMapping TypeName="ScholarshipModel.tblException">
               <MappingFragment StoreEntitySet="tblException">
@@ -217,6 +261,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblStdPaymentDetails">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblStdPaymentDetail">
+              <MappingFragment StoreEntitySet="tblStdPaymentDetail">
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TransacrtionId" ColumnName="TransacrtionId" />
+                <ScalarProperty Name="ScholarshipId" ColumnName="ScholarshipId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Stdid" ColumnName="Stdid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblScholarships">
             <EntityTypeMapping TypeName="ScholarshipModel.tblScholarship">
               <MappingFragment StoreEntitySet="tblScholarship">
@@ -231,19 +288,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblStdPaymentDetails">
-            <EntityTypeMapping TypeName="ScholarshipModel.tblStdPaymentDetail">
-              <MappingFragment StoreEntitySet="tblStdPaymentDetail">
-                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="TransacrtionId" ColumnName="TransacrtionId" />
-                <ScalarProperty Name="ScholarshipId" ColumnName="ScholarshipId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Stdid" ColumnName="Stdid" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="ScholarshipModel.Store.Validate_User" />
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="ScholarshipModel.Store.Validate_User" />
+          <EntitySetMapping Name="tblUserActivations">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblUserActivation">
+              <MappingFragment StoreEntitySet="tblUserActivation">
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Validate_Student" FunctionName="ScholarshipModel.Store.Validate_Student" />
+          <FunctionImportMapping FunctionImportName="ValidateStudent" FunctionName="ScholarshipModel.Store.Validate_Student" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

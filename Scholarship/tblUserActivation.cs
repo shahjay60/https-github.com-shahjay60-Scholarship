@@ -12,10 +12,9 @@ namespace Scholarship
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_login
+    public partial class tblUserActivation
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int UserId { get; set; }
+        public string ActivationCode { get; set; }
     }
 }

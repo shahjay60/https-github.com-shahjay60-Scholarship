@@ -45,8 +45,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="Aspose.PDF, Version=22.2.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.PDF.22.2.0\lib\net4.0\Aspose.PDF.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -54,8 +57,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    <Reference Include="IronPdf, Version=2022.2.0.4887, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.Slim.2022.2.4887\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
@@ -147,6 +153,7 @@
     <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
     <Compile Include="Areas\Student\Controllers\STPaymentDetailController.cs" />
     <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
+    <Compile Include="Areas\Student\Domain\StdPaymentInfo.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentLoginModel.cs" />
     <Compile Include="Controllers\ComingSoonController.cs" />
@@ -193,7 +200,10 @@
     <Compile Include="tblStudentDetail.cs">
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="tbl_login.cs">
+    <Compile Include="tblUser.cs">
+      <DependentUpon>ScholarshipModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUserActivation.cs">
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -677,6 +687,7 @@
     <Content Include="Assests\images\familysupport.jpg" />
     <Content Include="Assests\images\fulfillyourdreams.jpg" />
     <Content Include="Assests\images\hero_1.jpg" />
+    <Content Include="Assests\images\imagepopup.png" />
     <Content Include="Assests\images\Logo Design-01.jpg" />
     <Content Include="Assests\images\logo.jpg" />
     <Content Include="Assests\images\logo.png" />
@@ -685,6 +696,7 @@
     <Content Include="Assests\images\person_3.jpg" />
     <Content Include="Assests\images\person_4.jpg" />
     <Content Include="Assests\images\reward.png" />
+    <Content Include="Assests\images\Scholarshippopup.jpeg" />
     <Content Include="Assests\js\aos.js" />
     <Content Include="Assests\js\bootstrap-datepicker.min.js" />
     <Content Include="Assests\js\bootstrap.min.js" />
@@ -902,6 +914,9 @@
     <Content Include="Areas\Student\Views\STLogin\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\AdPaymentDetails\Index.cshtml" />
     <Content Include="Areas\Student\Views\STStudent\PaymentDetail.cshtml" />
+    <Content Include="Areas\Student\Views\STStudent\Edit.cshtml" />
+    <Content Include="EmailTemplate\PaymentReceipt.pdf" />
+    <Content Include="EmailTemplate\PaymentReceipt-converted.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

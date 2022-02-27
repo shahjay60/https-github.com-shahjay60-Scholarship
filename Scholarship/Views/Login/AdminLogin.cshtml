@@ -64,6 +64,7 @@
         fnCheckLogin();
     });
     function fnCheckLogin() {
+        $("#btnSubmit").attr('disabled', 'disabled');
 
         var AdminLoginDomain = {};
         AdminLoginDomain.UserName = $("#username").val();
@@ -80,6 +81,8 @@
                         window.location.href = '@Url.Action("Index", "Admin/AdminDashbord")'
                     }
                     else {
+                        $("#btnSubmit").removeAttr('disabled');
+
                         $("#error").text(response).css('color','red')
                     }
                 }

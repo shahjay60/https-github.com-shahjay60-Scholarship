@@ -19,6 +19,7 @@ namespace Scholarship.Areas.Admin.Controllers
         public ActionResult Detail(int id)
         {
             var model = entity.tblStudentDetails.ToList().Where(x => x.Id == id).FirstOrDefault() ;
+
             return View(model);
         }
     }

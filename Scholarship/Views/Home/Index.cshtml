@@ -2,7 +2,8 @@
     ViewBag.Title = "Home Page";
 }
 
-
+<style>
+</style>
 <div class="hero-slide owl-carousel site-blocks-cover">
     <div class="intro-section" style="background-image: url('../Assests/images/hero_1.jpg');">
         <div class="container">
@@ -28,19 +29,12 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-success modal-frame modal-top modal-notify" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #293794; border-color: #293794;color:white">
-                <h5 class="modal-title" id="exampleModalLabel" >Future is based on learning, and learning is also rewarding.</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-                <p style="color:black">
-                    “Teachers are Successful only when their students succeed in their life.  Students are successful when they achieve their goals of life and Education is only useful when your knowledge helps you to earn you goals in life and makes humans to live better life.”
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #293794; border-color: #293794">Close</button>
+                <div class="container">
+                    <div class="row">
+                        <img id="website2" src="~/Assests/images/imagepopup.png" style="height:100%;width:100%" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -138,18 +132,18 @@
                         </figure>
                         <div class="course-1-content pb-4">
                             <h2>Std 4th,5th,6th</h2>
-                            <p><a href="@Url.Action("Index","ComingSoon")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
+                            <p><a href="@Url.Action("Index","Register")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
                         </div>
                     </div>
 
                     <div class="course-1-item">
                         <figure class="thumnail">
-                            <a href="course-single.html"><img src="~/Assests/images/familysupport.jpg" alt="Image" class="img-fluid"  style="height:192px;"></a>
+                            <a href="course-single.html"><img src="~/Assests/images/familysupport.jpg" alt="Image" class="img-fluid" style="height:192px;"></a>
                             <div class="category"><h3>SUPPORT YOUR FAMILIES</h3></div>
                         </figure>
                         <div class="course-1-content pb-4">
                             <h2>Std 7th,8th,9th</h2>
-                            <p><a href="@Url.Action("Index","ComingSoon")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
+                            <p><a href="@Url.Action("Index","Register")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
 
                         </div>
                     </div>
@@ -162,7 +156,7 @@
                         </figure>
                         <div class="course-1-content pb-4">
                             <h2>Std 10th,11th,12th</h2>
-                            <p><a href="@Url.Action("Index","ComingSoon")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
+                            <p><a href="@Url.Action("Index","Register")" class="btn btn-primary rounded-0 px-4">Enroll Now</a></p>
 
                         </div>
                     </div>
@@ -307,6 +301,9 @@
 <script>
     $(document).ready(function () {
         $('#exampleModal').modal('show');
+        $("#website2").click(function () {
+            window.location.href='@Url.Action("Index", "Scholarship")'
+        });
         setTimeout(function () {
             $('#exampleModal').modal('hide');
         }, 7000);

@@ -63,6 +63,7 @@
         fnCheckLogin();
     });
     function fnCheckLogin() {
+        $("#btnSubmit").attr('disabled', 'disabled');
 
         var StudentLoginDomain = {};
         StudentLoginDomain.UserName = $("#username").val();
@@ -80,6 +81,8 @@
 
                     }
                     else {
+                        $("#btnSubmit").removeAttr('disabled');
+
                         $("#error").text(response).css('color','red')
                     }
                 }

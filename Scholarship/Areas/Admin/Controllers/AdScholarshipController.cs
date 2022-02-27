@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Scholarship.Areas.Admin.Controllers
 {
+    [Authorize]
     public class AdScholarshipController : Controller
     {
         // GET: Admin/AdScholarship
@@ -39,7 +40,7 @@ namespace Scholarship.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 tblException mobj = new tblException();
-                mobj.ControllerName = "Add";
+                mobj.MethodName = "Add";
                 mobj.ControllerName = "AdScholarship";
                 mobj.Message = ex.Message;
                 mobj.StackTrace = ex.StackTrace;
@@ -91,7 +92,7 @@ namespace Scholarship.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 tblException mobj = new tblException();
-                mobj.ControllerName = "Edit";
+                mobj.MethodName = "Edit";
                 mobj.ControllerName = "AdScholarship";
                 mobj.Message = ex.Message;
                 mobj.StackTrace = ex.StackTrace;
@@ -116,7 +117,7 @@ namespace Scholarship.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 tblException mobj = new tblException();
-                mobj.ControllerName = "Edit";
+                mobj.MethodName = "Edit";
                 mobj.ControllerName = "AdScholarship";
                 mobj.Message = ex.Message;
                 mobj.StackTrace = ex.StackTrace;
