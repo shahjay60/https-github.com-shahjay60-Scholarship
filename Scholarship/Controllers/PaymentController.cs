@@ -64,7 +64,9 @@ namespace Scholarship.Controllers
                 myremotepost.Add("firstname", model.Name);
                 myremotepost.Add("phone", model.ContactNumber);
                 myremotepost.Add("email", model.Email);
-                myremotepost.Add("surl", Psurl);//Change the success url here depending upon the port number of your local system.
+                //myremotepost.Add("surl", "https://localhost:44372/Return/Success?id="+ model.StdId + "& scholarshipid="+model.ScholarshipId+" ");//Change the success url here depending upon the port number of your local system.
+                myremotepost.Add("surl", "http://eduxam.in/Return/Success?id="+model.StdId+ "&scholarshipid="+model.ScholarshipId+" ");//Change the success url here depending upon the port number of your local system.
+
                 myremotepost.Add("furl", Pfurl);//Change the failure url here depending upon the port number of your local system.
                 myremotepost.Add("service_provider", Pservice_provider);
                 string hashString = key + "|" + txnid + "|" + model.ScholarshipAmount + "|" + model.ScholarshipName + "|" + model.Name + "|" + model.Email + "|||||||||||" + salt;
@@ -72,102 +74,6 @@ namespace Scholarship.Controllers
                 string hash = Generatehash512(hashString);
                 myremotepost.Add("hash", hash);
 
-                int? paymentRecid = entity.tblStdPaymentDetails.ToList()
-                                         .OrderByDescending(x => x.Id)
-                                         .Select(c => c.ReceiptNumber)
-                                         .FirstOrDefault();
-                if (paymentRecid == null || paymentRecid == 0)
-                {
-                    paymentRecid = 1;
-                }
-                else
-                {
-                    paymentRecid = paymentRecid + 1;
-                }
-
-                #region Send payment receipt
-                var Savepath = Server.MapPath("~/EmailTemplate/HTML-to-PDF.pdf");
-                string rcptNo = "";
-                if (paymentRecid <= 99)
-                {
-                    rcptNo = "GVB000" + paymentRecid;
-                }
-                else
-                {
-                    rcptNo = "GVB00" + paymentRecid;
-                }
-                string DocPath = Server.MapPath("~/EmailTemplate/PaymentReceipt-converted.pdf"); //Orginal Pdf
-
-                // OPEN DOCUMENTS
-                Aspose.Pdf.Document doc = new Aspose.Pdf.Document(DocPath);
-                PdfContentEditor editor = new PdfContentEditor();
-                editor.BindPdf(doc);
-                int PageCount = doc.Pages.Count;
-                for (int i = 1; i <= PageCount; i++)
-                {
-                    // CHANGE TEXT
-                    editor.ReplaceText("GVB0001", i, rcptNo);
-                    editor.ReplaceText("23, Feb 2022", i, DateTime.Now.ToString("dd, MMMM yyyy"));
-                    editor.ReplaceText("Name", i, model.Name);
-                }
-                // DOWNLOAD
-                doc.Save(DocPath);
-
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    string text = string.Empty;
-                    MailMessage mm = new MailMessage();
-                    mm.To.Add(model.Email);
-                    MailAddress address = new MailAddress(Email);
-                    mm.From = address;
-
-                    mm.Subject = "PAYMENT RECEIPT FOR EST";
-
-                    text = "Online registration transaction has been processed successfully for Eduxam scholarship test." +
-                        "<br>Receipt copy is attached <br><br>Best Regards,<br>Team Eduxam<br>" +
-                        "EMAIL: info@Eduxam.in" +
-                        "<br>This e-mail and any files transmitted with it are for the sole use of the intended recipient(s)" +
-                        " <br>" +
-                        "and may contain confidential and privileged information." +
-                        " If you are not the intended recipient, please contact the sender by reply <br>" +
-                        " e-mail and destroy all copies and the original message. <br>" +
-                        "Any unauthorized review, use, disclosure, dissemination, forwarding,<br>" +
-                        " printing or copying of this email or any action taken in reliance on <br>" +
-                        " this e-mail is strictly prohibited and may be unlawful. <br>" +
-                        "The recipient acknowledges that Eduxam LLP or its subsidiaries and associated <br>" +
-                        " companies are unable to exercise control or ensure or guarantee the <br>" +
-                        "integrity of/overthe contents of the information contained in e-mail transmissions and<br>" +
-                        " further acknowledges that any views expressed in this message are those of the individual sender <br>" +
-                        " and no binding nature of the message shall be implied or assumed unless the sender does <br>" +
-                        " so expressly with due authority of Eduxam LLP. <br>" +
-                        "Before opening any attachments please check them for viruses and defects.";
-
-                    mm.Body = text;
-                    mm.Attachments.Add(new Attachment(Savepath));
-                    mm.IsBodyHtml = true;
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "relay-hosting.secureserver.net";
-                    smtp.EnableSsl = false;
-                    smtp.Port = Convert.ToInt32(Port);
-                    smtp.UseDefaultCredentials = false;
-
-                    NetworkCredential credentials = new NetworkCredential(Email, Password);
-                    smtp.Credentials = credentials;
-
-                    smtp.Send(mm);
-
-                    tblStdPaymentDetail mtblStdPaymentDetail = new tblStdPaymentDetail();
-                    mtblStdPaymentDetail.Stdid = model.StdId;
-                    mtblStdPaymentDetail.ScholarshipId = Convert.ToString(model.ScholarshipId);
-                    mtblStdPaymentDetail.Amount = model.ScholarshipAmount;
-                    mtblStdPaymentDetail.TransacrtionId = txnid;
-                    mtblStdPaymentDetail.TransactionDate = DateTime.Now;
-                    mtblStdPaymentDetail.ReceiptNumber = paymentRecid;
-
-                    entity.tblStdPaymentDetails.Add(mtblStdPaymentDetail);
-                    entity.SaveChanges();
-                }
-                #endregion
 
                 myremotepost.Post();
                 return View();
