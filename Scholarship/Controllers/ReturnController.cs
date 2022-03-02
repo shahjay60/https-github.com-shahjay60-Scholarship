@@ -1,8 +1,6 @@
 ﻿using Aspose.Pdf.Facades;
-using HiQPdf;
+using NReco.PdfGenerator;
 using Scholarship.Models;
-using Spire.Pdf;
-using Spire.Pdf.HtmlConverter;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -65,52 +63,25 @@ namespace Scholarship.Controllers
             {
                 rcptNo = "GVB00" + paymentRecid;
             }
-            string DocPath = Server.MapPath("~/EmailTemplate/paymentreceipt.html"); //Orginal Pdf
-            string fileName = Server.MapPath("~/EmailTemplate/Foobar.pdf");
+
+
+
+            string DocPath = Server.MapPath("~/EmailTemplate/PdfToHTML.html"); //Orginal html
             var content = System.IO.File.ReadAllText(DocPath);
-            content = content.Replace("#rcptno", rcptNo);
-            content = content.Replace("#rcptdate", DateTime.Now.ToShortDateString());
+            content = content.Replace("GVB0001", rcptNo);
+            content = content.Replace("23, Feb 2022", DateTime.Now.ToShortDateString());
             content = content.Replace("#name", model.Name);
-            ////Write new HTML string to file
-            System.IO.File.WriteAllText(fileName, content);
-
-            string pdffileName = Server.MapPath("~/EmailTemplate/PaymentReceipt - Copy.pdf");
-
-            Aspose.Pdf.Heading heading2 = new Aspose.Pdf.Heading(1);
-            Aspose.Pdf.Document doc = new Aspose.Pdf.Document(pdffileName);
-            PdfContentEditor editor = new PdfContentEditor();
-            editor.BindPdf(doc);
-            int PageCount = doc.Pages.Count;
-            for (int i = 1; i <= PageCount; i++)
-            {
-                // CHANGE TEXT
-                editor.ReplaceText("GVB0001", i, rcptNo);
-                editor.ReplaceText("23, Feb 2022", i, DateTime.Now.ToString("dd/MMM/yy"));
-                editor.ReplaceText("Bill To :", i, "Bill To :"+ model.Name);
-            }
-            // DOWNLOAD
-            doc.Save(pdffileName);
-
-            //PdfDocument doc = new PdfDocument();
-
-            //PdfPageSettings setting = new PdfPageSettings();
-            //setting.Size = Spire.Pdf.PdfPageSize.A4;
-
-            //string htmlCode = content;
-            //PdfHtmlLayoutFormat htmlLayoutFormat = new PdfHtmlLayoutFormat();
-            //htmlLayoutFormat.IsWaiting = true;
+            content = content.Replace("#src", "http://www.eduxam.in/Assests/images/logo1.jpeg");
 
 
-            //Thread thread = new Thread(() =>
-            //{ doc.LoadFromHTML(htmlCode, false, setting, htmlLayoutFormat); });
-            //thread.SetApartmentState(ApartmentState.STA);
-            //thread.Start();
-            //thread.Join();
+            var htmlToPdf = new HtmlToPdfConverter();
+            var pdfContentType = "application/pdf";
 
-            ////Save pdf file.
-            //string fileName = Server.MapPath("~/EmailTemplate/output-wiki.pdf");
+            var pdfBytes = htmlToPdf.GeneratePdf(content);
+            var filepath = Server.MapPath("~/EmailTemplate/PdfToHTML"+id+".pdf"); ;
 
-            //doc.SaveToFile(fileName);
+            var tempFolder = System.IO.Path.GetTempPath();
+            System.IO.File.WriteAllBytes(filepath, pdfBytes);
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -142,7 +113,7 @@ namespace Scholarship.Controllers
                     "Before opening any attachments please check them for viruses and defects.";
 
                 mm.Body = text;
-                mm.Attachments.Add(new Attachment(DocPath));
+                mm.Attachments.Add(new Attachment(filepath));
                 mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "relay-hosting.secureserver.net";
@@ -165,11 +136,12 @@ namespace Scholarship.Controllers
 
                 entity.tblStdPaymentDetails.Add(mtblStdPaymentDetail);
                 entity.SaveChanges();
+                GC.Collect();
 
-                if (System.IO.File.Exists(pdffileName))
+                if (System.IO.File.Exists(filepath))
                 {
                     // If file found, delete it    
-                    System.IO.File.Delete(DocPath);
+                    System.IO.File.Delete(filepath);
                 }
 
             }
