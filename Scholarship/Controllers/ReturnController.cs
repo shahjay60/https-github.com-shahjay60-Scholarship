@@ -66,22 +66,22 @@ namespace Scholarship.Controllers
 
 
 
-            string DocPath = Server.MapPath("~/EmailTemplate/PdfToHTML.html"); //Orginal html
-            var content = System.IO.File.ReadAllText(DocPath);
-            content = content.Replace("GVB0001", rcptNo);
-            content = content.Replace("23, Feb 2022", DateTime.Now.ToShortDateString());
-            content = content.Replace("#name", model.Name);
-            content = content.Replace("#src", "http://www.eduxam.in/Assests/images/logo1.jpeg");
+            //string DocPath = Server.MapPath("~/EmailTemplate/PdfToHTML.html"); //Orginal html
+            //var content = System.IO.File.ReadAllText(DocPath);
+            //content = content.Replace("GVB0001", rcptNo);
+            //content = content.Replace("23, Feb 2022", DateTime.Now.ToShortDateString());
+            //content = content.Replace("#name", model.Name);
+            //content = content.Replace("#src", "http://www.eduxam.in/Assests/images/logo1.jpeg");
 
 
-            var htmlToPdf = new HtmlToPdfConverter();
-            var pdfContentType = "application/pdf";
+            //var htmlToPdf = new HtmlToPdfConverter();
+            //var pdfContentType = "application/pdf";
 
-            var pdfBytes = htmlToPdf.GeneratePdf(content);
-            var filepath = Server.MapPath("~/EmailTemplate/PdfToHTML"+id+".pdf"); ;
+            //var pdfBytes = htmlToPdf.GeneratePdf(content);
+            //var filepath = Server.MapPath("~/EmailTemplate/PdfToHTML" + id + ".pdf"); ;
 
-            var tempFolder = System.IO.Path.GetTempPath();
-            System.IO.File.WriteAllBytes(filepath, pdfBytes);
+            //var tempFolder = System.IO.Path.GetTempPath();
+            //System.IO.File.WriteAllBytes(filepath, pdfBytes);
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -91,9 +91,9 @@ namespace Scholarship.Controllers
                 MailAddress address = new MailAddress(Email);
                 mm.From = address;
 
-                mm.Subject = "PAYMENT RECEIPT FOR EST";
-
-                text = "Online registration transaction has been processed successfully for Eduxam scholarship test." +
+                mm.Subject = "PAYMENT DETAILS AND LOGIN CREDNETIALS FOR EST";
+                text = "your Login info <b>Username</b>: " + model.UserName + " and <b>Password</b>:" + model.Password + " ";
+                text += "Online registration transaction has been processed successfully for Eduxam scholarship test." +
                     "<br>Receipt copy is attached <br><br>Best Regards,<br>Team Eduxam<br>" +
                     "EMAIL: info@Eduxam.in" +
                     "<br>This e-mail and any files transmitted with it are for the sole use of the intended recipient(s)" +
@@ -113,7 +113,7 @@ namespace Scholarship.Controllers
                     "Before opening any attachments please check them for viruses and defects.";
 
                 mm.Body = text;
-                mm.Attachments.Add(new Attachment(filepath));
+                //mm.Attachments.Add(new Attachment(filepath));
                 mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "relay-hosting.secureserver.net";
@@ -138,11 +138,11 @@ namespace Scholarship.Controllers
                 entity.SaveChanges();
                 GC.Collect();
 
-                if (System.IO.File.Exists(filepath))
-                {
-                    // If file found, delete it    
-                    System.IO.File.Delete(filepath);
-                }
+                //if (System.IO.File.Exists(filepath))
+                //{
+                //    // If file found, delete it    
+                //    System.IO.File.Delete(filepath);
+                //}
 
             }
             #endregion

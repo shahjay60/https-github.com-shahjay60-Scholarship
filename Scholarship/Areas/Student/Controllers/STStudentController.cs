@@ -9,8 +9,6 @@ using System.Web.Mvc;
 
 namespace Scholarship.Areas.Student.Controllers
 {
-    [Authorize]
-
     public class STStudentController : Controller
     {
         // GET: Student/STStudent
@@ -24,6 +22,7 @@ namespace Scholarship.Areas.Student.Controllers
 
             ViewBag.ispaymentDone = entity.tblStdPaymentDetails.Where(x => x.Stdid == id).Select(x=>x.Id)
                                     .FirstOrDefault();
+            ViewBag.stdid = id;
 
             return View(model);
         }

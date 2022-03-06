@@ -75,14 +75,13 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-
+                    debugger;
                     if (response !=0) {
                         window.location.href = "/Student/STStudent/Index?id=" + response;
 
                     }
                     else {
                         $("#btnSubmit").removeAttr('disabled');
-
                         $("#error").text(response).css('color','red')
                     }
                 }

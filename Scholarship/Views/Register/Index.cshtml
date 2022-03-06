@@ -67,7 +67,11 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblMedium">Medium</label>
-                        <input type="text" id="txtMedium" class="form-control form-control-lg">
+                        <select id="drpMedium" class="form-control form-control-lg">
+                            <option value="English">English</option>
+                            <option value="Gujarati">Gujarati</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblstream">Stream</label>
@@ -79,11 +83,47 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblMedium">State</label>
-                        <input type="text" id="txtState" class="form-control form-control-lg">
+                        <select id="drpState" class="form-control form-control-lg">
+                            <option value="Gujarat">Gujarat</option>
+                        </select>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblCity">City</label>
-                        <input type="text" id="txtCity" class="form-control form-control-lg">
+                        <select id="drpCity" class="form-control form-control-lg">
+                            <option value="Ahmedabad">Ahmedabad           </option>
+                            <option value="Vadodara">Vadodara            </option>
+                            <option value="Anand">Anand               </option>
+                            <option value="ChhotaUdaipur">Chhota Udaipur      </option>
+                            <option value="Dahod">Dahod               </option>
+                            <option value="Kheda">Kheda               </option>
+                            <option value="Mahisagar">Mahisagar           </option>
+                            <option value="Panchmahal">Panchmahal          </option>
+                            <option value="Gandhinagar">Gandhinagar         </option>
+                            <option value="Aravalli">Aravalli            </option>
+                            <option value="Banaskantha">Banaskantha         </option>
+                            <option value="Mehsana">Mehsana             </option>
+                            <option value="Patan">Patan               </option>
+                            <option value="Sabarkantha">Sabarkantha         </option>
+                            <option value="Rajkot">Rajkot              </option>
+                            <option value="Amreli">Amreli              </option>
+                            <option value="Bhavnagar">Bhavnagar           </option>
+                            <option value="Botad">Botad               </option>
+                            <option value="Dwarka">Devbhoomi Dwarka    </option>
+                            <option value="Somnath">Gir Somnath         </option>
+                            <option value="Jamnagar">Jamnagar            </option>
+                            <option value="Junagadh">Junagadh            </option>
+                            <option value="Morbi">Morbi               </option>
+                            <option value="Porbandar">Porbandar           </option>
+                            <option value="Surendranagar">Surendranagar       </option>
+                            <option value="Kachchh">Kachchh             </option>
+                            <option value="Surat">Surat               </option>
+                            <option value="Bharuch">Bharuch             </option>
+                            <option value="Dang">Dang                </option>
+                            <option value="Narmada">Narmada             </option>
+                            <option value="Navsari">Navsari             </option>
+                            <option value="Tapi">Tapi                </option>
+                            <option value="Valsad">Valsad              </option>
+                        </select>
                     </div>
 
                     <div class="col-md-12 form-group">
@@ -194,9 +234,9 @@
                 mdata.Stream = $("#AltEmail").val();
                 mdata.STD = $("#Std").val();
                 mdata.Medium = $("#txtMedium").val();
-                mdata.Country = $("#txtCountry").val();
-                mdata.State = $("#txtState").val();
-                mdata.City = $("#txtCity").val();
+                mdata.Country = $("#drpMedium :Selected").val();
+                mdata.State = $("#drpState :Selected").val();
+                mdata.City = $("#drpCity :Selected").val();
                 mdata.SchoolName = $("#SchoolName").val();
                 mdata.SchoolCity = $("#PrincipleName").val();
                 if ($('input[name="inlineRadioOptions"]:checked').val() == "Yes")
@@ -261,9 +301,7 @@
         var charCode = (e.which) ? e.which : event.keyCode
 
         if (String.fromCharCode(charCode).match(/[^0-9]/g))
-
             return false;
-
     });
 
     $('#Std').keypress(function (e) {

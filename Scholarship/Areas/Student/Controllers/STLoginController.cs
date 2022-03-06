@@ -24,5 +24,22 @@ namespace Scholarship.Areas.Student.Controllers
                 throw;
             }
         }
+        [HttpPost]
+        public ActionResult ChangePWd(StudentLoginModel mstd)
+        {
+            try
+            {
+                tblStudentDetail mStudentLoginModel = new tblStudentDetail();
+                mStudentLoginModel.Password = mstd.NewPassword;
+                mStudentLoginModel.Id = mstd.StdId;
+                entity.tblStudentDetails.Add(mStudentLoginModel);
+                entity.SaveChanges();
+                return View(mStudentLoginModel);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

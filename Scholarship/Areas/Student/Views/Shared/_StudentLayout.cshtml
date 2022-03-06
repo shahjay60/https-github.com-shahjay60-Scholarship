@@ -84,7 +84,7 @@
 
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="@Url.Action("ChangePassword", "STLogin")">
+                    <a class="nav-link" href="@Url.Action("ChangePassword", "STLogin" ,new { id=@ViewBag.stdid})">
                         <span>Change Password</span>
                     </a>
 
@@ -124,7 +124,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index","STStudent")" class="nav-link">
+                            <a href="@Url.Action("Index","STStudent" ,new { id=@ViewBag.stdid})" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     My Detail
