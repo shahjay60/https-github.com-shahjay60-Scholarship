@@ -45,12 +45,43 @@
                     <div class="col-12">
                         <input type="submit" value="Log In" class="btn btn-primary btn-lg px-5" id="btnLogin">
                         <a href="@Url.Action("Index","Register")" class="btn btn-info btn-lg px-5">Register</a>
+
+                    </div>
+                    <div>
+                        <a href="#" class="" data-toggle="modal" data-target="#Reset">Reset Password</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="Reset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-title text-center">
+                    <h4>Forgot Password</h4>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="username" placeholder="Your email address...">
+                    </div>
+                    <a class="btn btn-info btn-block btn-round" id="btnforgetpwd" style="color:white">Forgot Password</a>
+                    <span id="error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="~/Assests/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
@@ -86,6 +117,30 @@
                     }
                 }
             });
+    }
+
+       $("#btnforgetpwd").click(function () {
+        if ($('#username').val() != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ResetPassword", "Login")',
+                data: { EmailId: $('#username').val() },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response =="Success") {
+                        window.location.href = '@Url.Action("Index", "Login")';
+                    }
+                    else {
+                        alert("Email id not found..!!");
+                    }
+                }
+            });
         }
+        else {
+            alert("Please enter emailId");
+        }
+    });
+
 </script>
 

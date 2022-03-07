@@ -329,6 +329,44 @@
      window.location.href = '@Url.Action("Index", "Scholarship")';
     });
 
+     $('#ContactNo1').blur(function () {
+         $.ajax({
+                type: "POST",
+             url: '@Url.Action("ChkContactExists", "Register")',
+             data: JSON.stringify({ 'ContactNo': $('#ContactNo1').val() }),
+             contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+                success: function (response) {
+                    if (response == "Error") {
+
+                        alert("Contact number is already exists..!!");
+                        $("#btnSubmit").attr('disabled', 'disabled');
+                    }
+                    else {
+                        $("#btnSubmit").removeAttr('disabled');
+                    }
+                }
+            });
+    });
+    $('#EmailID').blur(function () {
+         $.ajax({
+                type: "POST",
+                url:'@Url.Action("ChkEmailExists", "Register")',
+             data: JSON.stringify({ 'EmailId': $('#EmailID').val() }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response =="Error") {
+                        alert("EmailId is already exists..!!");
+                        $("#btnSubmit").attr('disabled', 'disabled');
+                    }
+                    else {
+                        $("#btnSubmit").removeAttr('disabled');
+                    }
+                }
+            });
+    });
 
     function validation() {
         var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;

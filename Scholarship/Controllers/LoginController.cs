@@ -12,7 +12,7 @@ namespace Scholarship.Controllers
     {
         // GET: Login
         ScholarshipEntities entity = new ScholarshipEntities();
-
+        Utilities mUtilities = new Utilities();
         public ActionResult Index()
         {
             return View();
@@ -44,10 +44,10 @@ namespace Scholarship.Controllers
                     message = "Account has not been activated.";
                     break;
                 default:
-                    FormsAuthentication.SetAuthCookie(model.UserName,false);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
                     return Json("Success", JsonRequestBehavior.AllowGet);
             }
-              return Json(message, JsonRequestBehavior.AllowGet);
+            return Json(message, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -73,6 +73,40 @@ namespace Scholarship.Controllers
         {
             return View();
         }
+
+        public ActionResult ResetPassword(string EmailId)
+        {
+            try
+            {
+                var data = entity.tblStudentDetails.Where(x => x.EmailId.Trim().ToLower() == EmailId.Trim().ToLower()).FirstOrDefault();
+                if (data != null)
+                {
+                    string body = string.Empty;
+                    var lnkHref = "<a href='" + Url.Action("StudentLogin", "Login") + "'>Reset Password</a>";
+                    body += "<bYour password is. </b>" + data.Password;
+                    body += "<b>Please find the Login URL. </b>" + lnkHref;
+                    mUtilities.SendMail(EmailId, "Reset Password!!", body);
+                    return Json("Success");
+                }
+                else
+                {
+                    return Json("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                tblException mobj = new tblException();
+                mobj.MethodName = "ResetPassword";
+                mobj.ControllerName = "Login";
+                mobj.Message = ex.Message;
+                mobj.StackTrace = ex.StackTrace;
+                mobj.CreatedDatetime = DateTime.Now;
+                entity.tblExceptions.Add(mobj);
+                entity.SaveChanges();
+                return RedirectToAction("Fail", "Return");
+            }
+        }
+
 
     }
 }

@@ -20,7 +20,7 @@ namespace Scholarship.Areas.Student.Controllers
             ViewBag.scholarshipid = entity.tblScholarships.Where(x => x.MinStd <= model.STD && x.MaxStd >= model.STD)
                                                                   .Select(x => x.Id).FirstOrDefault();
 
-            ViewBag.ispaymentDone = entity.tblStdPaymentDetails.Where(x => x.Stdid == id).Select(x=>x.Id)
+            ViewBag.ispaymentDone = entity.tblStdPaymentDetails.Where(x => x.Stdid == id).Select(x => x.Id)
                                     .FirstOrDefault();
             ViewBag.stdid = id;
 
@@ -29,15 +29,35 @@ namespace Scholarship.Areas.Student.Controllers
 
         public ActionResult Edit(int id)
         {
+            if(TempData["Message"]!=null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             var model = entity.tblStudentDetails.ToList().Where(x => x.Id == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblStudentDetail model)
         {
-            entity.Entry(model).State = EntityState.Modified;
-            entity.SaveChanges();
-            return RedirectToAction("Index", model.Id);
+            try
+            {
+                entity.Entry(model).State = EntityState.Modified;
+                entity.SaveChanges();
+                TempData["Message"] = "Success";
+                return RedirectToAction("Edit", model.Id);
+            }
+            catch (Exception ex)
+            {
+                tblException mobj = new tblException();
+                mobj.MethodName = "Edit";
+                mobj.ControllerName = "STStudent";
+                mobj.Message = ex.Message;
+                mobj.StackTrace = ex.StackTrace;
+                mobj.CreatedDatetime = DateTime.Now;
+                entity.tblExceptions.Add(mobj);
+                entity.SaveChanges();
+                return RedirectToAction("Fail", "../Return");
+            }
         }
 
         [HttpGet]

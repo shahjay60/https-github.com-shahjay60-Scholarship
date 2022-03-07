@@ -22,6 +22,8 @@ namespace Scholarship.Controllers
     {
         // GET: Return
         ScholarshipEntities entity = new ScholarshipEntities();
+        Utilities mUtilities = new Utilities();
+
         private string Psurl = ConfigurationManager.AppSettings["surl"];
         private string Pfurl = ConfigurationManager.AppSettings["furl"];
         private string PUrl = ConfigurationManager.AppSettings["Url"];
@@ -86,14 +88,8 @@ namespace Scholarship.Controllers
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 string text = string.Empty;
-                MailMessage mm = new MailMessage();
-                mm.To.Add(model.EmailId);
-                MailAddress address = new MailAddress(Email);
-                mm.From = address;
-
-                mm.Subject = "PAYMENT DETAILS AND LOGIN CREDNETIALS FOR EST";
                 text = "your Login info <b>Username</b>: " + model.UserName + " and <b>Password</b>:" + model.Password + " ";
-                text += "Online registration transaction has been processed successfully for Eduxam scholarship test." +
+                text += "<br>Online registration transaction has been processed successfully for Eduxam scholarship test." +
                     "<br>Receipt copy is attached <br><br>Best Regards,<br>Team Eduxam<br>" +
                     "EMAIL: info@Eduxam.in" +
                     "<br>This e-mail and any files transmitted with it are for the sole use of the intended recipient(s)" +
@@ -112,19 +108,7 @@ namespace Scholarship.Controllers
                     " so expressly with due authority of Eduxam LLP. <br>" +
                     "Before opening any attachments please check them for viruses and defects.";
 
-                mm.Body = text;
-                //mm.Attachments.Add(new Attachment(filepath));
-                mm.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "relay-hosting.secureserver.net";
-                smtp.EnableSsl = false;
-                smtp.Port = Convert.ToInt32(Port);
-                smtp.UseDefaultCredentials = false;
-
-                NetworkCredential credentials = new NetworkCredential(Email, Password);
-                smtp.Credentials = credentials;
-
-                smtp.Send(mm);
+                mUtilities.SendMail(model.EmailId, "PAYMENT DETAILS AND LOGIN CREDNETIALS FOR EST", text);
 
                 tblStdPaymentDetail mtblStdPaymentDetail = new tblStdPaymentDetail();
                 mtblStdPaymentDetail.Stdid = id;

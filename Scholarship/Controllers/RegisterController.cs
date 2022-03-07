@@ -147,5 +147,41 @@ namespace Scholarship.Controllers
                 return builder.ToString().ToLower();
             return builder.ToString();
         }
+
+        [HttpPost]
+        public ActionResult ChkEmailExists(string EmailId)
+        {
+            var stuIsExists = entity.tblStudentDetails.Where(x => x.EmailId.Trim().ToLower() == EmailId.Trim().ToLower())
+                                                      .Select(x => x.Id).FirstOrDefault();
+
+            if (stuIsExists != 0)
+            {
+                return Json("Error");
+            }
+            else
+            {
+                return Json(stuIsExists);
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult ChkContactExists(string ContactNo)
+        {
+            var stuIsExists = entity.tblStudentDetails.Where(x => x.ContactNumber == ContactNo)
+                                                       .Select(x => x.Id).FirstOrDefault();
+
+            if (stuIsExists != 0)
+            {
+                return Json("Error");
+
+            }
+            else
+            {
+                return Json(stuIsExists);
+
+            }
+        }
+
     }
 }
