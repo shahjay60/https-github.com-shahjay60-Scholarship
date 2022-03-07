@@ -17,6 +17,8 @@ namespace Scholarship.Areas.Student.Controllers
         {
             try
             {
+                ViewBag.stdid = id;
+
                 StudentLoginModel mStudentLoginModel = new StudentLoginModel();
                 mStudentLoginModel.StdId = id;
                 return View(mStudentLoginModel);
@@ -42,7 +44,7 @@ namespace Scholarship.Areas.Student.Controllers
                     entity.SaveChanges();
 
                     string body = string.Empty;
-                    var lnkHref = "<a href='" + Url.Action("StudentLogin", "Login") + "'>Login</a>";
+                    var lnkHref = "<a href='https://eduxam.in/Login'>Login</a>";
                     body = "<b>Please find the Login URL. </b>" + lnkHref;
                     mUtilities.SendMail(mStudentLoginModel.EmailId, "Your password change successfully..!!", body);
                     TempData["Message"] = "Password Change Successfully..!!";
@@ -51,7 +53,7 @@ namespace Scholarship.Areas.Student.Controllers
                 {
                     TempData["Message"] = "Old password is not match";
                 }
-                return View(mstd.StdId);
+                return RedirectToAction("Index", "STStudent", new { @id = data.Id });
             }
             catch (Exception ex)
             {

@@ -29,9 +29,11 @@ namespace Scholarship.Areas.Student.Controllers
 
         public ActionResult Edit(int id)
         {
-            if(TempData["Message"]!=null)
+            ViewBag.stdid = id;
+
+            if (TempData["Message"]!=null)
             {
-                ViewBag.Message = TempData["Message"];
+                ViewBag.STDMessage = TempData["Message"];
             }
             var model = entity.tblStudentDetails.ToList().Where(x => x.Id == id).FirstOrDefault();
             return View(model);
@@ -39,6 +41,7 @@ namespace Scholarship.Areas.Student.Controllers
         [HttpPost]
         public ActionResult Edit(tblStudentDetail model)
         {
+
             try
             {
                 entity.Entry(model).State = EntityState.Modified;
