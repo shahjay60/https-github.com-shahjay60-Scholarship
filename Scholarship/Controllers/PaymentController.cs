@@ -1,6 +1,4 @@
-﻿using Aspose.Pdf;
-using Aspose.Pdf.Facades;
-using Scholarship.Models;
+﻿using Scholarship.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -65,9 +63,9 @@ namespace Scholarship.Controllers
                 myremotepost.Add("phone", model.ContactNumber);
                 myremotepost.Add("email", model.Email);
                 //myremotepost.Add("surl", "https://localhost:44372/Return/Success?id="+ model.StdId + "& scholarshipid="+model.ScholarshipId+" ");//Change the success url here depending upon the port number of your local system.
-                myremotepost.Add("surl", "http://eduxam.in/Return/Success?id="+model.StdId+ "&scholarshipid="+model.ScholarshipId+" ");//Change the success url here depending upon the port number of your local system.
+                myremotepost.Add("surl", "https://eduxam.in/Return/Success?id="+model.StdId+ "&scholarshipid="+model.ScholarshipId+" ");//Change the success url here depending upon the port number of your local system.
 
-                myremotepost.Add("furl", Pfurl);//Change the failure url here depending upon the port number of your local system.
+                myremotepost.Add("furl", "https://eduxam.in/Return/Fail");//Change the failure url here depending upon the port number of your local system.
                 myremotepost.Add("service_provider", Pservice_provider);
                 string hashString = key + "|" + txnid + "|" + model.ScholarshipAmount + "|" + model.ScholarshipName + "|" + model.Name + "|" + model.Email + "|||||||||||" + salt;
                 //string hashString = "3Q5c3q|2590640|3053.00|OnlineBooking|vimallad|ladvimal@gmail.com|||||||||||mE2RxRwx";

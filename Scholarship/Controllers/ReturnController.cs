@@ -1,6 +1,4 @@
-﻿using Aspose.Pdf.Facades;
-using NReco.PdfGenerator;
-using Scholarship.Models;
+﻿using Scholarship.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -66,8 +64,6 @@ namespace Scholarship.Controllers
                 rcptNo = "GVB00" + paymentRecid;
             }
 
-
-
             //string DocPath = Server.MapPath("~/EmailTemplate/PdfToHTML.html"); //Orginal html
             //var content = System.IO.File.ReadAllText(DocPath);
             //content = content.Replace("GVB0001", rcptNo);
@@ -88,9 +84,9 @@ namespace Scholarship.Controllers
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 string text = string.Empty;
-                text = "your Login info <b>Username</b>: " + model.UserName + " and <b>Password</b>:" + model.Password + " ";
+                text = "Greetings from EDUXAM, <br/>your Login info <b>Username</b>: " + model.UserName + " and <b>Password</b>:" + model.Password + " ";
                 text += "<br>Online registration transaction has been processed successfully for Eduxam scholarship test." +
-                    "<br>Receipt copy is attached <br><br>Best Regards,<br>Team Eduxam<br>" +
+                    "<br>Best Regards,<br>Team Eduxam<br>" +
                     "EMAIL: info@Eduxam.in" +
                     "<br>This e-mail and any files transmitted with it are for the sole use of the intended recipient(s)" +
                     " <br>" +
