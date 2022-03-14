@@ -33,7 +33,7 @@ namespace Scholarship.Controllers
             {
                 mdata.UserName = mdata.EmailId;
                 mdata.Password = RandomString(8, false);
-
+                mdata.RegiDate = DateTime.Now;
                 entity.tblStudentDetails.Add(mdata);
                 entity.SaveChanges();
                 int id = mdata.Id;

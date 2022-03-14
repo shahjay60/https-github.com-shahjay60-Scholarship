@@ -34,5 +34,7 @@ namespace Scholarship
         public string State { get; set; }
         public string Medium { get; set; }
         public string Country { get; set; }
+        public Nullable<System.DateTime> LastLoginDate { get; set; }
+        public Nullable<System.DateTime> RegiDate { get; set; }
     }
 }

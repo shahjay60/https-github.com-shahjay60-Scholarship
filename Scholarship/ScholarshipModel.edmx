@@ -38,7 +38,7 @@
           <Property Name="Stdid" Type="int" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ScholarshipId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TransacrtionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TransacrtionId" Type="nvarchar" MaxLength="100" />
           <Property Name="TransactionDate" Type="datetime" />
           <Property Name="ReceiptNumber" Type="int" />
         </EntityType>
@@ -66,6 +66,8 @@
           <Property Name="State" Type="nvarchar(max)" />
           <Property Name="Medium" Type="nvarchar" MaxLength="500" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="RegiDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -172,6 +174,8 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Medium" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="RegiDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tblStdPaymentDetail">
           <Key>
@@ -181,7 +185,7 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           <Property Name="Stdid" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ScholarshipId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransacrtionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransacrtionId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TransactionDate" Type="DateTime" Precision="3" />
           <Property Name="ReceiptNumber" Type="Int32" />
         </EntityType>
@@ -238,6 +242,8 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           <EntitySetMapping Name="tblStudentDetails">
             <EntityTypeMapping TypeName="ScholarshipModel.tblStudentDetail">
               <MappingFragment StoreEntitySet="tblStudentDetails">
+                <ScalarProperty Name="RegiDate" ColumnName="RegiDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Medium" ColumnName="Medium" />
                 <ScalarProperty Name="State" ColumnName="State" />
