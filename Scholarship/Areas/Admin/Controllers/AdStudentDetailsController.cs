@@ -22,5 +22,12 @@ namespace Scholarship.Areas.Admin.Controllers
 
             return View(model);
         }
+        public ActionResult Delete(int stid)
+        {
+            var modelData = entity.tblStudentDetails.ToList().Where(x => x.Id == stid).FirstOrDefault();
+            var model = entity.tblStudentDetails.Remove(modelData);
+            entity.SaveChanges();
+            return Json("Ok");
+        }
     }
 }

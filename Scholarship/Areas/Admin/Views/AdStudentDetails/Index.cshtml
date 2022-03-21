@@ -41,6 +41,7 @@
                                     <th>Registration Date</th>
                                     <th>IsApply</th>
                                     <th>Details</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +67,9 @@
                                         <td>
                                             <a href="@Url.Action("Detail","AdStudentDetails",new {id=item.Id })" class="btn btn-block btn-info">Detail</a>
                                         </td>
+                                        <td>
+                                            <a href="#" onclick="functionDelete(@item.Id)" class="btn btn-block btn-warning">Delete</a>
+                                        </td>
                                     </tr>
                                 }
 
@@ -81,3 +85,26 @@
     </div>
 
 </section>
+<script>
+    function functionDelete(id) {
+        if (confirm("Do you want to Delete?") == true) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Delete", "AdStudentDetails")',
+                data: JSON.stringify({ 'stid': id }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response == "Ok") {
+                        alert("Record deleted..!!");
+                        window.location.reload();
+
+                    }
+                    else {
+                        alert("Error..!!");
+                    }
+                }
+            });
+        }
+    }
+</script>
