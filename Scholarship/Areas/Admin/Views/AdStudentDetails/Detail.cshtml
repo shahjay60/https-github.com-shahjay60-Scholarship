@@ -56,6 +56,14 @@
                                             <div class="col-sm-8">@Model.ContactNumber</div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-sm-2"><label>Stream:</label></div>
+                                            <div class="col-sm-8">@Model.Stream</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Medium:</label></div>
+                                            <div class="col-sm-8">@Model.Medium</div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-sm-2"><label>Email:</label></div>
                                             <div class="col-sm-8">@Model.EmailId</div>
                                         </div>
@@ -64,10 +72,10 @@
                                             <div class="col-sm-8">@Model.AlternetContactNumber</div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-2"><label>Alternate Email:</label></div>
-                                            <div class="col-sm-8">@Model.Stream</div>
-                                        </div>
+                                        @*<div class="row">
+            <div class="col-sm-2"><label>Alternate Email:</label></div>
+            <div class="col-sm-8">@Model.Stream</div>
+        </div>*@
                                         <div class="row">
                                             <div class="col-sm-2"><label>Standard:</label></div>
                                             <div class="col-sm-8">@Model.STD</div>
@@ -84,7 +92,7 @@
                                             <div class="col-sm-2"><label>City:</label></div>
                                             <div class="col-sm-8">@Model.City</div>
                                         </div>
-                                       
+
                                         <div class="row">
                                             <div class="col-sm-2"><label>ApplyScholarship:</label></div>
                                             @if (@Model.Apply_Scholarship == false)

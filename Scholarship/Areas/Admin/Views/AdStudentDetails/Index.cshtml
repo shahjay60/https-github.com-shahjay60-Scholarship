@@ -38,8 +38,13 @@
                                     <th>Sur Name</th>
                                     <th>ContactNumber</th>
                                     <th>EmailId</th>
-                                    <th>Registration Date</th>
+                                    <th>Standard</th>
+                                    <th>Stream</th>
+                                    <th>Medium</th>
                                     <th>IsApply</th>
+                                    <th>Registration Date</th>
+                                    <th>City</th>
+                                    <th>State</th>
                                     <th>Details</th>
                                     <th>Delete</th>
                                 </tr>
@@ -47,30 +52,47 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        @*<td>@item.Id</td>*@
-                                        <td>
-                                            @item.Name
-                                        </td>
-                                        <td>@item.ParentName</td>
-                                        <td>@item.SurName</td>
-                                        <td> @item.ContactNumber</td>
-                                        <td>
-                                            @item.EmailId
-                                        </td>
-                                        <td>
-                                            @item.RegiDate
-                                        </td>
-                                        <td>
-                                            @item.Apply_Scholarship
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Detail","AdStudentDetails",new {id=item.Id })" class="btn btn-block btn-info">Detail</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" onclick="functionDelete(@item.Id)" class="btn btn-block btn-warning">Delete</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    @*<td>@item.Id</td>*@
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>@item.ParentName</td>
+                                    <td>@item.SurName</td>
+                                    <td> @item.ContactNumber</td>
+                                    <td>
+                                        @item.EmailId
+                                    </td>
+                                    <td>
+                                        @item.STD
+                                    </td>
+                                    <td>
+                                        @item.Stream
+                                    </td>
+                                    <td>
+                                        @item.Medium
+                                    </td>
+                                    <td>
+                                        @item.Apply_Scholarship
+                                    </td>
+                                    <td>
+                                        @item.City
+                                    </td>
+                                    <td>
+                                        @item.State
+                                    </td>
+
+                                    <td>
+                                        @item.RegiDate
+                                    </td>
+
+                                    <td>
+                                        <a href="@Url.Action("Detail","AdStudentDetails",new {id=item.Id })" class="btn btn-block btn-info">Detail</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="functionDelete(@item.Id)" class="btn btn-block btn-warning">Delete</a>
+                                    </td>
+                                </tr>
                                 }
 
 

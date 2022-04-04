@@ -75,7 +75,12 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblstream">Stream</label>
-                        <input type="text" id="AltEmail" class="form-control form-control-lg">
+                        <select id="drpStream" class="form-control form-control-lg">
+                            <option value="Other">Other</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Science">Science</option>
+                        </select>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="pword2" id="lblMedium">Country</label>
@@ -204,9 +209,9 @@
     $("#failure").hide();
     $("#failure1").hide();
     $("#success").hide();
-    $("#AltEmail").hide();
+    $("#drpStream").hide();
     $("#lblstream").hide();
-    //$("#btnSubmit").attr('disabled', 'disabled');
+    $("#btnSubmit").attr('disabled', 'disabled');
   $("#loading-bar-spinner").hide()
     $('input[type="checkbox"]').click(function () {
         if ($(this).prop("checked") == true) {
@@ -231,10 +236,10 @@
                 mdata.EmailId = $("#EmailID").val();
                 mdata.Address = $("#address").val();
                 mdata.AlternetContactNumber = $("#AltContact").val();
-                mdata.Stream = $("#AltEmail").val();
+                mdata.Stream = $("#drpStream :Selected").val();
                 mdata.STD = $("#Std").val();
-                mdata.Medium = $("#txtMedium").val();
-                mdata.Country = $("#drpMedium :Selected").val();
+                mdata.Medium = $("#drpMedium :Selected").val();
+                mdata.Country = $("#txtCountry").val();
                 mdata.State = $("#drpState :Selected").val();
                 mdata.City = $("#drpCity :Selected").val();
                 mdata.SchoolName = $("#SchoolName").val();
@@ -316,11 +321,11 @@
 
     $("#Std").focusout(function () {
         if ($("#Std").val() == "11" || $("#Std").val() == "12") {
-            $("#AltEmail").show();
+            $("#drpStream").show();
             $("#lblstream").show();
         }
         else {
-            $("#AltEmail").hide();
+            $("#drpStream").hide();
             $("#lblstream").hide();
         }
     });
@@ -424,11 +429,16 @@
         if ($.trim($("#PrincipleName").val()) != '') {
             result = true;
         }
+        if ($("#drpStream :Selected").val() !="Other") {
+            result = true;
+        }
 
         if ($('input[name="inlineRadioOptions"]:checked').length != 0) {
             result = true;
         }
-
+        if ($('input[type="checkbox"]:checked').length != 0) {
+            result = true;
+        }
 
         return result;
 
