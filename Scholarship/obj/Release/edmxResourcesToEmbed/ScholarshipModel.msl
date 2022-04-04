@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ScholarshipModelStoreContainer" CdmEntityContainer="ScholarshipEntities">
+    <EntitySetMapping Name="tbl_login">
+      <EntityTypeMapping TypeName="ScholarshipModel.tbl_login">
+        <MappingFragment StoreEntitySet="tbl_login">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblExceptions">
+      <EntityTypeMapping TypeName="ScholarshipModel.tblException">
+        <MappingFragment StoreEntitySet="tblException">
+          <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+          <ScalarProperty Name="InnerMessage" ColumnName="InnerMessage" />
+          <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStudentDetails">
+      <EntityTypeMapping TypeName="ScholarshipModel.tblStudentDetail">
+        <MappingFragment StoreEntitySet="tblStudentDetails">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Apply_Scholarship" ColumnName="Apply_Scholarship" />
+          <ScalarProperty Name="Goal_In_Life" ColumnName="Goal_In_Life" />
+          <ScalarProperty Name="SchoolEmailId" ColumnName="SchoolEmailId" />
+          <ScalarProperty Name="PrincipalName" ColumnName="PrincipalName" />
+          <ScalarProperty Name="SchoolContactNumber" ColumnName="SchoolContactNumber" />
+          <ScalarProperty Name="SchoolAddress" ColumnName="SchoolAddress" />
+          <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+          <ScalarProperty Name="SubjectInterested" ColumnName="SubjectInterested" />
+          <ScalarProperty Name="STD" ColumnName="STD" />
+          <ScalarProperty Name="AlternateEmailId" ColumnName="AlternateEmailId" />
+          <ScalarProperty Name="AlternetContactNumber" ColumnName="AlternetContactNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="SurName" ColumnName="SurName" />
+          <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblScholarships">
+      <EntityTypeMapping TypeName="ScholarshipModel.tblScholarship">
+        <MappingFragment StoreEntitySet="tblScholarship">
+          <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

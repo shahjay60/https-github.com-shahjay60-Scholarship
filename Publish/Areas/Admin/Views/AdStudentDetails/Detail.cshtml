@@ -1,0 +1,134 @@
+﻿@model tblStudentDetail
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutcshtml.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Student Details</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href=@Url.Action("Index","AdminDashbord")>Home</a></li>
+                    <li class="breadcrumb-item"><a href=@Url.Action("Index","AdStudentDetails")>Back to list</a></li>
+
+                    <li class="breadcrumb-item active">Student Details</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary card-outline">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5 col-sm-3">
+                                <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="true">Basic Details</a>
+                                    <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false">School Details</a>
+                                    <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false">Payment Details</a>
+                                </div>
+                            </div>
+                            <div class="col-7 col-sm-9">
+                                <div class="tab-content" id="vert-tabs-tabContent">
+                                    <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Name:</label></div>
+                                            <div class="col-sm-8">@Model.Name</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Parent Name:</label></div>
+                                            <div class="col-sm-8">@Model.ParentName</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>SurName:</label></div>
+                                            <div class="col-sm-8">@Model.SurName</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Contact Number:</label></div>
+                                            <div class="col-sm-8">@Model.ContactNumber</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Email:</label></div>
+                                            <div class="col-sm-8">@Model.EmailId</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Alternate Contact:</label></div>
+                                            <div class="col-sm-8">@Model.AlternetContactNumber</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Alternate Email:</label></div>
+                                            <div class="col-sm-8">@Model.AlternateEmailId</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Standard:</label></div>
+                                            <div class="col-sm-8">@Model.STD</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Subject Interested:</label></div>
+                                            <div class="col-sm-8">@Model.SubjectInterested</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Goal in life:</label></div>
+                                            <div class="col-sm-8">@Model.Goal_In_Life</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>ApplyScholarship:</label></div>
+                                            @if (@Model.Apply_Scholarship == false)
+                                            {
+                                                <div class="col-sm-8">No</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-sm-8">Yes</div>
+                                            }
+                                        </div>
+
+
+                                        </div>
+                                    <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
+
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>School Name:</label></div>
+                                            <div class="col-sm-8">@Model.SchoolName</div>
+                                        </div>
+                                       
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>School Contact:</label></div>
+                                            <div class="col-sm-8">@Model.SchoolContactNumber</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>School Email:</label></div>
+                                            <div class="col-sm-8">@Model.SchoolEmailId</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2"><label>Principal Name:</label></div>
+                                            <div class="col-sm-8">@Model.PrincipalName</div>
+                                        </div>
+
+                                    </div>
+                                        <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
+                                            Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>

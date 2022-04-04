@@ -1,0 +1,80 @@
+﻿@model List<tblStudentDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutcshtml.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Students Details</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href=@Url.Action("Index","AdminDashbord")>Home</a></li>
+                    <li class="breadcrumb-item active">Students Details</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                  
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    @*<th>Id</th>*@
+                                    <th>Name</th>
+                                    <th>ParentName</th>
+                                    <th>Sur Name</th>
+                                    <th>ContactNumber</th>
+                                    <th>EmailId</th>
+                                    <th>School Name</th>
+
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>@item.Id</td>*@
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>@item.ParentName</td>
+                                        <td>@item.SurName</td>
+                                        <td> @item.ContactNumber</td>
+                                        <td>
+                                            @item.EmailId
+                                        </td>
+                                        <td>
+                                            @item.SchoolName
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Detail","AdStudentDetails",new {id=item.Id })" class="btn btn-block btn-info">Detail</a>
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

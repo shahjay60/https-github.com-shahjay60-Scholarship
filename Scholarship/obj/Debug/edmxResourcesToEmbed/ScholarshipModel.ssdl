@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScholarshipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblException">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ControllerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MethodName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="StackTrace" Type="nvarchar(max)" />
+    <Property Name="InnerMessage" Type="nvarchar(max)" />
+    <Property Name="CreatedDatetime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblScholarship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ExamDate" Type="datetime" />
+    <Property Name="MinStd" Type="int" />
+    <Property Name="MaxStd" Type="int" />
+  </EntityType>
+  <EntityType Name="tblStdPaymentDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Stdid" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ScholarshipId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TransacrtionId" Type="nvarchar" MaxLength="100" />
+    <Property Name="TransactionDate" Type="datetime" />
+    <Property Name="ReceiptNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="tblStudentDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ParentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SurName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AlternetContactNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stream" Type="nvarchar" MaxLength="100" />
+    <Property Name="STD" Type="int" Nullable="false" />
+    <Property Name="SchoolName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SchoolCity" Type="nvarchar(max)" />
+    <Property Name="Apply_Scholarship" Type="bit" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsTCaccept" Type="bit" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="State" Type="nvarchar(max)" />
+    <Property Name="Medium" Type="nvarchar" MaxLength="500" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="RegiDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblUserActivation">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ActivationCode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="Validate_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ScholarshipModelStoreContainer">
+    <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserActivation" EntityType="Self.tblUserActivation" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblUserActivation].[UserId] AS [UserId], 
+    [tblUserActivation].[ActivationCode] AS [ActivationCode]
+    FROM [dbo].[tblUserActivation] AS [tblUserActivation]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

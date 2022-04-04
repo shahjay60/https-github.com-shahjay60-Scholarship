@@ -1,0 +1,316 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end justify-content-center text-center">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Register</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="@Url.Action("Index","Home")">Home</a>
+
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">Register</span>
+    </div>
+</div>
+
+
+<div class="site-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label for="username">First Name <span style="color:red">*</span></label>
+                        <input type="text" id="Fname" class="form-control form-control-lg">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="pword">Last Name<span style="color:red">*</span></label>
+                        <input type="text" id="LName" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Father's Name<span style="color:red">*</span></label>
+                        <input type="text" id="FatherName" class="form-control form-control-lg">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">ContactNo<span style="color:red">*</span></label>
+                        <input type="text" id="ContactNo1" class="form-control form-control-lg" maxlength="12">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Alternate ContactNo</label>
+                        <input type="text" id="AltContact" class="form-control form-control-lg" maxlength="12">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">EmailID<span style="color:red">*</span></label>
+                        <input type="text" id="EmailID" class="form-control form-control-lg">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Alternate EmailID</label>
+                        <input type="text" id="AltEmail" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Standard<span style="color:red">*</span></label>
+                        <input type="text" id="Std" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label for="pword2">Address<span style="color:red">*</span></label>
+                        <textarea style="width:100%" id="address"></textarea>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Subject Interested<span style="color:red">*</span></label>
+                        <input type="text" id="SubInt" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">School Name<span style="color:red">*</span></label>
+                        <input type="text" id="SchoolName" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Principle Name<span style="color:red">*</span></label>
+                        <input type="text" id="PrincipleName" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">School ContactNumber<span style="color:red">*</span></label>
+                        <input type="text" id="SchoolContactNumber" class="form-control form-control-lg" maxlength="12">
+                    </div>
+
+
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">School EmailID<span style="color:red">*</span></label>
+                        <input type="text" id="SchoolEmailId" class="form-control form-control-lg">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label for="pword2">Goal In Life<span style="color:red">*</span></label>
+                        <textarea style="width:100%" id="Goal"></textarea>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label for="pword2">School Address<span style="color:red">*</span></label>
+                        <textarea style="width:100%" id="schlAddress"></textarea>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="pword2">Apply For Scholarship<span style="color:red">*</span></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Yes">
+                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="No">
+                            <label class="form-check-label" for="inlineRadio2">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="submit" value="Register" class="btn btn-primary btn-lg px-5" id="btnSubmit">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-success" role="alert" id="success">
+                            Form submit successfully..!!
+                        </div>
+                        <div class="alert alert-danger" role="alert" id="failure">
+                            Please fill the required (*) data..!!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="divLoader" style="display:none;"> <img src="~/Content/ajax-loader.gif" alt="Loader" /> </div>
+<script src="~/Assests/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $("#failure").hide();
+    $("#success").hide();
+
+    $("#btnSubmit").click(function () {
+        var res = validation();
+        if (res == true) {
+            var mdata = {};
+            mdata.Name = $("#Fname").val();
+            mdata.ParentName = $("#FatherName").val();
+            mdata.SurName = $("#LName").val();
+            mdata.ContactNumber = $("#ContactNo1").val();
+            mdata.EmailId = $("#EmailID").val();
+            mdata.Address = $("#address").val();
+            mdata.AlternetContactNumber = $("#AltContact").val();
+            mdata.AlternateEmailId = $("#AltEmail").val();
+            mdata.STD = $("#Std").val();
+            mdata.SubjectInterested = $("#SubInt").val();
+            mdata.SchoolName = $("#SchoolName").val();
+            mdata.SchoolAddress = $("#schlAddress").val();
+            mdata.SchoolContactNumber = $("#SchoolContactNumber").val();
+            mdata.PrincipalName = $("#PrincipleName").val();
+            mdata.SchoolEmailId = $("#SchoolEmailId").val();
+            mdata.Goal_In_Life = $("#Goal").val();
+            mdata.Apply_Scholarship = $('input[name="inlineRadioOptions"]:checked').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Register/StudentRegister",
+                data: JSON.stringify(mdata),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result != 0) {
+                        console.log(result);
+                        var sid = result;
+
+                        var url = '@Url.Action("Index", "Scholarship")' + '?Id=';
+
+                        var link = url+ sid;
+                        $("#success").show();
+                        $("#success").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#success").slideUp(500);
+                        });
+                        window.location.href =link;
+                    }
+                    else {
+                        $("#failure").show();
+                        $("#failure").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#failure").slideUp(500);
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            $("#failure").show();
+            $("#failure").fadeTo(2000, 500).slideUp(500, function () {
+                $("#failure").slideUp(500);
+            });
+        }
+    });
+    $('#ContactNo1').keypress(function (e) {
+
+        var charCode = (e.which) ? e.which : event.keyCode
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+            return false;
+
+    });
+
+    $('#SchoolContactNumber').keypress(function (e) {
+
+        var charCode = (e.which) ? e.which : event.keyCode
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+            return false;
+
+    });
+
+    function validation() {
+        var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+
+        var phone = /[0-9 -()+]+$/;
+
+        var result = false;
+        if ($.trim($("#Fname").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#LName").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#FatherName").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#ContactNo1").val()) != '') {
+            var contactNo = ($.trim($("#ContactNo1").val()));
+
+            if ((contactNo.length == 12) || (phone.test(contactNo))) {
+                result = true;
+
+            }
+
+        }
+
+        if ($.trim($("#EmailID").val()) != '') {
+            var email = $.trim($("#EmailID").val());
+            if (emailReg.test(email)) {
+                result = true;
+            }
+            else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        if ($.trim($("#Std").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#address").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#SubInt").val()) != '') {
+            result = true;
+        }
+        if ($.trim($("#SchoolName").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#SchoolContactNumber").val()) != '') {
+            var contactNo = ($.trim($("#SchoolContactNumber").val()));
+
+            if ((contactNo.length == 12) || (phone.test(contactNo))) {
+                result = true;
+            }
+            else {
+                result = false;
+            }
+        }
+
+        if ($.trim($("#PrincipleName").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#SchoolEmailId").val()) != '') {
+            var email = $.trim($("#SchoolEmailId").val());
+            if (emailReg.test(email)) {
+                result = true;
+            }
+            else {
+                alert("Enter valid School email Id");
+                result = false;
+                return result;
+            }
+        }
+
+        if ($.trim($("#Goal").val()) != '') {
+            result = true;
+        }
+
+        if ($.trim($("#schlAddress").val()) != '') {
+            result = true;
+        }
+
+        if ($('input[name="inlineRadioOptions"]:checked').length != 0) {
+            result = true;
+        }
+
+        return result;
+
+    }
+</script>
