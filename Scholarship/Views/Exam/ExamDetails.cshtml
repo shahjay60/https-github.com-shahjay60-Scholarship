@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .numberCircle {
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border: 2px solid #666;
+            color: #666;
+            text-align: center;
+            font: 18px Arial, sans-serif;
+        }
+    </style>
+    <title>Exam</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h3>Exam Title:</h3>
+        <div class="well well-lg">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Student Name : </h4>
+                    <h4>Standard :</h4>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <h4>Exam closes in <span id="time">05:00</span> minutes!</h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6" style="background-color:red">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="numberCircle">1</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="numberCircle">1</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="numberCircle">1</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="numberCircle">1</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="numberCircle">1</div>
+                </div>
+                <br />
+
+            </div>
+
+        </div>
+        <div class="col-lg-1 col-md-6 col-sm-6" style="background-color:yellow">
+
+        </div>
+        <div class="col-lg-9 col-md-6 col-sm-6" style="background-color:yellow">
+            <div class="col-sm-4">
+                <div class="numberCircle">1</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="numberCircle">1</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="numberCircle">1</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+    // Set the date we're counting down to
+
+    $(document).ready(function () {
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10)
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.text(minutes + ":" + seconds);
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        jQuery(function ($) {
+            var sixyMinutes = 60 * 60,
+                display = $('#time');
+            startTimer(sixyMinutes, display);
+        });
+    });
+
+</script>

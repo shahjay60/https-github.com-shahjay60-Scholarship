@@ -504,6 +504,7 @@
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentLoginModel.cs" />
     <Compile Include="Controllers\ComingSoonController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1533,6 +1534,8 @@
     <Content Include="Views\Return\Fail.cshtml" />
     <Content Include="Views\ComingSoon\Index1.cshtml" />
     <Content Include="Views\ComingSoon\Index.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\ExamDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
