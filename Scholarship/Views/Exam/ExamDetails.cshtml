@@ -79,13 +79,23 @@
 
 </body>
 </html>
+<script type="text/javascript">
+    function disableF5(e)
+    { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
+    function disbaleCTR_R(e) {
+        if (e.keyCode == 65 && e.ctrlKey) {
+            alert('ctrl A');
+        }
+    }
+
+</script>
 <script>
-    // Set the date we're counting down to
-    window.open("https://localhost:44372/Exam/ExamDetails", "name", "top=0,left=0,width=" + window.screen.width + ",height=" + window.screen.height);
-
+    
     $(document).ready(function () {
-
+        $(document).on("keydown", disableF5);
+        $(document).on("keydown", disbaleCTR_R);
+       
         // Make this element full screen asynchronously
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
