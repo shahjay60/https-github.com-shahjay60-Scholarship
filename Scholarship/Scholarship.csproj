@@ -1289,6 +1289,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ExamCss.css" />
     <Content Include="EmailTemplate\PaymentReceipt %282%29.html" />
     <Content Include="EmailTemplate\PdfToHTML.html" />
     <Content Include="favicon.ico" />

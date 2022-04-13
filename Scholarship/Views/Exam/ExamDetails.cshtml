@@ -4,22 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        .numberCircle {
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
-            background: #fff;
-            border: 2px solid #666;
-            color: #666;
-            text-align: center;
-            font: 18px Arial, sans-serif;
-        }
-    </style>
     <title>Exam</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="~/Content/ExamCss.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -34,54 +23,48 @@
                     <h4>Standard :</h4>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <div id="time"></div>
+                    Time Remaining: <div id="time"></div>
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-2 col-md-6 col-sm-6" style="background-color:red">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="numberCircle">1</div>
+        <div class="row">
+            @for (int i = 0; i <= 100; i++)
+            {
+                <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                    <div class="circle">@i</div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="numberCircle">1</div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="numberCircle">1</div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="numberCircle">1</div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="numberCircle">1</div>
-                </div>
-                <br />
-
-            </div>
-
+            }
+            
         </div>
-        <div class="col-lg-1 col-md-6 col-sm-6" style="background-color:yellow">
+        <hr />
+            <div class="row" style="margin-top:15px;">
+                <div class="col-12" style="padding-left:25px;padding-right:25px;">
+                    <p class="fw-bold">1. Which of the following sentences is correct</p>
+                    <div>
+                        <input type="radio" name="box" id="one"> <input type="radio" name="box" id="two"> <input type="radio" name="box" id="three"> <input type="radio" name="box" id="four"> <label for="one" class="box first">
+                            <div class="course"> <span class="circle"></span> <span class="subject"> When its raining ,people's umbrella are all you're going to see from above </span> </div>
+                        </label> <label for="two" class="box second">
+                            <div class="course"> <span class="circle"></span> <span class="subject"> When its raining,people's umbrella are all your going to see from above </span> </div>
+                        </label> <label for="three" class="box third">
+                            <div class="course"> <span class="circle"></span> <span class="subject"> When its raining,peoples umbrella's are all you're going to see from above </span> </div>
+                        </label> <label for="four" class="box forth">
+                            <div class="course"> <span class="circle"></span> <span class="subject"> None of the above </span> </div>
+                        </label>
+                    </div>
+                </div>
 
-        </div>
-        <div class="col-lg-9 col-md-6 col-sm-6" style="background-color:yellow">
-            <div class="col-sm-4">
-                <div class="numberCircle">1</div>
-            </div>
-            <div class="col-sm-4">
-                <div class="numberCircle">1</div>
-            </div>
-            <div class="col-sm-4">
-                <div class="numberCircle">1</div>
+                <div style="padding-left:25px;padding-right:25px;">
+                    <button class="btn btn-primary d-flex align-items-center btn-danger pull-left" type="button" style="width:25%;"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
+                    <button class="btn btn-primary border-success align-items-center btn-success pull-right" type="button" style="width:25%;">Next<i class="fa fa-angle-right ml-2"></i></button>
+                </div>
             </div>
         </div>
-    </div>
 
 </body>
 </html>
 <script type="text/javascript">
-    function disableF5(e)
-    { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
     function disbaleCTR_R(e) {
         if (e.keyCode == 65 && e.ctrlKey) {
@@ -104,24 +87,24 @@
         console.log(display);
         startTimer(fiveMinutes, '');
     };
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10)
-                seconds = parseInt(timer % 60, 10);
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                $("#time").text(minutes + ":" + seconds);
-                //display.text(minutes + ":" + seconds);
+            $("#time").text(minutes + ":" + seconds);
+            //display.text(minutes + ":" + seconds);
 
-                if (--timer < 0) {
-                    timer = duration;
-                }
-                console.log(parseInt(seconds))
-                window.localStorage.setItem("seconds", seconds)
-                window.localStorage.setItem("minutes", minutes)
-            }, 1000);
-        }
+            if (--timer < 0) {
+                timer = duration;
+            }
+            console.log(parseInt(seconds))
+            window.localStorage.setItem("seconds", seconds)
+            window.localStorage.setItem("minutes", minutes)
+        }, 1000);
+    }
 </script>
