@@ -34,7 +34,7 @@
                     <h4>Standard :</h4>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <h4>Exam closes in <span id="time">05:00</span> minutes!</h4>
+                    <div id="time"></div>
                 </div>
             </div>
 
@@ -88,15 +88,22 @@
             alert('ctrl A');
         }
     }
-
 </script>
 <script>
-    
-    $(document).ready(function () {
-        $(document).on("keydown", disableF5);
-        $(document).on("keydown", disbaleCTR_R);
-       
-        // Make this element full screen asynchronously
+    window.onload = function () {
+        sec = parseInt(window.localStorage.getItem("seconds"))
+        min = parseInt(window.localStorage.getItem("minutes"))
+
+        if (parseInt(min * sec)) {
+            var fiveMinutes = (parseInt(min * 60) + sec);
+        } else {
+            var fiveMinutes = 60 * 60;
+        }
+        // var fiveMinutes = 60 * 5;
+        display = document.querySelector('#time');
+        console.log(display);
+        startTimer(fiveMinutes, '');
+    };
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             setInterval(function () {
@@ -106,19 +113,15 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                display.text(minutes + ":" + seconds);
+                $("#time").text(minutes + ":" + seconds);
+                //display.text(minutes + ":" + seconds);
 
                 if (--timer < 0) {
                     timer = duration;
                 }
+                console.log(parseInt(seconds))
+                window.localStorage.setItem("seconds", seconds)
+                window.localStorage.setItem("minutes", minutes)
             }, 1000);
         }
-
-        jQuery(function ($) {
-            var sixyMinutes = 60 * 60,
-                display = $('#time');
-            startTimer(sixyMinutes, display);
-        });
-    });
-
 </script>
