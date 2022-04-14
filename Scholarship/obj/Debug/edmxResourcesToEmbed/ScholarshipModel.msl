@@ -93,5 +93,20 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Validate_Student" FunctionName="ScholarshipModel.Store.Validate_Student" />
     <FunctionImportMapping FunctionImportName="ValidateStudent" FunctionName="ScholarshipModel.Store.Validate_Student" />
+    <EntitySetMapping Name="tblQuestions">
+      <EntityTypeMapping TypeName="ScholarshipModel.tblQuestion">
+        <MappingFragment StoreEntitySet="tblQuestions">
+          <ScalarProperty Name="selectedvalue" ColumnName="selectedvalue" />
+          <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+          <ScalarProperty Name="OptionD" ColumnName="OptionD" />
+          <ScalarProperty Name="OptionC" ColumnName="OptionC" />
+          <ScalarProperty Name="OptionB" ColumnName="OptionB" />
+          <ScalarProperty Name="OptionA" ColumnName="OptionA" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Standard" ColumnName="Standard" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

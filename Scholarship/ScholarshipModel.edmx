@@ -17,6 +17,20 @@
           <Property Name="InnerMessage" Type="nvarchar(max)" />
           <Property Name="CreatedDatetime" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Standard" Type="int" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="OptionA" Type="nvarchar(max)" />
+          <Property Name="OptionB" Type="nvarchar(max)" />
+          <Property Name="OptionC" Type="nvarchar(max)" />
+          <Property Name="OptionD" Type="nvarchar(max)" />
+          <Property Name="CorrectAns" Type="nvarchar(max)" />
+          <Property Name="selectedvalue" Type="int" />
+        </EntityType>
         <EntityType Name="tblScholarship">
           <Key>
             <PropertyRef Name="Id" />
@@ -99,6 +113,7 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
         </Function>
         <EntityContainer Name="ScholarshipModelStoreContainer">
           <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuestions" EntityType="Self.tblQuestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
@@ -137,6 +152,7 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tblQuestions" EntityType="ScholarshipModel.tblQuestion" />
         </EntityContainer>
         <EntityType Name="tblException">
           <Key>
@@ -219,6 +235,20 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Standard" Type="Int32" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OptionA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OptionB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OptionC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OptionD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="selectedvalue" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -318,6 +348,21 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Validate_Student" FunctionName="ScholarshipModel.Store.Validate_Student" />
           <FunctionImportMapping FunctionImportName="ValidateStudent" FunctionName="ScholarshipModel.Store.Validate_Student" />
+          <EntitySetMapping Name="tblQuestions">
+            <EntityTypeMapping TypeName="ScholarshipModel.tblQuestion">
+              <MappingFragment StoreEntitySet="tblQuestions">
+                <ScalarProperty Name="selectedvalue" ColumnName="selectedvalue" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="OptionD" ColumnName="OptionD" />
+                <ScalarProperty Name="OptionC" ColumnName="OptionC" />
+                <ScalarProperty Name="OptionB" ColumnName="OptionB" />
+                <ScalarProperty Name="OptionA" ColumnName="OptionA" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

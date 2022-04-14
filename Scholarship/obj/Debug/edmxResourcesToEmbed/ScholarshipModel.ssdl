@@ -12,6 +12,20 @@
     <Property Name="InnerMessage" Type="nvarchar(max)" />
     <Property Name="CreatedDatetime" Type="datetime" />
   </EntityType>
+  <EntityType Name="tblQuestions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Standard" Type="int" />
+    <Property Name="Question" Type="nvarchar(max)" />
+    <Property Name="OptionA" Type="nvarchar(max)" />
+    <Property Name="OptionB" Type="nvarchar(max)" />
+    <Property Name="OptionC" Type="nvarchar(max)" />
+    <Property Name="OptionD" Type="nvarchar(max)" />
+    <Property Name="CorrectAns" Type="nvarchar(max)" />
+    <Property Name="selectedvalue" Type="int" />
+  </EntityType>
   <EntityType Name="tblScholarship">
     <Key>
       <PropertyRef Name="Id" />
@@ -94,6 +108,7 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
   </Function>
   <EntityContainer Name="ScholarshipModelStoreContainer">
     <EntitySet Name="tblException" EntityType="Self.tblException" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuestions" EntityType="Self.tblQuestions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
