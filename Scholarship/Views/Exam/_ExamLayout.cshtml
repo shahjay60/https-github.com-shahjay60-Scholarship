@@ -29,12 +29,15 @@
             @for (int i = 1; i <= 100; i++)
             {
                 <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
-                    <a href="#@i"><div class="circle">@i</div></a>
+                    <a href="#@i">
+                        <div class="circle">@i</div>
+                    </a>
                 </div>
             }
 
         </div>
         <hr />
+
         @RenderBody()
 
     </div>

@@ -24,7 +24,7 @@
     <Property Name="OptionC" Type="nvarchar(max)" />
     <Property Name="OptionD" Type="nvarchar(max)" />
     <Property Name="CorrectAns" Type="nvarchar(max)" />
-    <Property Name="selectedvalue" Type="int" />
+    <Property Name="selectedvalue" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="tblScholarship">
     <Key>

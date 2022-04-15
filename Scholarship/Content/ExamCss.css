@@ -73,10 +73,10 @@ label.box .circle {
     border: 2px solid #ddd;
     display: inline-block
 }
-
+/*
 input[type="radio"] {
     display: none
-}
+}*/
 
 .btn.btn-primary {
     border-radius: 25px;

@@ -11,6 +11,7 @@ namespace Scholarship.Controllers
     {
         // GET: Exam
         ScholarshipEntities db = new ScholarshipEntities();
+        IDictionary<int, string> numberNames = new Dictionary<int, string>();
         int totalCount = 0;
         [HttpGet]
         public ActionResult ExamLogin()
@@ -49,7 +50,7 @@ namespace Scholarship.Controllers
 
             ViewBag.drpData = drp;
             ViewBag.questionNo = Convert.ToInt32(TempData["QuestionNo"]);
-            TempData["a"] = Convert.ToInt32(TempData["QuestionNo"]);
+            Session["a"] = Convert.ToInt32(TempData["QuestionNo"]);
 
             int std = Convert.ToInt32(ViewBag.std);
             totalCount = totalCount + 1;
@@ -73,32 +74,39 @@ namespace Scholarship.Controllers
 
         public ActionResult Questions()
         {
+            int qNo = 0;
             if (Session["StdName"] != null && Session["Std"] != null)
             {
                 ViewBag.StudentName = Session["StdName"];
                 ViewBag.std = Session["Std"];
             }
-            if (TempData["a"] == null)
+            if ((int)Session["a"] == 0)
             {
-                int qNo = 1;
+                qNo = 1;
                 ViewBag.questionNo = qNo;
             }
             else
             {
-                int qNo = (int)TempData["a"];
+                qNo = (int)Session["a"];
                 ViewBag.questionNo = qNo;
             }
+
             tblQuestion a = (tblQuestion)TempData["qData"];
+
+            Dictionary<int, string> myDictionary = (Dictionary<int, string>)Session["DateCollections"];
+
+            if (myDictionary != null)
+            {
+                a.selectedvalue = myDictionary.Where(x => x.Key == qNo).Select(x => x.Value).FirstOrDefault();
+            }
             return View(a);
         }
         [HttpPost]
-        public ActionResult Questions(tblQuestion aaa, string Previous, string Next, FormCollection fc)
+        public ActionResult Questions(tblQuestion aaa, string Previous, string Skip, string Next, FormCollection fc)
         {
             totalCount = totalCount + 1;
-            if (fc["hdnSelectedValue"]!=null)
-            {
-                aaa.selectedvalue = fc["hdnSelectedValue"];
-            }
+            int std = Convert.ToInt32(ViewBag.std);
+
 
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {
@@ -112,32 +120,50 @@ namespace Scholarship.Controllers
                 }
             }
 
+            numberNames.Add((int)aaa.Id, aaa.selectedvalue);
+
+            var selectedData = (Dictionary<int, string>)Session["DateCollections"];
+            if (numberNames != null)
+            {
+                numberNames.Add(selectedData);
+            }
+
+            Session["DateCollections"] = numberNames;
+            var marks = Session["correctAns"];
+
             if (totalCount == 100)
             {
                 return RedirectToAction("Create", "Result");
             }
+            if (!string.IsNullOrEmpty(Skip))
+            {
+                int qId = (int)aaa.Id + 1;
+                tblQuestion SingleQuestion = db.tblQuestions
+                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                ViewBag.questionNo = qId;
+                Session["a"] = SingleQuestion.Id;
+                TempData["qData"] = SingleQuestion;
+            }
             if (!string.IsNullOrEmpty(Next))
             {
                 int qId = (int)aaa.Id + 1;
-                int std = Convert.ToInt32(ViewBag.std);
 
                 tblQuestion SingleQuestion = db.tblQuestions
                                                .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
 
                 ViewBag.questionNo = qId;
-                TempData["a"] = qId;
+                Session["a"] = qId;
                 TempData["qData"] = SingleQuestion;
             }
             if (!string.IsNullOrEmpty(Previous))
             {
                 int qId = (int)aaa.Id - 1;
-                int std = Convert.ToInt32(ViewBag.std);
-
                 tblQuestion SingleQuestion = db.tblQuestions
                                                .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
 
                 ViewBag.questionNo = qId;
-                TempData["a"] = SingleQuestion.Id;
+                Session["a"] = SingleQuestion.Id;
                 TempData["qData"] = SingleQuestion;
             }
             return RedirectToAction("Questions");

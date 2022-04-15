@@ -119,6 +119,6 @@
     <Property Name="OptionC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="OptionD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="selectedvalue" Type="Int32" />
+    <Property Name="selectedvalue" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
