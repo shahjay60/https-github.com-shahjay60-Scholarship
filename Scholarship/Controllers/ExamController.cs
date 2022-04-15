@@ -118,14 +118,19 @@ namespace Scholarship.Controllers
                 {
                     Session["correctAns"] = Convert.ToInt32(Session["correctAns"]) - 0.25;
                 }
+
+                numberNames.Add((int)aaa.Id, aaa.selectedvalue);
             }
 
-            numberNames.Add((int)aaa.Id, aaa.selectedvalue);
 
             var selectedData = (Dictionary<int, string>)Session["DateCollections"];
-            if (numberNames != null)
+
+            if (selectedData != null)
             {
-                numberNames.Add(selectedData);
+                foreach (var item in selectedData)
+                {
+                    numberNames.Add(item.Key, item.Value);
+                }
             }
 
             Session["DateCollections"] = numberNames;
