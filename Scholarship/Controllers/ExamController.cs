@@ -11,6 +11,7 @@ namespace Scholarship.Controllers
     {
         // GET: Exam
         ScholarshipEntities db = new ScholarshipEntities();
+        int totalCount = 0;
         [HttpGet]
         public ActionResult ExamLogin()
         {
@@ -23,9 +24,9 @@ namespace Scholarship.Controllers
             var std = db.tblStudentDetails.ToList();
 
             var data = db.tblStudentDetails.ToList()
-                             .Where(x => x.UserName == model.UserName && x.Password == model.Password)
-                             .FirstOrDefault();
-            if (data!=null)
+                                           .Where(x => x.UserName == model.UserName && x.Password == model.Password)
+                                           .FirstOrDefault();
+            if (data != null)
             {
                 TempData["StdName"] = data.Name + " " + data.ParentName + " " + data.SurName;
                 TempData["Std"] = data.STD;
@@ -47,41 +48,51 @@ namespace Scholarship.Controllers
             drp.QuestionNo = 1;
 
             ViewBag.drpData = drp;
-            ViewBag.StudentName = TempData["StdName"];
-            ViewBag.std = TempData["Std"];
-
             ViewBag.questionNo = Convert.ToInt32(TempData["QuestionNo"]);
             TempData["a"] = Convert.ToInt32(TempData["QuestionNo"]);
 
             int std = Convert.ToInt32(ViewBag.std);
-
+            totalCount = totalCount + 1;
             if (drp.QuestionNo == 1)
             {
 
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == std);
+                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == 3);
 
                 TempData["qData"] = SingleQuestion;
-                return RedirectToAction("NextQuestion");
+                return RedirectToAction("Questions");
             }
             else
             {
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == std);
+                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == 3);
                 int qus = (int)drp.QuestionNo;
                 return View(SingleQuestion);
             }
         }
-        public ActionResult NextQuestion()
+
+        public ActionResult Questions()
         {
-            int qNo = (int)TempData["a"];
-            ViewBag.questionNo = qNo;
+            ViewBag.StudentName = TempData["StdName"];
+            ViewBag.std = TempData["Std"];
+            if (TempData["a"] == null)
+            {
+                int qNo = 1;
+                ViewBag.questionNo = qNo;
+            }
+            else
+            {
+                int qNo = (int)TempData["a"];
+                ViewBag.questionNo = qNo;
+            }
             tblQuestion a = (tblQuestion)TempData["qData"];
             return View(a);
         }
         [HttpPost]
-        public ActionResult NextQuestion(tblQuestion aaa)
+        public ActionResult Questions(tblQuestion aaa, string Previous, string Next)
         {
+            totalCount = totalCount + 1;
+
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {
                 if (aaa.CorrectAns == Convert.ToString(aaa.selectedvalue))
@@ -94,7 +105,64 @@ namespace Scholarship.Controllers
                 }
             }
 
-            if (aaa.Id == 100)
+            if (totalCount == 100)
+            {
+                return RedirectToAction("Create", "Result");
+            }
+            if (!string.IsNullOrEmpty(Next))
+            {
+                int qId = (int)aaa.Id + 1;
+                int std = Convert.ToInt32(ViewBag.std);
+
+                tblQuestion SingleQuestion = db.tblQuestions
+                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                ViewBag.questionNo = qId;
+                TempData["a"] = qId;
+                TempData["qData"] = SingleQuestion;
+            }
+            if (!string.IsNullOrEmpty(Previous))
+            {
+                int qId = (int)aaa.Id - 1;
+                int std = Convert.ToInt32(ViewBag.std);
+
+                tblQuestion SingleQuestion = db.tblQuestions
+                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                ViewBag.questionNo = qId;
+                TempData["a"] = SingleQuestion.Id;
+                TempData["qData"] = SingleQuestion;
+            }
+            return RedirectToAction("Questions");
+        }
+        public ActionResult NextQuestion()
+        {
+            ViewBag.StudentName = TempData["StdName"];
+            ViewBag.std = TempData["Std"];
+
+            int qNo = (int)TempData["a"];
+            ViewBag.questionNo = qNo;
+            tblQuestion a = (tblQuestion)TempData["qData"];
+            return View(a);
+        }
+        [HttpPost]
+        public ActionResult NextQuestion(tblQuestion aaa)
+        {
+            totalCount = totalCount + 1;
+
+            if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
+            {
+                if (aaa.CorrectAns == Convert.ToString(aaa.selectedvalue))
+                {
+                    Session["correctAns"] = Convert.ToInt32(Session["correctAns"]) + 1;
+                }
+                else if (aaa.CorrectAns != Convert.ToString(aaa.selectedvalue))
+                {
+                    Session["correctAns"] = Convert.ToInt32(Session["correctAns"]) - 0.25;
+                }
+            }
+
+            if (totalCount == 100)
             {
                 return RedirectToAction("Create", "Result");
             }
@@ -120,6 +188,8 @@ namespace Scholarship.Controllers
         [HttpPost]
         public ActionResult PrevQuestion(tblQuestion aaa)
         {
+            totalCount = totalCount - 1;
+
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {
                 if (aaa.CorrectAns == Convert.ToString(aaa.selectedvalue))

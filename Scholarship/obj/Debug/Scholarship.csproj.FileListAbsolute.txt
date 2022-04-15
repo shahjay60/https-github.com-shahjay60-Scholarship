@@ -270,3 +270,4 @@ C:\Users\MeghTech\source\repos\Scholarship2\Scholarship\obj\Debug\Scholarship.cs
 C:\Users\MeghTech\source\repos\Scholarship2\Scholarship\obj\Debug\Scholarship.csproj.CopyComplete
 C:\Users\MeghTech\source\repos\Scholarship2\Scholarship\obj\Debug\Scholarship.dll
 C:\Users\MeghTech\source\repos\Scholarship2\Scholarship\obj\Debug\Scholarship.pdb
+C:\Users\MeghTech\source\repos\Scholarship2\Scholarship\obj\Debug\Scholarship.csproj.AssemblyReference.cache

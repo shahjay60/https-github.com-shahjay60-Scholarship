@@ -50,6 +50,9 @@
     }
 </script>
 <script>
+
+    window.addEventListener("beforeunload", () => window.localStorage.clear());
+
     window.onload = function () {
         sec = parseInt(window.localStorage.getItem("seconds"))
         min = parseInt(window.localStorage.getItem("minutes"))
@@ -61,7 +64,6 @@
         }
         // var fiveMinutes = 60 * 5;
         display = document.querySelector('#time');
-        console.log(display);
         startTimer(fiveMinutes, '');
     };
     function startTimer(duration, display) {

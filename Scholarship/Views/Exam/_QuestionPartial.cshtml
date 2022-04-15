@@ -1,7 +1,7 @@
 ﻿@model  tblQuestion
 
 <div class="row">
-    @using (Html.BeginForm("NextQuestion", "Exam", FormMethod.Post))
+    @using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
     {
         @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
 
@@ -63,9 +63,9 @@
 
                 </div>
                 <div class="col-sm-4">
-                    <button class="btn btn-primary d-flex align-items-center btn-danger" type="button"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button>
+                    <input type="submit" name="Previous" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
                     <button class="btn btn-primary d-flex align-items-center btn-info " type="button" style="width:20%;"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;Skip</button>
-                    <button class="btn btn-primary border-success align-items-center btn-success" type="button" style="width:20%;">Next<i class="fa fa-angle-right ml-2"></i></button>
+                    <input type="submit" name="Next" value="Next" class="btn btn-primary border-success align-items-center btn-success" />
                 </div>
                 <div class="col-sm-4">
                 </div>

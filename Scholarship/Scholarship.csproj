@@ -1318,6 +1318,7 @@
     <Content Include="Views\Exam\NextQuestion.cshtml" />
     <Content Include="Views\Exam\PrevQuestion.cshtml" />
     <Content Include="Views\Exam\ExamLogin.cshtml" />
+    <Content Include="Views\Exam\Questions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
