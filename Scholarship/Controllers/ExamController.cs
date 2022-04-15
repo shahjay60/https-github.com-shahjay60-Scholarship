@@ -28,8 +28,8 @@ namespace Scholarship.Controllers
                                            .FirstOrDefault();
             if (data != null)
             {
-                TempData["StdName"] = data.Name + " " + data.ParentName + " " + data.SurName;
-                TempData["Std"] = data.STD;
+                Session["StdName"] = data.Name + " " + data.ParentName + " " + data.SurName;
+                Session["Std"] = data.STD;
                 return RedirectToAction("Index", data);
             }
             else
@@ -73,8 +73,11 @@ namespace Scholarship.Controllers
 
         public ActionResult Questions()
         {
-            ViewBag.StudentName = TempData["StdName"];
-            ViewBag.std = TempData["Std"];
+            if (Session["StdName"] != null && Session["Std"] != null)
+            {
+                ViewBag.StudentName = Session["StdName"];
+                ViewBag.std = Session["Std"];
+            }
             if (TempData["a"] == null)
             {
                 int qNo = 1;
@@ -89,9 +92,13 @@ namespace Scholarship.Controllers
             return View(a);
         }
         [HttpPost]
-        public ActionResult Questions(tblQuestion aaa, string Previous, string Next)
+        public ActionResult Questions(tblQuestion aaa, string Previous, string Next, FormCollection fc)
         {
             totalCount = totalCount + 1;
+            if (fc["hdnSelectedValue"]!=null)
+            {
+                aaa.selectedvalue = fc["hdnSelectedValue"];
+            }
 
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {

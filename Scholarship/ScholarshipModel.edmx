@@ -29,7 +29,7 @@
           <Property Name="OptionC" Type="nvarchar(max)" />
           <Property Name="OptionD" Type="nvarchar(max)" />
           <Property Name="CorrectAns" Type="nvarchar(max)" />
-          <Property Name="selectedvalue" Type="int" />
+          <Property Name="selectedvalue" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tblScholarship">
           <Key>
@@ -248,7 +248,7 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
           <Property Name="OptionC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OptionD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="selectedvalue" Type="Int32" />
+          <Property Name="selectedvalue" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>

@@ -22,6 +22,6 @@ namespace Scholarship
         public string OptionC { get; set; }
         public string OptionD { get; set; }
         public string CorrectAns { get; set; }
-        public Nullable<int> selectedvalue { get; set; }
+        public string selectedvalue { get; set; }
     }
 }

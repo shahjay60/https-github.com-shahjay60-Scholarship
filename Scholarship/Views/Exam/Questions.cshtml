@@ -9,10 +9,12 @@
     @using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
     {
         @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
+        @Html.Hidden("hdnSelectedValue")
         if (@Model != null)
         {
+
             <div class="col-12" id="1" style="padding-left:25px;padding-right:25px;">
-                <p class="fw-bold"> @ViewBag.questionNo.@Model.Question</p>
+                <p class="fw-bold">@Model.Id. @Model.Question</p>
                 <div>
                     <input type="radio" name="box" id="one">
                     <input type="radio" name="box" id="two">
@@ -20,34 +22,33 @@
                     <input type="radio" name="box" id="four">
                     <label for="one" class="box first">
                         <div class="course">
-                            <span class="circle"></span>
+                            <span class="circle" onclick="funSelecValue('A')">
+
+                            </span>
                             <span class="subject">
                                 @Model.OptionA
-                                @Html.HiddenFor(model => model.selectedvalue, "A")
                             </span>
                         </div>
                     </label>
                     <label for="two" class="box second">
                         <div class="course">
-                            <span class="circle"></span> <span class="subject">
+                            <span class="circle" onclick="funSelecValue('B')">
+                            </span>
+                            <span class="subject">
                                 @Model.OptionB
-                                @Html.HiddenFor(model => model.selectedvalue, "B")
 
                             </span>
                         </div>
                     </label> <label for="three" class="box third">
                         <div class="course">
-                            <span class="circle"></span> <span class="subject">
+                            <span class="circle" onclick="funSelecValue('C')"></span> <span class="subject">
                                 @Model.OptionC
-                                @Html.HiddenFor(model => model.selectedvalue, "C")
-
                             </span>
                         </div>
                     </label> <label for="four" class="box forth">
                         <div class="course">
-                            <span class="circle"></span> <span class="subject">
+                            <span class="circle" onclick="funSelecValue('D')"></span> <span class="subject">
                                 @Model.OptionD
-                                @Html.HiddenFor(model => model.selectedvalue, "D")
                             </span>
                         </div>
                     </label>
@@ -59,7 +60,6 @@
                     @Html.HiddenFor(m => m.Question)
                     @Html.HiddenFor(m => m.Standard)
                     @Html.HiddenFor(m => m.CorrectAns)
-                    @Html.HiddenFor(m => m.selectedvalue)
 
                 </div>
             </div>
@@ -88,4 +88,10 @@
     }
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<script>
+        function funSelecValue(selectedvalue) {
+            $("#hdnSelectedValue").val(selectedvalue);
+        }
+</script>
