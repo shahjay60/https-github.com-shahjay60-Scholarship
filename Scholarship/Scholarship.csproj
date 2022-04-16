@@ -499,6 +499,7 @@
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
     <Compile Include="Areas\Student\Controllers\STPaymentDetailController.cs" />
+    <Compile Include="Areas\Student\Controllers\STResultController.cs" />
     <Compile Include="Areas\Student\Controllers\STStudentController.cs" />
     <Compile Include="Areas\Student\Domain\StdPaymentInfo.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
@@ -511,6 +512,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\ReturnController.cs" />
     <Compile Include="Controllers\ScholarshipController.cs" />
     <Compile Include="Controllers\TermsConditionsController.cs" />
@@ -551,6 +553,9 @@
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStudentDetail.cs">
+      <DependentUpon>ScholarshipModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudentResult.cs">
       <DependentUpon>ScholarshipModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUser.cs">
@@ -1272,6 +1277,7 @@
     <Content Include="Areas\Student\Views\STStudent\PaymentDetail.cshtml" />
     <Content Include="Areas\Student\Views\STStudent\Edit.cshtml" />
     <Content Include="EmailTemplate\PaymentReceipt.pdf" />
+    <Content Include="Areas\Student\Views\STResult\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1320,6 +1326,7 @@
     <Content Include="Views\Exam\ExamLogin.cshtml" />
     <Content Include="Views\Exam\Questions.cshtml" />
     <Content Include="Views\Exam\_QuestionNumber.cshtml" />
+    <Content Include="Views\Result\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

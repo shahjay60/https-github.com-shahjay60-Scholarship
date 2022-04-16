@@ -64,8 +64,15 @@
                 </div>
                 <div class="col-sm-4">
                     <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
-                    <input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />
-                    <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
+                    @*<input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />*@
+                    @if (@Model.Id == @ViewBag.questionNo)
+                    {
+                        <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
+                    }
+                    else
+                    {
+                        <input type="submit" name="Submit" value="Submit" id="btnSubmit" class="btn btn-primary border-success align-items-center btn-info" />
+                    }
                 </div>
                 <div class="col-sm-4">
                 </div>

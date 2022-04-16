@@ -31,6 +31,7 @@ namespace Scholarship.Controllers
             {
                 Session["StdName"] = data.Name + " " + data.ParentName + " " + data.SurName;
                 Session["Std"] = data.STD;
+                Session["stdId"] = data.Id;
                 return RedirectToAction("Index", data);
             }
             else
@@ -91,11 +92,16 @@ namespace Scholarship.Controllers
                 ViewBag.questionNo = qNo;
             }
 
-            tblQuestion a = (tblQuestion)TempData["qData"];
+            var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
+
+            ViewBag.questionNo = totalQues;
+            tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == 3);
+
+            //tblQuestion a = (tblQuestion)TempData["qData"];
 
             Dictionary<int, string> myDictionary = (Dictionary<int, string>)Session["DateCollections"];
 
-            if (myDictionary != null && myDictionary.Count>0)
+            if (myDictionary != null && myDictionary.Count > 0)
             {
                 a.selectedvalue = myDictionary.Where(x => x.Key == qNo).Select(x => x.Value).FirstOrDefault();
             }
@@ -129,14 +135,21 @@ namespace Scholarship.Controllers
             {
                 foreach (var item in selectedData)
                 {
+                    var data = numberNames.Where(x => x.Key == item.Key).Count();
+
+                    if (data > 0)
+                    {
+                        numberNames.Remove(item.Key);
+                    }
                     numberNames.Add(item.Key, item.Value);
+
                 }
             }
 
             Session["DateCollections"] = numberNames;
             var marks = Session["correctAns"];
 
-            if (totalCount == 100)
+            if (totalCount == totalQues.Count)
             {
                 return RedirectToAction("Create", "Result");
             }

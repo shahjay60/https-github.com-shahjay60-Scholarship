@@ -24,6 +24,8 @@ namespace Scholarship.Areas.Student.Controllers
                                     .FirstOrDefault();
             ViewBag.stdid = id;
 
+            Session["Id"] = id;
+
             return View(model);
         }
 

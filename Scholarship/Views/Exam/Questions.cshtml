@@ -93,8 +93,20 @@
         function funSelecValue(selectedvalue) {
             $("#hdnSelectedValue").val(selectedvalue);
     }
+    $(document).ready(function () {
+        var quesNo = sessionStorage.getItem('QuesNo');
+        var radioAttr = sessionStorage.getItem('isRadioCheck');
+    });
 
-    $("#btnSkip").click(function () {
+    $("#btnNxt").click(function () {
+        debugger;
+        var radioValue = $("input[name='selectedvalue']:checked").val();
+        if (radioValue == undefined) {
+            radioValue = '';
+        }
+        sessionStorage.setItem("QuesNo", $("#hdnId").val());
+        sessionStorage.setItem("isRadioCheck", radioValue);
+
         var qid = $("#hdnId").val();
         $("#circle_" + qid).css('background-color', 'red');
     });
