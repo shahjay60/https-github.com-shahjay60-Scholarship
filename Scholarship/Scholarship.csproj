@@ -520,6 +520,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminLoginDomain.cs" />
+    <Compile Include="Models\StdResultDetails.cs" />
     <Compile Include="Models\DrpList.cs" />
     <Compile Include="Models\PaymentClass.cs" />
     <Compile Include="Models\StudentLoginDomain.cs" />
@@ -1081,6 +1082,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Certificate.css" />
     <Content Include="Content\ExamCss.css" />
     <Content Include="EmailTemplate\PaymentReceipt %282%29.html" />
     <Content Include="EmailTemplate\PdfToHTML.html" />
@@ -1327,6 +1329,8 @@
     <Content Include="Views\Exam\Questions.cshtml" />
     <Content Include="Views\Exam\_QuestionNumber.cshtml" />
     <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Result\Result.cshtml" />
+    <Content Include="Views\Result\Certifcate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

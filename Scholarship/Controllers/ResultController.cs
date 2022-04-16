@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scholarship.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -45,5 +46,26 @@ namespace Scholarship.Controllers
             }
             return View();
         }
+
+        public ActionResult Result()
+        {
+            var data = (from sp in db.tblStdPaymentDetails.ToList()
+                        join sc in db.tblScholarships.ToList() on sp.ScholarshipId equals Convert.ToString(sc.Id)
+                        join s in db.tblStudentResults.ToList() on sp.Stdid equals s.StudentId
+                        join st in db.tblStudentDetails.ToList() on sp.Stdid equals st.Id
+                        select new StdResultDetails
+                        {
+                            StudentName = st.Name + " " + st.ParentName + " " + st.SurName,
+                            ScholarshipName = sc.Name,
+                            Score = s.result,
+                        }).OrderByDescending(x => x.Score).Take(50).ToList();
+
+            return View(data);
+        }
+        public ActionResult Certifcate()
+        {
+            return View();
+        }
+
     }
 }
