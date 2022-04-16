@@ -128,7 +128,6 @@ namespace Scholarship.Controllers
                 numberNames.Add((int)aaa.Id, aaa.selectedvalue);
             }
 
-
             var selectedData = (Dictionary<int, string>)Session["DateCollections"];
 
             if (selectedData != null)
@@ -148,6 +147,8 @@ namespace Scholarship.Controllers
 
             Session["DateCollections"] = numberNames;
             var marks = Session["correctAns"];
+
+            var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
 
             if (totalCount == totalQues.Count)
             {

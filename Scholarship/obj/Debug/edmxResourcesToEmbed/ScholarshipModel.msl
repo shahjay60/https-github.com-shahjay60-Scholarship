@@ -108,5 +108,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblStudentResults">
+      <EntityTypeMapping TypeName="ScholarshipModel.tblStudentResult">
+        <MappingFragment StoreEntitySet="tblStudentResult">
+          <ScalarProperty Name="result" ColumnName="result" />
+          <ScalarProperty Name="CreataionDate" ColumnName="CreataionDate" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Standard" ColumnName="Standard" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
