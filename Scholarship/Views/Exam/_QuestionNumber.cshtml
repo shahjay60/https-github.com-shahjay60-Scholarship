@@ -1,44 +1,47 @@
 ﻿@model  tblQuestion
 
-<div class="row">
-    @using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+@using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+{
+    @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
+    @Html.Hidden("hdnSelectedValue")
+    if (@Model != null)
     {
-        @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
-
-        <div class="col-12" id="1" style="padding-left:25px;padding-right:25px;">
-            <p class="fw-bold"> @ViewBag.questionNo.@Model.Question</p>
+        <input type="hidden" value="@Model.Id" id="hdnId" />
+        <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
+            <p class="fw-bold">@Model.Id. @Model.Question</p>
             <div>
-              
                 <label for="one" class="box first">
                     <div class="course">
-                        <span class="circle"></span>
+
                         <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "A")
                             @Model.OptionA
-                            @Html.HiddenFor(model => model.selectedvalue, "1")
                         </span>
                     </div>
                 </label>
                 <label for="two" class="box second">
                     <div class="course">
-                        <span class="circle"></span> <span class="subject">
+
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "B")
+
                             @Model.OptionB
-                            @Html.HiddenFor(model => model.selectedvalue, "2")
 
                         </span>
                     </div>
                 </label> <label for="three" class="box third">
                     <div class="course">
-                        <span class="circle"></span> <span class="subject">
-                            @Model.OptionC
-                            @Html.HiddenFor(model => model.selectedvalue, "3")
 
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "C")
+                            @Model.OptionC
                         </span>
                     </div>
                 </label> <label for="four" class="box forth">
                     <div class="course">
-                        <span class="circle"></span> <span class="subject">
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "D")
                             @Model.OptionD
-                            @Html.HiddenFor(model => model.selectedvalue, "4")
                         </span>
                     </div>
                 </label>
@@ -60,13 +63,19 @@
 
                 </div>
                 <div class="col-sm-4">
-                    <input type="submit" name="Previous" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
-                    <button class="btn btn-primary d-flex align-items-center btn-info " type="button" style="width:20%;"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;Skip</button>
-                    <input type="submit" name="Next" value="Next" class="btn btn-primary border-success align-items-center btn-success" />
+                    <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
+                    <input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />
+                    <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
                 </div>
                 <div class="col-sm-4">
                 </div>
             </div>
         </div>
     }
-</div>
+    else
+    {
+        <div class="col-12">
+            <p>No Question</p>
+        </div>
+    }
+}

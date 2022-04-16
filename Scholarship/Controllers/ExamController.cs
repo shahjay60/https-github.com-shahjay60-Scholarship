@@ -95,7 +95,7 @@ namespace Scholarship.Controllers
 
             Dictionary<int, string> myDictionary = (Dictionary<int, string>)Session["DateCollections"];
 
-            if (myDictionary != null)
+            if (myDictionary != null && myDictionary.Count>0)
             {
                 a.selectedvalue = myDictionary.Where(x => x.Key == qNo).Select(x => x.Value).FirstOrDefault();
             }
