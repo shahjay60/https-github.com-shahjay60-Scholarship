@@ -1,113 +1,135 @@
-﻿
+﻿@model  tblQuestion
+
 @{
     ViewBag.Title = "Question";
     Layout = "~/Views/Exam/_ExamLayout.cshtml";
 }
 
+<div class="row" style="margin-top:20px;" id="divQuestions">
+    @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
+    {
+        <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+            <a href="@Url.Action("NextQuestion","Exam" ,new {id=@i })">
+                <div class="circle" id="circle_@i">@i</div>
+            </a>
+        </div>
+    }
+
+</div>
+<hr />
 <div class="row">
-    @Html.Partial("_QuestionNumber")
-    @*@using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+    @*@Html.Partial("_QuestionNumber")*@
+
+    @using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+    {
+        @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
+        @Html.Hidden("hdnSelectedValue")
+        if (@Model != null)
         {
-            @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
-            @Html.Hidden("hdnSelectedValue")
-            if (@Model != null)
-            {
-                <input type="hidden" value="@Model.Id" id="hdnId" />
-                <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
-                    <p class="fw-bold">@Model.Id. @Model.Question</p>
-                    <div>
-                        <label for="one" class="box first">
-                            <div class="course">
+            <input type="hidden" value="@Model.Id" id="hdnId" />
+            <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
+                <p class="fw-bold">@Model.Id. @Model.Question</p>
+                <div>
+                    <label for="one" class="box first">
+                        <div class="course">
 
-                                <span class="subject">
-                                    @Html.RadioButtonFor(model => model.selectedvalue, "A")
-                                    @Model.OptionA
-                                </span>
-                            </div>
-                        </label>
-                        <label for="two" class="box second">
-                            <div class="course">
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "A")
+                                @Model.OptionA
+                            </span>
+                        </div>
+                    </label>
+                    <label for="two" class="box second">
+                        <div class="course">
 
-                                <span class="subject">
-                                    @Html.RadioButtonFor(model => model.selectedvalue, "B")
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "B")
 
-                                    @Model.OptionB
+                                @Model.OptionB
 
-                                </span>
-                            </div>
-                        </label> <label for="three" class="box third">
-                            <div class="course">
+                            </span>
+                        </div>
+                    </label> <label for="three" class="box third">
+                        <div class="course">
 
-                                <span class="subject">
-                                    @Html.RadioButtonFor(model => model.selectedvalue, "C")
-                                    @Model.OptionC
-                                </span>
-                            </div>
-                        </label> <label for="four" class="box forth">
-                            <div class="course">
-                                <span class="subject">
-                                    @Html.RadioButtonFor(model => model.selectedvalue, "D")
-                                    @Model.OptionD
-                                </span>
-                            </div>
-                        </label>
-                        @Html.HiddenFor(m => m.OptionA)
-                        @Html.HiddenFor(m => m.OptionB)
-                        @Html.HiddenFor(m => m.OptionC)
-                        @Html.HiddenFor(m => m.OptionD)
-                        @Html.HiddenFor(m => m.Id)
-                        @Html.HiddenFor(m => m.Question)
-                        @Html.HiddenFor(m => m.Standard)
-                        @Html.HiddenFor(m => m.CorrectAns)
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "C")
+                                @Model.OptionC
+                            </span>
+                        </div>
+                    </label> <label for="four" class="box forth">
+                        <div class="course">
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "D")
+                                @Model.OptionD
+                            </span>
+                        </div>
+                    </label>
+                    @Html.HiddenFor(m => m.OptionA)
+                    @Html.HiddenFor(m => m.OptionB)
+                    @Html.HiddenFor(m => m.OptionC)
+                    @Html.HiddenFor(m => m.OptionD)
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Question)
+                    @Html.HiddenFor(m => m.Standard)
+                    @Html.HiddenFor(m => m.CorrectAns)
+
+                </div>
+            </div>
+
+            <div style="padding-left:25px;padding-right:25px;">
+                <div class="row">
+                    <div class="col-sm-4">
 
                     </div>
-                </div>
-
-                <div style="padding-left:25px;padding-right:25px;">
-                    <div class="row">
-                        <div class="col-sm-4">
-
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
-                            <input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />
-                            <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
-                        </div>
-                        <div class="col-sm-4">
-                        </div>
+                    <div class="col-sm-4">
+                        <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
+                        @*<input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />*@
+                        <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
+                    </div>
+                    <div class="col-sm-4">
                     </div>
                 </div>
-            }
-            else
-            {
-                <div class="col-12">
-                    <p>No Question</p>
-                </div>
-            }
-        }*@
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <p>No Question</p>
+            </div>
+        }
+    }
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-        function funSelecValue(selectedvalue) {
-            $("#hdnSelectedValue").val(selectedvalue);
+    function funSelecValue(selectedvalue) {
+        $("#hdnSelectedValue").val(selectedvalue);
     }
+    var arr = [];
+    var arr2 = [];
+    var element = {};
+
     $(document).ready(function () {
-        var quesNo = sessionStorage.getItem('QuesNo');
-        var radioAttr = sessionStorage.getItem('isRadioCheck');
+        var data = sessionStorage.getItem("lastname");
+        var ques = '@ViewBag.skipQues';
+        var totalQuestion = '@ViewBag.questionNo';
+
+        console.log(data);
+        //if (radioAttr == '')
+            //$("#circle_" + quesNo).css('background-color', 'red');
+
     });
 
     $("#btnNxt").click(function () {
-        debugger;
         var radioValue = $("input[name='selectedvalue']:checked").val();
         if (radioValue == undefined) {
             radioValue = '';
         }
-        sessionStorage.setItem("QuesNo", $("#hdnId").val());
-        sessionStorage.setItem("isRadioCheck", radioValue);
-
-        var qid = $("#hdnId").val();
-        $("#circle_" + qid).css('background-color', 'red');
+        element.id = $("#hdnId").val();
+        element.quantity = radioValue;
+        arr.push(element);
+        sessionStorage.setItem("lastname", element);
     });
 </script>

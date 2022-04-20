@@ -95,6 +95,7 @@ namespace Scholarship.Controllers
             var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
 
             ViewBag.questionNo = totalQues;
+            ViewBag.skipQues = qNo;
             tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == 3);
 
             //tblQuestion a = (tblQuestion)TempData["qData"];
@@ -187,15 +188,21 @@ namespace Scholarship.Controllers
             }
             return RedirectToAction("Questions");
         }
-        public ActionResult NextQuestion()
+        [HttpGet]
+        public ActionResult NextQuestion(int id)
         {
             ViewBag.StudentName = TempData["StdName"];
             ViewBag.std = TempData["Std"];
 
-            int qNo = (int)TempData["a"];
+            int qNo = id;
             ViewBag.questionNo = qNo;
-            tblQuestion a = (tblQuestion)TempData["qData"];
-            return View(a);
+            Session["a"] = id;
+            //tblQuestion SingleQuestion = db.tblQuestions
+            //                                   .SingleOrDefault(m => m.Id == id && m.Standard == 3);
+
+            //TempData["qData"] = SingleQuestion;
+            return RedirectToAction("Questions");
+
         }
         [HttpPost]
         public ActionResult NextQuestion(tblQuestion aaa)
