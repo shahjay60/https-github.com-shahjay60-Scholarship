@@ -6,17 +6,17 @@
 }
 
 <div class="row" style="margin-top:20px;" id="divQuestions">
-    @{
-        var imgsDt = ViewBag.SkipQuesList as List<int>;
-        var imageList = imgsDt.AsEnumerable().Select(t => new
-        {
-            Id = t
-        }).ToList();
-    }
     @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
     {
         if (ViewBag.SkipQuesList != null)
         {
+
+            var imgsDt = ViewBag.SkipQuesList as List<int>;
+            var imageList = imgsDt.AsEnumerable().Select(t => new
+            {
+                Id = t
+            }).ToList();
+
             var id = imageList.Where(d => d.Id == i).Select(d => d.Id).FirstOrDefault();
             if (id != 0)
             {
@@ -133,6 +133,17 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="~/Scripts/SessionJS.js"></script>
+
+<script type="text/javascript">
+    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+
+    function disbaleCTR_R(e) {
+        if (e.keyCode == 65 && e.ctrlKey) {
+            alert('ctrl A');
+        }
+    }
+</script>
+
 <script>
     function funSelecValue(selectedvalue) {
         $("#hdnSelectedValue").val(selectedvalue);
@@ -142,15 +153,15 @@
     var element = {};
 
     $(document).ready(function () {
-        alert($("#hdnId").val());
-        if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 0) {
+
+        if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 1) {
             $("#btnPrev").hide();
         }
         else {
             $("#btnPrev").show();
         }
 
-        var Totalques =parseInt('@ViewBag.questionNo');
+        var Totalques =parseInt('@ViewBag.TotalquestionNo');
 
         if (Totalques == $("#hdnId").val()) {
             $("#btnNxt").hide();
