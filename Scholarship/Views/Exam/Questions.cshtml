@@ -1,0 +1,138 @@
+﻿@model  tblQuestion
+
+@{
+    ViewBag.Title = "Question";
+    Layout = "~/Views/Exam/_ExamLayout.cshtml";
+}
+
+<div class="row" style="margin-top:20px;" id="divQuestions">
+    @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
+    {
+        <a href="@Url.Action("NextQuestion","Exam" ,new {id=@i })">
+            <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                <div class="circle" id="circle_@i">@i</div>
+            </div>
+        </a>
+    }
+
+</div>
+<hr />
+<div class="row">
+    @*@Html.Partial("_QuestionNumber")*@
+
+    @using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+    {
+        @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
+        @Html.Hidden("hdnSelectedValue")
+        if (@Model != null)
+        {
+            <input type="hidden" value="@Model.Id" id="hdnId" />
+            <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
+                <p class="fw-bold">@Model.Id. @Model.Question</p>
+                <div>
+                    <label for="one" class="box first">
+                        <div class="course">
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "A", new { @class = "Radio_" + @Model.Id })
+                                @Model.OptionA
+                            </span>
+                        </div>
+                    </label>
+                    <label for="two" class="box second">
+                        <div class="course">
+
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "B", new { @class = "Radio_" + @Model.Id })
+                                @Model.OptionB
+
+                            </span>
+                        </div>
+                    </label> <label for="three" class="box third">
+                        <div class="course">
+
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "C", new { @class = "Radio_" + @Model.Id })
+                                @Model.OptionC
+                            </span>
+                        </div>
+                    </label> <label for="four" class="box forth">
+                        <div class="course">
+                            <span class="subject">
+                                @Html.RadioButtonFor(model => model.selectedvalue, "D", new { @class = "Radio_" + @Model.Id })
+                                @Model.OptionD
+                            </span>
+                        </div>
+                    </label>
+                    @Html.HiddenFor(m => m.OptionA)
+                    @Html.HiddenFor(m => m.OptionB)
+                    @Html.HiddenFor(m => m.OptionC)
+                    @Html.HiddenFor(m => m.OptionD)
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Question)
+                    @Html.HiddenFor(m => m.Standard)
+                    @Html.HiddenFor(m => m.CorrectAns)
+
+                </div>
+            </div>
+
+            <div style="padding-left:25px;padding-right:25px;">
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
+                        @*<input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />*@
+                        <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <p>No Question</p>
+            </div>
+        }
+    }
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/Scripts/SessionJS.js"></script>
+<script>
+    function funSelecValue(selectedvalue) {
+        $("#hdnSelectedValue").val(selectedvalue);
+    }
+    var arr = [];
+    var arr2 = [];
+    var element = {};
+
+    $(document).ready(function () {
+        var ques =parseInt('@ViewBag.skipQues');
+        var Totalques =parseInt('@ViewBag.questionNo');
+        if ($.session.get("compareLeftContent") != null) {
+            var skipQuesNo = JSON.parse($.session.get("compareLeftContent"));
+            console.log(skipQuesNo);
+        }
+        if (ques != null) {
+            for (var i = 0; i < Totalques.length; i++) {
+                var isChecked = $('.Radio_' + Totalques[i] + ':checked').val() ? true : false;
+                if (isChecked == false) {
+                    $("#circle_" + Totalques[i]).css('background-color', 'red')
+                }
+            }
+        }
+
+    });
+
+    $("#btnNxt").click(function () {
+        var radioValue = $("input[name='selectedvalue']:checked").val();
+        if (radioValue == undefined) {
+            arr.push($("#hdnId").val());
+            $.session.set("compareLeftContent", JSON.stringify(arr));
+            radioValue = '';
+        }
+    });
+</script>

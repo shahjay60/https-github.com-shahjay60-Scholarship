@@ -1,0 +1,35 @@
+﻿@model List<Scholarship.Models.StdResultDetails>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Scholarship Name</th>
+            <th scope="col">Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    item.StudentName
+                </td>
+                <td>
+                    item.ScholarshipName
+                </td>
+                <td>
+                    item.Score
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

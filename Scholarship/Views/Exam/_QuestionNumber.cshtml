@@ -1,0 +1,88 @@
+﻿@model  tblQuestion
+
+@using (Html.BeginForm("Questions", "Exam", FormMethod.Post))
+{
+    @Html.ValidationMessageFor(m => m.selectedvalue, "", new { @class = "text-danger" })
+    @Html.Hidden("hdnSelectedValue")
+    if (@Model != null)
+    {
+        <input type="hidden" value="@Model.Id" id="hdnId" />
+        <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
+            <p class="fw-bold">@Model.Id. @Model.Question</p>
+            <div>
+                <label for="one" class="box first">
+                    <div class="course">
+
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "A")
+                            @Model.OptionA
+                        </span>
+                    </div>
+                </label>
+                <label for="two" class="box second">
+                    <div class="course">
+
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "B")
+
+                            @Model.OptionB
+
+                        </span>
+                    </div>
+                </label> <label for="three" class="box third">
+                    <div class="course">
+
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "C")
+                            @Model.OptionC
+                        </span>
+                    </div>
+                </label> <label for="four" class="box forth">
+                    <div class="course">
+                        <span class="subject">
+                            @Html.RadioButtonFor(model => model.selectedvalue, "D")
+                            @Model.OptionD
+                        </span>
+                    </div>
+                </label>
+                @Html.HiddenFor(m => m.OptionA)
+                @Html.HiddenFor(m => m.OptionB)
+                @Html.HiddenFor(m => m.OptionC)
+                @Html.HiddenFor(m => m.OptionD)
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Question)
+                @Html.HiddenFor(m => m.Standard)
+                @Html.HiddenFor(m => m.CorrectAns)
+
+            </div>
+        </div>
+
+        <div style="padding-left:25px;padding-right:25px;">
+            <div class="row">
+                <div class="col-sm-4">
+
+                </div>
+                <div class="col-sm-4">
+                    <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
+                    @*<input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />*@
+                    @if (@Model.Id == @ViewBag.questionNo)
+                    {
+                        <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
+                    }
+                    else
+                    {
+                        <input type="submit" name="Submit" value="Submit" id="btnSubmit" class="btn btn-primary border-success align-items-center btn-info" />
+                    }
+                </div>
+                <div class="col-sm-4">
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-12">
+            <p>No Question</p>
+        </div>
+    }
+}

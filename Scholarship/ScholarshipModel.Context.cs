@@ -33,6 +33,8 @@ namespace Scholarship
         public virtual DbSet<tblScholarship> tblScholarships { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblUserActivation> tblUserActivations { get; set; }
+        public virtual DbSet<tblQuestion> tblQuestions { get; set; }
+        public virtual DbSet<tblStudentResult> tblStudentResults { get; set; }
     
         public virtual int Validate_User(string username, string password)
         {

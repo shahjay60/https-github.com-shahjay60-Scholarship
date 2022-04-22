@@ -23,6 +23,8 @@
       <Parameter Name="Username" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="tblQuestions" EntityType="ScholarshipModel.tblQuestion" />
+    <EntitySet Name="tblStudentResults" EntityType="ScholarshipModel.tblStudentResult" />
   </EntityContainer>
   <EntityType Name="tblException">
     <Key>
@@ -105,5 +107,35 @@
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Standard" Type="Int32" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OptionA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OptionB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OptionC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OptionD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="selectedvalue" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblStudentResult">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="Standard" />
+      <PropertyRef Name="Time" />
+      <PropertyRef Name="CreataionDate" />
+      <PropertyRef Name="result" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="Standard" Type="Int32" Nullable="false" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreataionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
