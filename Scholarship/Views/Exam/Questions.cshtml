@@ -8,11 +8,11 @@
 <div class="row" style="margin-top:20px;" id="divQuestions">
     @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
     {
-        <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
-            <a href="@Url.Action("NextQuestion","Exam" ,new {id=@i })">
+        <a href="@Url.Action("NextQuestion","Exam" ,new {id=@i })">
+            <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
                 <div class="circle" id="circle_@i">@i</div>
-            </a>
-        </div>
+            </div>
+        </a>
     }
 
 </div>
@@ -32,9 +32,8 @@
                 <div>
                     <label for="one" class="box first">
                         <div class="course">
-
                             <span class="subject">
-                                @Html.RadioButtonFor(model => model.selectedvalue, "A")
+                                @Html.RadioButtonFor(model => model.selectedvalue, "A", new { @class = "Radio_" + @Model.Id })
                                 @Model.OptionA
                             </span>
                         </div>
@@ -43,8 +42,7 @@
                         <div class="course">
 
                             <span class="subject">
-                                @Html.RadioButtonFor(model => model.selectedvalue, "B")
-
+                                @Html.RadioButtonFor(model => model.selectedvalue, "B", new { @class = "Radio_" + @Model.Id })
                                 @Model.OptionB
 
                             </span>
@@ -53,14 +51,14 @@
                         <div class="course">
 
                             <span class="subject">
-                                @Html.RadioButtonFor(model => model.selectedvalue, "C")
+                                @Html.RadioButtonFor(model => model.selectedvalue, "C", new { @class = "Radio_" + @Model.Id })
                                 @Model.OptionC
                             </span>
                         </div>
                     </label> <label for="four" class="box forth">
                         <div class="course">
                             <span class="subject">
-                                @Html.RadioButtonFor(model => model.selectedvalue, "D")
+                                @Html.RadioButtonFor(model => model.selectedvalue, "D", new { @class = "Radio_" + @Model.Id })
                                 @Model.OptionD
                             </span>
                         </div>
@@ -102,7 +100,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+<script src="~/Scripts/SessionJS.js"></script>
 <script>
     function funSelecValue(selectedvalue) {
         $("#hdnSelectedValue").val(selectedvalue);
@@ -112,24 +110,29 @@
     var element = {};
 
     $(document).ready(function () {
-        var data = sessionStorage.getItem("lastname");
-        var ques = '@ViewBag.skipQues';
-        var totalQuestion = '@ViewBag.questionNo';
-
-        console.log(data);
-        //if (radioAttr == '')
-            //$("#circle_" + quesNo).css('background-color', 'red');
+        var ques =parseInt('@ViewBag.skipQues');
+        var Totalques =parseInt('@ViewBag.questionNo');
+        if ($.session.get("compareLeftContent") != null) {
+            var skipQuesNo = JSON.parse($.session.get("compareLeftContent"));
+            console.log(skipQuesNo);
+        }
+        if (ques != null) {
+            for (var i = 0; i < Totalques.length; i++) {
+                var isChecked = $('.Radio_' + Totalques[i] + ':checked').val() ? true : false;
+                if (isChecked == false) {
+                    $("#circle_" + Totalques[i]).css('background-color', 'red')
+                }
+            }
+        }
 
     });
 
     $("#btnNxt").click(function () {
         var radioValue = $("input[name='selectedvalue']:checked").val();
         if (radioValue == undefined) {
+            arr.push($("#hdnId").val());
+            $.session.set("compareLeftContent", JSON.stringify(arr));
             radioValue = '';
         }
-        element.id = $("#hdnId").val();
-        element.quantity = radioValue;
-        arr.push(element);
-        sessionStorage.setItem("lastname", element);
     });
 </script>

@@ -1084,6 +1084,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Certificate.css" />
     <Content Include="Content\ExamCss.css" />
+    <Content Include="Content\RadioButtonStyle.css" />
     <Content Include="EmailTemplate\PaymentReceipt %282%29.html" />
     <Content Include="EmailTemplate\PdfToHTML.html" />
     <Content Include="favicon.ico" />
@@ -1291,6 +1292,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SessionJS.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
