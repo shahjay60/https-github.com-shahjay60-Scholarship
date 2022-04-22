@@ -12,6 +12,7 @@ namespace Scholarship.Controllers
         // GET: Exam
         ScholarshipEntities db = new ScholarshipEntities();
         IDictionary<int, string> numberNames = new Dictionary<int, string>();
+        List<int> SkipQuest = new List<int>();
         int totalCount = 0;
         [HttpGet]
         public ActionResult ExamLogin()
@@ -95,10 +96,12 @@ namespace Scholarship.Controllers
             var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
 
             ViewBag.questionNo = totalQues;
+            Session["questionNo"] = totalQues;
             ViewBag.skipQues = qNo;
             tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == 3);
 
             //tblQuestion a = (tblQuestion)TempData["qData"];
+            ViewBag.SkipQuesList = (List<int>)Session["SkipQuest"];
 
             Dictionary<int, string> myDictionary = (Dictionary<int, string>)Session["DateCollections"];
 
@@ -113,7 +116,6 @@ namespace Scholarship.Controllers
         {
             totalCount = totalCount + 1;
             int std = Convert.ToInt32(ViewBag.std);
-
 
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {
@@ -151,30 +153,87 @@ namespace Scholarship.Controllers
 
             var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
 
-            if (totalCount == totalQues.Count)
-            {
-                return RedirectToAction("Create", "Result");
-            }
+           
             if (!string.IsNullOrEmpty(Skip))
             {
-                int qId = (int)aaa.Id + 1;
-                tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+                if ( totalQues.Count()>= (int)aaa.Id)
+                {
+                    int qId = (int)aaa.Id + 1;
 
-                ViewBag.questionNo = qId;
-                Session["a"] = SingleQuestion.Id;
-                TempData["qData"] = SingleQuestion;
+                    tblQuestion SingleQuestion = db.tblQuestions
+                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                    ViewBag.questionNo = qId;
+                    Session["a"] = SingleQuestion.Id;
+                    TempData["qData"] = SingleQuestion;
+                    SkipQuest.Add((int)aaa.Id);
+
+                    var SkipData = (List<int>)Session["SkipQuest"];
+                    if (SkipData != null)
+                    {
+                        foreach (var item in SkipData)
+                        {
+                            var data = SkipQuest.Where(x => x == item).Count();
+
+                            if (data > 0)
+                            {
+                                SkipQuest.Remove(item);
+                            }
+                            SkipQuest.Add(item);
+                        }
+                    }
+
+                    Session["SkipQuest"] = SkipQuest;
+                }
+                else
+                {
+                    Session["a"] = aaa.Id;
+                    TempData["qData"] = "";
+                }
             }
             if (!string.IsNullOrEmpty(Next))
             {
-                int qId = (int)aaa.Id + 1;
 
-                tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+                if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
+                {
+                    int qId = (int)aaa.Id + 1;
 
-                ViewBag.questionNo = qId;
-                Session["a"] = qId;
-                TempData["qData"] = SingleQuestion;
+                    tblQuestion SingleQuestion = db.tblQuestions
+                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                    ViewBag.questionNo = qId;
+                    Session["a"] = qId;
+                    TempData["qData"] = SingleQuestion;
+                }
+                else
+                {
+                    int qId = (int)aaa.Id + 1;
+
+                    tblQuestion SingleQuestion = db.tblQuestions
+                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+
+                    ViewBag.questionNo = qId;
+                    Session["a"] = SingleQuestion.Id;
+                    TempData["qData"] = SingleQuestion;
+                    SkipQuest.Add((int)aaa.Id);
+
+                    var SkipData = (List<int>)Session["SkipQuest"];
+                    if (SkipData != null)
+                    {
+                        foreach (var item in SkipData)
+                        {
+                            var data = SkipQuest.Where(x => x == item).Count();
+
+                            if (data > 0)
+                            {
+                                SkipQuest.Remove(item);
+                            }
+                            SkipQuest.Add(item);
+                        }
+                    }
+
+                    Session["SkipQuest"] = SkipQuest;
+                }
             }
             if (!string.IsNullOrEmpty(Previous))
             {
@@ -185,6 +244,11 @@ namespace Scholarship.Controllers
                 ViewBag.questionNo = qId;
                 Session["a"] = SingleQuestion.Id;
                 TempData["qData"] = SingleQuestion;
+            }
+           
+            if (totalCount == totalQues.Count)
+            {
+                return RedirectToAction("Create", "Result");
             }
             return RedirectToAction("Questions");
         }

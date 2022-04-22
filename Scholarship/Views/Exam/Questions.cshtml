@@ -8,11 +8,28 @@
 <div class="row" style="margin-top:20px;" id="divQuestions">
     @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
     {
-        <a href="@Url.Action("NextQuestion","Exam" ,new {id=@i })">
-            <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
-                <div class="circle" id="circle_@i">@i</div>
-            </div>
-        </a>
+        if (ViewBag.SkipQuesList != null)
+        {
+            foreach (var quesId in ViewBag.SkipQuesList)
+            {
+                if (i == quesId)
+                {
+                    <a href="@Url.Action("NextQuestion", "Exam", new { id = @i })">
+                        <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                            <div class="circle" id="circle_@i" style="background-color:red">@i</div>
+                        </div>
+                    </a>
+                }
+            }
+        }
+        else
+        {
+            <a href="@Url.Action("NextQuestion", "Exam", new { id = @i })">
+                <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                    <div class="circle" id="circle_@i">@i</div>
+                </div>
+            </a>
+        }
     }
 
 </div>
@@ -110,8 +127,22 @@
     var element = {};
 
     $(document).ready(function () {
-        var ques =parseInt('@ViewBag.skipQues');
+        if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 0) {
+            $("#btnPrev").hide();
+        }
+        else {
+            $("#btnPrev").show();
+        }
         var Totalques =parseInt('@ViewBag.questionNo');
+
+        if (Totalques == $("#hdnId").val()) {
+            $("#btnNxt").hide();
+
+        }
+        else {
+            $("#btnNxt").show();
+        }
+        var ques =parseInt('@ViewBag.skipQues');
         if ($.session.get("compareLeftContent") != null) {
             var skipQuesNo = JSON.parse($.session.get("compareLeftContent"));
             console.log(skipQuesNo);
