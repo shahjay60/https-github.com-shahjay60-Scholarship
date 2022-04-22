@@ -153,10 +153,10 @@ namespace Scholarship.Controllers
 
             var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
 
-           
+
             if (!string.IsNullOrEmpty(Skip))
             {
-                if ( totalQues.Count()>= (int)aaa.Id)
+                if (totalQues.Count() >= (int)aaa.Id)
                 {
                     int qId = (int)aaa.Id + 1;
 
@@ -193,10 +193,10 @@ namespace Scholarship.Controllers
             }
             if (!string.IsNullOrEmpty(Next))
             {
+                int qId = (int)aaa.Id + 1;
 
                 if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
                 {
-                    int qId = (int)aaa.Id + 1;
 
                     tblQuestion SingleQuestion = db.tblQuestions
                                                    .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
@@ -207,32 +207,34 @@ namespace Scholarship.Controllers
                 }
                 else
                 {
-                    int qId = (int)aaa.Id + 1;
 
                     tblQuestion SingleQuestion = db.tblQuestions
                                                    .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
 
-                    ViewBag.questionNo = qId;
-                    Session["a"] = SingleQuestion.Id;
-                    TempData["qData"] = SingleQuestion;
-                    SkipQuest.Add((int)aaa.Id);
-
-                    var SkipData = (List<int>)Session["SkipQuest"];
-                    if (SkipData != null)
+                    if (SingleQuestion != null)
                     {
-                        foreach (var item in SkipData)
+                        ViewBag.questionNo = qId;
+                        Session["a"] = SingleQuestion.Id;
+                        TempData["qData"] = SingleQuestion;
+                        SkipQuest.Add((int)aaa.Id);
+
+                        var SkipData = (List<int>)Session["SkipQuest"];
+                        if (SkipData != null)
                         {
-                            var data = SkipQuest.Where(x => x == item).Count();
-
-                            if (data > 0)
+                            foreach (var item in SkipData)
                             {
-                                SkipQuest.Remove(item);
-                            }
-                            SkipQuest.Add(item);
-                        }
-                    }
+                                var data = SkipQuest.Where(x => x == item).Count();
 
-                    Session["SkipQuest"] = SkipQuest;
+                                if (data > 0)
+                                {
+                                    SkipQuest.Remove(item);
+                                }
+                                SkipQuest.Add(item);
+                            }
+                        }
+
+                        Session["SkipQuest"] = SkipQuest;
+                    }
                 }
             }
             if (!string.IsNullOrEmpty(Previous))
@@ -245,7 +247,7 @@ namespace Scholarship.Controllers
                 Session["a"] = SingleQuestion.Id;
                 TempData["qData"] = SingleQuestion;
             }
-           
+
             if (totalCount == totalQues.Count)
             {
                 return RedirectToAction("Create", "Result");

@@ -6,20 +6,35 @@
 }
 
 <div class="row" style="margin-top:20px;" id="divQuestions">
+    @{
+        var imgsDt = ViewBag.SkipQuesList as List<int>;
+        var imageList = imgsDt.AsEnumerable().Select(t => new
+        {
+            Id = t
+        }).ToList();
+    }
     @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
     {
         if (ViewBag.SkipQuesList != null)
         {
-            foreach (var quesId in ViewBag.SkipQuesList)
+            var id = imageList.Where(d => d.Id == i).Select(d => d.Id).FirstOrDefault();
+            if (id != 0)
             {
-                if (i == quesId)
-                {
-                    <a href="@Url.Action("NextQuestion", "Exam", new { id = @i })">
-                        <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
-                            <div class="circle" id="circle_@i" style="background-color:red">@i</div>
-                        </div>
-                    </a>
-                }
+
+                <a href="@Url.Action("NextQuestion", "Exam", new { id = @i })">
+                    <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                        <div class="circle" id="circle_@i" style="background-color:red">@i</div>
+                    </div>
+                </a>
+
+            }
+            else
+            {
+                <a href="@Url.Action("NextQuestion", "Exam", new { id = @i })">
+                    <div class="col-sm-1" style="padding-left: 25px; padding-right: 25px; width: 1.333333%">
+                        <div class="circle" id="circle_@i">@i</div>
+                    </div>
+                </a>
             }
         }
         else
@@ -127,18 +142,20 @@
     var element = {};
 
     $(document).ready(function () {
+        alert($("#hdnId").val());
         if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 0) {
             $("#btnPrev").hide();
         }
         else {
             $("#btnPrev").show();
         }
+
         var Totalques =parseInt('@ViewBag.questionNo');
 
         if (Totalques == $("#hdnId").val()) {
             $("#btnNxt").hide();
-
         }
+
         else {
             $("#btnNxt").show();
         }
