@@ -12,13 +12,13 @@ namespace Scholarship.Controllers
         ScholarshipEntities db = new ScholarshipEntities();
 
         // GET: Result
-        public ActionResult Index()
+        public ActionResult Index(int Std, int StdId)
         {
             try
             {
                 string score = Session["correctAns"].ToString();
-                int std = (int)Session["Std"];
-                int stdId = (int)Session["stdId"];
+                int std = Std;
+                int stdId = StdId;
                 int totalTime = (int)Session["totalTime"];
 
                 tblStudentResult mObj = new tblStudentResult();

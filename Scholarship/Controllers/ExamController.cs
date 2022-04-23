@@ -114,10 +114,10 @@ namespace Scholarship.Controllers
             return View(a);
         }
         [HttpPost]
-        public ActionResult Questions(tblQuestion aaa, string Previous, string Skip, string Next, FormCollection fc)
+        public ActionResult Questions(tblQuestion aaa, string Previous, string Finished, string Next, FormCollection fc)
         {
-            totalCount = totalCount + 1;
-            int std = Convert.ToInt32(ViewBag.std);
+            int std = Convert.ToInt32(Session["Std"]);
+            int stdId = Convert.ToInt32(Session["stdId"]);
 
             if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
             {
@@ -152,17 +152,17 @@ namespace Scholarship.Controllers
             Session["DateCollections"] = numberNames;
             var marks = Session["correctAns"];
 
-            var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
-           
+            var totalQues = db.tblQuestions.Where(m => m.Standard == std).ToList();
+
             if (!string.IsNullOrEmpty(Next))
             {
                 int qId = (int)aaa.Id + 1;
 
-                
+
                 if (!string.IsNullOrEmpty(Convert.ToString(aaa.selectedvalue)))
                 {
                     tblQuestion SingleQuestion = db.tblQuestions
-                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == std);
 
                     ViewBag.questionNo = qId;
                     Session["a"] = qId;
@@ -178,7 +178,7 @@ namespace Scholarship.Controllers
                 else
                 {
                     tblQuestion SingleQuestion = db.tblQuestions
-                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+                                                   .SingleOrDefault(m => m.Id == qId && m.Standard == std);
                     if (SingleQuestion != null)
                     {
                         ViewBag.questionNo = qId;
@@ -209,16 +209,16 @@ namespace Scholarship.Controllers
             {
                 int qId = (int)aaa.Id - 1;
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == qId && m.Standard == 3);
+                                               .SingleOrDefault(m => m.Id == qId && m.Standard == std);
 
                 ViewBag.questionNo = qId;
                 Session["a"] = SingleQuestion.Id;
                 TempData["qData"] = SingleQuestion;
             }
 
-            if (totalCount == totalQues.Count)
+            if (!string.IsNullOrEmpty(Finished))
             {
-                return RedirectToAction("Create", "Result");
+                return RedirectToAction("Index", "Result",new {std= std, StdId = stdId });
             }
             return RedirectToAction("Questions");
         }
@@ -232,17 +232,14 @@ namespace Scholarship.Controllers
             ViewBag.questionNo = qNo;
             Session["a"] = id;
 
-            var SkipData = (List<int>)Session["SkipQuest"];
-            if (SkipData != null)
+            var ListOfSkipQues = (List<int>)Session["SkipQuest"];
+            if (ListOfSkipQues != null)
             {
-                foreach (var item in SkipData)
+                if (ListOfSkipQues.Count > 0)
                 {
-                    var data = SkipQuest.Where(x => x == id).Count();
-
-                    if (data > 0)
-                    {
-                        SkipQuest.Remove(data);
-                    }
+                    ListOfSkipQues.RemoveAll(x => x == id);
+                    Session["SkipQuest"] = null;
+                    Session["SkipQuest"] = ListOfSkipQues;
                 }
             }
             else
@@ -252,8 +249,9 @@ namespace Scholarship.Controllers
                 {
                     SkipQuest.Add(i);
                 }
+                Session["SkipQuest"] = SkipQuest;
+
             }
-            Session["SkipQuest"] = SkipQuest;
 
             return RedirectToAction("Questions");
 

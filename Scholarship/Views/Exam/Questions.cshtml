@@ -59,6 +59,7 @@
         if (@Model != null)
         {
             <input type="hidden" value="@Model.Id" id="hdnId" />
+            <input type="hidden" id="hdnTime" />
             <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
                 <p class="fw-bold">@Model.Id. @Model.Question</p>
                 <div>
@@ -114,7 +115,7 @@
                     </div>
                     <div class="col-sm-4">
                         <input type="submit" name="Previous" id="btnPrev" value="Previous" class="btn btn-primary d-flex align-items-center btn-danger" />
-                        @*<input type="submit" name="Skip" value="Skip" id="btnSkip" class="btn btn-primary d-flex align-items-center btn-info " />*@
+                        <input type="submit" name="Finished" value="Finished" id="btnFinished" class="btn btn-primary d-flex align-items-center btn-info " />
                         <input type="submit" name="Next" value="Next" id="btnNxt" class="btn btn-primary border-success align-items-center btn-success" />
                     </div>
                     <div class="col-sm-4">
@@ -153,6 +154,10 @@
     var element = {};
 
     $(document).ready(function () {
+        $("#btnFinished").hide();
+
+        alert($("#time").val());
+        alert($("#time").text());
 
         if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 1) {
             $("#btnPrev").hide();
@@ -165,6 +170,7 @@
 
         if (Totalques == $("#hdnId").val()) {
             $("#btnNxt").hide();
+            $("#btnFinished").show();
         }
 
         else {
@@ -185,7 +191,7 @@
         }
 
     });
-
+    
     $("#btnNxt").click(function () {
         var radioValue = $("input[name='selectedvalue']:checked").val();
         if (radioValue == undefined) {
