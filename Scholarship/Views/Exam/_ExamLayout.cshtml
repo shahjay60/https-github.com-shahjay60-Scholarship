@@ -14,67 +14,10 @@
 </head>
 <body id="bodyexam">
     <div class="container">
-        <div class="well well-lg">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h4>Student Name :@ViewBag.StudentName  </h4>
-                    <h4>Standard :@ViewBag.std</h4>
-                </div>
-                <div class="col-sm-6 text-right" style="margin-top:15px;">
-                    <div id="time"></div>
-                </div>
-            </div>
-        </div>
 
         @RenderBody()
 
     </div>
 </body>
 </html>
-<script type="text/javascript">
-    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
-    function disbaleCTR_R(e) {
-        if (e.keyCode == 65 && e.ctrlKey) {
-            alert('ctrl A');
-        }
-    }
-</script>
-<script>
-
-    window.addEventListener("beforeunload", () => window.localStorage.clear());
-
-    window.onload = function () {
-        sec = parseInt(window.localStorage.getItem("seconds"))
-        min = parseInt(window.localStorage.getItem("minutes"))
-
-        if (parseInt(min * sec)) {
-            var fiveMinutes = (parseInt(min * 60) + sec);
-        } else {
-            var fiveMinutes = 60 * 60;
-        }
-        // var fiveMinutes = 60 * 5;
-        display = document.querySelector('#time');
-        startTimer(fiveMinutes, display);
-    };
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10)
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            $("#time").text(" Time Remaining: " + minutes + ":" + seconds);
-            //display.text(minutes + ":" + seconds);
-
-            if (--timer < 0) {
-                timer = duration;
-            }
-
-            window.localStorage.setItem("seconds", seconds)
-            window.localStorage.setItem("minutes", minutes)
-        }, 1000);
-    }
-</script>

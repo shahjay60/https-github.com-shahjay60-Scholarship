@@ -5,6 +5,18 @@
     Layout = "~/Views/Exam/_ExamLayout.cshtml";
 }
 
+<div class="well well-lg">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Student Name :@ViewBag.StudentName  </h4>
+            <h4>Standard :@ViewBag.std</h4>
+        </div>
+        <div class="col-sm-6 text-right" style="margin-top:15px;">
+            <div id="time1"></div>
+        </div>
+    </div>
+</div>
+
 <div class="row" style="margin-top:20px;" id="divQuestions">
     @for (int i = 1; i <= @ViewBag.questionNo.Count; i++)
     {
@@ -59,7 +71,7 @@
         if (@Model != null)
         {
             <input type="hidden" value="@Model.Id" id="hdnId" />
-            <input type="hidden" id="hdnTime" />
+            @Html.Hidden("Country")
             <div class="col-12" id="@Model.Id" style="padding-left:25px;padding-right:25px;">
                 <p class="fw-bold">@Model.Id. @Model.Question</p>
                 <div>
@@ -146,6 +158,45 @@
 </script>
 
 <script>
+
+    window.addEventListener("beforeunload", () => window.localStorage.clear());
+
+    window.onload = function () {
+        sec = parseInt(window.localStorage.getItem("seconds"))
+        min = parseInt(window.localStorage.getItem("minutes"))
+
+        if (parseInt(min * sec)) {
+            var fiveMinutes = (parseInt(min * 60) + sec);
+        } else {
+            var fiveMinutes = 60 * 60;
+        }
+        // var fiveMinutes = 60 * 5;
+        display = document.querySelector('#time1');
+        startTimer(fiveMinutes, display);
+    };
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            $("#time1").text(" Time Remaining: " + minutes + ":" + seconds);
+            //display.text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+
+            window.localStorage.setItem("seconds", seconds)
+            window.localStorage.setItem("minutes", minutes)
+        }, 1000);
+    }
+</script>
+
+<script>
     function funSelecValue(selectedvalue) {
         $("#hdnSelectedValue").val(selectedvalue);
     }
@@ -156,8 +207,6 @@
     $(document).ready(function () {
         $("#btnFinished").hide();
 
-        alert($("#time").val());
-        alert($("#time").text());
 
         if ($("#hdnId").val() == null || $("#hdnId").val() == undefined || $("#hdnId").val() == 1) {
             $("#btnPrev").hide();
@@ -199,5 +248,10 @@
             $.session.set("compareLeftContent", JSON.stringify(arr));
             radioValue = '';
         }
+    });
+    $("#btnFinished").click(function () {
+        var completeTime = $("#time1").text();
+        completeTime = completeTime.substring(completeTime.indexOf(':') + 1);
+        $("#Country").val(completeTime)
     });
 </script>
