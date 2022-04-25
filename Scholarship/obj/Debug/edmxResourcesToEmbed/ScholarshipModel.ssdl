@@ -78,16 +78,9 @@
     <Property Name="LastLoginDate" Type="datetime" />
     <Property Name="RegiDate" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblStudentResult' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tblStudentResult">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="StudentId" />
-      <PropertyRef Name="Standard" />
-      <PropertyRef Name="Time" />
-      <PropertyRef Name="CreataionDate" />
-      <PropertyRef Name="result" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StudentId" Type="int" Nullable="false" />
@@ -130,17 +123,8 @@ warning 6002: The table/view 'ph11155711551_Scholarship.dbo.tblUserActivation' d
     <EntitySet Name="tblScholarship" EntityType="Self.tblScholarship" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStdPaymentDetail" EntityType="Self.tblStdPaymentDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStudentDetails" EntityType="Self.tblStudentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStudentResult" EntityType="Self.tblStudentResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblStudentResult" EntityType="Self.tblStudentResult" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblStudentResult].[Id] AS [Id], 
-    [tblStudentResult].[StudentId] AS [StudentId], 
-    [tblStudentResult].[Standard] AS [Standard], 
-    [tblStudentResult].[Time] AS [Time], 
-    [tblStudentResult].[CreataionDate] AS [CreataionDate], 
-    [tblStudentResult].[result] AS [result]
-    FROM [dbo].[tblStudentResult] AS [tblStudentResult]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="tblUserActivation" EntityType="Self.tblUserActivation" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [tblUserActivation].[UserId] AS [UserId], 

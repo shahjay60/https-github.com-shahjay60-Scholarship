@@ -55,13 +55,13 @@ namespace Scholarship.Controllers
             ViewBag.questionNo = Convert.ToInt32(TempData["QuestionNo"]);
             Session["a"] = Convert.ToInt32(TempData["QuestionNo"]);
 
-            int std = Convert.ToInt32(ViewBag.std);
+            int std = Convert.ToInt32(Session["Std"]);
             totalCount = totalCount + 1;
             if (drp.QuestionNo == 1)
             {
 
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == 3);
+                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == std);
 
                 TempData["qData"] = SingleQuestion;
                 return RedirectToAction("Questions");
@@ -69,7 +69,7 @@ namespace Scholarship.Controllers
             else
             {
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == 3);
+                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == std);
                 int qus = (int)drp.QuestionNo;
                 return View(SingleQuestion);
             }
@@ -93,14 +93,15 @@ namespace Scholarship.Controllers
                 qNo = (int)Session["a"];
                 ViewBag.questionNo = qNo;
             }
+            int std = Convert.ToInt32(Session["Std"]);
 
-            var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
+            var totalQues = db.tblQuestions.Where(m => m.Standard == std).ToList();
 
             ViewBag.questionNo = totalQues;
             ViewBag.TotalquestionNo = totalQues.Count;
             Session["questionNo"] = totalQues;
             ViewBag.skipQues = qNo;
-            tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == 3);
+            tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == std);
 
             //tblQuestion a = (tblQuestion)TempData["qData"];
             ViewBag.SkipQuesList = (List<int>)Session["SkipQuest"];
@@ -279,7 +280,7 @@ namespace Scholarship.Controllers
                 return RedirectToAction("Create", "Result");
             }
             int qId = (int)aaa.Id + 1;
-            int std = Convert.ToInt32(ViewBag.std);
+            int std = Convert.ToInt32(Session["Std"]);
 
             tblQuestion SingleQuestion = db.tblQuestions
                                            .SingleOrDefault(m => m.Id == qId && m.Standard == std);
