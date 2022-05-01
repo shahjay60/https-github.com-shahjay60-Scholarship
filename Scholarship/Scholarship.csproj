@@ -493,9 +493,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminDashbordController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdPaymentDetailsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ADQuestionController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdScholarshipController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdStudentDetailsController.cs" />
     <Compile Include="Areas\Admin\Domain\PaymentInfo.cs" />
+    <Compile Include="Areas\Admin\Domain\QuestionInfo.cs" />
     <Compile Include="Areas\Admin\Domain\ScholarshipDomain.cs" />
     <Compile Include="Areas\Student\Controllers\STLoginController.cs" />
     <Compile Include="Areas\Student\Controllers\STPaymentDetailController.cs" />
@@ -1281,6 +1283,9 @@
     <Content Include="Areas\Student\Views\STStudent\Edit.cshtml" />
     <Content Include="EmailTemplate\PaymentReceipt.pdf" />
     <Content Include="Areas\Student\Views\STResult\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ADQuestion\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ADQuestion\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

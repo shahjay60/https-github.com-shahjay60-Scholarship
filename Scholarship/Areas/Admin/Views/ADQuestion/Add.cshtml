@@ -1,0 +1,326 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutcshtml.cshtml";
+}
+}
+
+@*<section class="m-3">
+       <section class="card">
+           <section class="card-header text-center">
+               <label class="h3">Add Question</label>
+           </section>
+           <section class="card-body">
+               <section id="form-container">
+                   <section class="form-group">
+                       <label>Standard:</label>
+                       <input type="text" placeholder="Standard" id="StandardTxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Question:</label>
+                       <input type="text" placeholder="Question" id="QuestionTxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Option A:</label>
+                       <input type="text" placeholder="Option A" id="ATxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Option B:</label>
+                       <input type="text" placeholder="Option B" id="BTxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Option C:</label>
+                       <input type="text" placeholder="Option C" id="CTxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Option D:</label>
+                       <input type="text" placeholder="Option D" id="DTxt" class="form-control" />
+                   </section>
+                   <section class="form-group">
+                       <label>Correct Answer:</label>
+                       <input type="text" placeholder="Correct Answer" id="CorrectTxt" class="form-control" />
+                   </section>
+                   <section class="text-center">
+                       <a href="javascript:void(0)" class="text-info" id="AddTempMovieBtn">ADD Question</a>
+                   </section>
+               </section>
+               <section id="MsnContainer">
+                   <section class="text-center">
+                       <label class="font-weight-bold text-danger" id="Msn"></label>
+                   </section>
+               </section>
+               <br><br>
+               <section id="table-container">
+                   <table class="table table-bordered table-striped" id="table-information">
+                       <thead>
+                           <tr class="bg-info text-light font-weight-bold text-center">
+                               <td>Question</td>
+                               <td>OptionA</td>
+                               <td>OptionB</td>
+                               <td>OptionC</td>
+                               <td>OptionC</td>
+                               <td>Correct Answer</td>
+                               <td>Action</td>
+                           </tr>
+                       </thead>
+                       <tbody id="table-body"></tbody>
+                   </table>
+                   <section class="text-center">
+                       <button id="SubmitMoviesBtn" disabled="disabled" class="btn btn-success w-50">SAVE ALL Question</button>
+                   </section>
+               </section>
+           </section>
+       </section>
+    </section>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+@Html.AntiForgeryToken()
+<div class="page-body">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="card tab2-card">
+                    <div class="card-header">
+                        <h5> Add ProductAttribute</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-xl-3 col-md-4">
+                                <label for="validationCustom0"><span>*</span>Standard</label>
+                            </div>
+
+                            <div class="col-xl-8 col-md-7">
+                                <select id="ddlProducts" name="SubjectList">
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <div class="form-group row">
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>Question</label>
+                            </div>
+
+                            <div class="col-xl-8 col-md-7" id="divAttValue">
+                                <input type="text" id="txtQuestion" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>option A</label>
+                            </div>
+
+                            <div class="col-xl-4 col-md-4" id="divAttValue">
+                                <input type="text" id="txtoptionA" class="form-control" />
+                            </div>
+                            @*</div>
+                                <div class="form-group row">*@
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>option B</label>
+                            </div>
+
+                            <div class="col-xl-4 col-md-4" id="divoptionB">
+                                <input type="text" id="txtoptionB" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>option C</label>
+                            </div>
+
+                            <div class="col-xl-4 col-md-4" id="divoptionC">
+                                <input type="text" id="txtoptionC" class="form-control" />
+                            </div>
+                            @*</div>
+                                <div class="form-group row">*@
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>option D</label>
+                            </div>
+
+                            <div class="col-xl-4 col-md-2" id="divoptionD">
+                                <input type="text" id="txtoptionD" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xl-2 col-md-2">
+                                <label for="validationCustom0"><span>*</span>Correct Answer</label>
+                            </div>
+
+                            <div class="col-xl-4 col-md-4" id="divAns">
+                                <input type="text" id="txtAns" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="pull-right">
+
+
+                            @*<button type="button" class="btn btn-primary">Save</button>*@
+                            <input type="submit" class="btn btn-primary" value="Save" id="btnSubmit" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="alert alert-success" role="alert" style="display:none" id="divSuccess">
+                Questions Added Successfully..!!
+            </div>
+            <div class="alert alert-danger" role="alert" style="display:none" id="divError">
+                Questions Not Added Successfully..!!
+            </div>
+        </div>
+    </div>
+    <table class="table table-responsive table-striped" id="productTable">
+        <thead>
+            <tr>
+                <td>standard</td>
+                <td>Question</td>
+                <td>option A</td>
+                <td>option B</td>
+                <td>option C</td>
+                <td>option D</td>
+                <td>Correct Answer</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody id="tblBody">
+        </tbody>
+        <tfoot>
+            <tr>
+                <td align="right" colspan="4">
+                    <input type="submit" class="btn btn-primary" value="Save" id="btnfinalSubmit" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize select2
+        $("#selUser").select2();
+        // Read selected option
+        $('#but_read').click(function () {
+            var username = $('#selUser option:selected').text();
+            var userid = $('#selUser').val();
+            $('#result').html("id : " + userid + ", name : " + username);
+        });
+    });
+</script>
+<script>
+    $("#btnSubmit").click(function () {
+        if ($("#ddlProducts").val() != "" && $("#ddlAttribute").val() != "" && $("#ddlAttributeValue").val() != "") {
+            productAddToTable();
+            formClear();
+        }
+        else {
+            alert("Please select data");
+        }
+    });
+    function productAddToTable() {
+        // First check if a <tbody> tag exists, add one if not
+        if ($("#productTable tbody").length == 0) {
+            $("#productTable").append("<tbody></tbody>");
+        }
+        // Append product to the table
+        $("#productTable tbody").append("<tr>" +
+            "<td>" + $("#ddlProducts :selected").text() + "</td>" +
+            "<td>" + $("#txtQuestion").val() + "</td>" +
+            "<td>" + $("#txtoptionA").val() + "</td>" +
+            "<td>" + $("#txtoptionB").val() + "</td>" +
+            "<td>" + $("#txtoptionC").val() + "</td>" +
+            "<td>" + $("#txtoptionD").val() + "</td>" +
+            "<td>" + $("#txtAns").val() + "</td>" +
+            "<td>" +
+            "<a><button type='button' onclick='productDelete(this);' class='btn btn-default'>Delete" +
+            "</button></a>" +
+            "</td>" +
+            "</tr>");
+    }
+    function formClear() {
+        $("#txtQuestion").val("");
+        $("#txtoptionA").val("");
+        $("#txtoptionB").val("");
+        $("#txtoptionC").val("");
+        $("#txtoptionD").val("");
+        $("#txtAns").val("");
+    }
+    function productDelete(ctl) {
+        $(ctl).parents("tr").remove();
+    }
+    $('#ddlAttribute').change(function () {
+        $.ajax({
+            type: "post",
+            url:  "@Url.Action("GetAttValyByAttId", "ProductAttribute")",
+            data: { AttId: $('#ddlAttribute').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                debugger;
+                var district = "<select id='ddlAttributeValue' class='form-control'>";
+                district = district + '<option value="">--Select--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                }
+                district = district + '</select>';
+                $('#divAttValue').html(district);
+            }
+        });
+    });
+    $("#btnfinalSubmit").click(function () {
+        debugger;
+        var model = {};
+        var QuestionsDetails = new Array();
+        $("#productTable TBODY TR").each(function () {
+            var row = $(this);
+            var QuestionDetails = {};
+            QuestionDetails.Standard = row.find("TD").eq(0).html();
+            QuestionDetails.Question = row.find("TD").eq(1).html();
+            QuestionDetails.OptionA = row.find("TD").eq(2).html();
+            QuestionDetails.OptionB = row.find("TD").eq(3).html();
+            QuestionDetails.OptionC = row.find("TD").eq(4).html();
+            QuestionDetails.OptionD = row.find("TD").eq(5).html();
+            QuestionDetails.CorrectAnswer = row.find("TD").eq(6).html();
+            QuestionsDetails.push(QuestionDetails);
+        });
+        //console.log(membersDetails);
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AddOuestions", "ADQuestion")",
+            data: JSON.stringify(QuestionsDetails),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response ) {
+                          $("#divSuccess").show();
+                        $("#divSuccess").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#divSuccess").slideUp(500);
+                        });
+                    $("#productTable TBODY").remove();
+                    }
+                    else {
+                        $("#divError").show();
+                        $("#divError").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#divError").slideUp(500);
+                        });
+                    }
+            }
+        });
+    });
+</script>
