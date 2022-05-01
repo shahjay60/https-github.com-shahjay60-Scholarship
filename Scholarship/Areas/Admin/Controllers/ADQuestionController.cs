@@ -28,6 +28,7 @@ namespace Scholarship.Areas.Admin.Controllers
         {
             return View();
         }
+        //kenirah
         [HttpPost]
         public ActionResult AddOuestions(List<QuestionInfo> QuestionsDetails)
         {

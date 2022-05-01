@@ -62,9 +62,8 @@
                                     <th>Question</th>
                                     <th>Option A</th>
                                     <th>Option B</th>
-
-                                    <th>Option B</th>
-                                    <th>Option B</th>
+                                    <th>Option C</th>
+                                    <th>Option D</th>
                                     <th>Correct Answer</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -137,9 +136,7 @@
 <script>
     $('#ddlstandard').change(function () {
         var id = $(this).val();
-        debugger;
         $.ajax({
-
             url:  "@Url.Action("GetQuestiondata", "ADQuestion")",
             data: { id: id },
             datatype: "json",

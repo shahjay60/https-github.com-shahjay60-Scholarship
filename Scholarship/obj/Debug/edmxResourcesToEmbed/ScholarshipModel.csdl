@@ -125,11 +125,6 @@
   <EntityType Name="tblStudentResult">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="StudentId" />
-      <PropertyRef Name="Standard" />
-      <PropertyRef Name="Time" />
-      <PropertyRef Name="CreataionDate" />
-      <PropertyRef Name="result" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StudentId" Type="Int32" Nullable="false" />

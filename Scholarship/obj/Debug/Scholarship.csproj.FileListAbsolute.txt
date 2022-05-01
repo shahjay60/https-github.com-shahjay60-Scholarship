@@ -463,3 +463,4 @@ C:\Users\91903\source\repos\Scholarship\Scholarship\obj\Debug\Scholarship.csproj
 C:\Users\91903\source\repos\Scholarship\Scholarship\obj\Debug\Scholarship.csproj.CopyComplete
 C:\Users\91903\source\repos\Scholarship\Scholarship\obj\Debug\Scholarship.dll
 C:\Users\91903\source\repos\Scholarship\Scholarship\obj\Debug\Scholarship.pdb
+C:\Users\91903\source\repos\Scholarship\Scholarship\obj\Debug\Scholarship.csproj.AssemblyReference.cache

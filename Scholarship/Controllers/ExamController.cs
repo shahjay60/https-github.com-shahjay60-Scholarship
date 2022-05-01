@@ -11,7 +11,7 @@ namespace Scholarship.Controllers
     {
         // GET: Exam
         ScholarshipEntities db = new ScholarshipEntities();
-        IDictionary<int, string> numberNames = new Dictionary<int, string>();
+        IDictionary<int, string> SelectedAnswerWithQuestinId = new Dictionary<int, string>();
         List<int> SkipQuest = new List<int>();
         List<int> AttemptedQue = new List<int>();
         int totalCount = 0;
@@ -55,13 +55,13 @@ namespace Scholarship.Controllers
             ViewBag.questionNo = Convert.ToInt32(TempData["QuestionNo"]);
             Session["a"] = Convert.ToInt32(TempData["QuestionNo"]);
 
-            int std = Convert.ToInt32(ViewBag.std);
+            int std = Convert.ToInt32(Session["Std"]);
             totalCount = totalCount + 1;
             if (drp.QuestionNo == 1)
             {
 
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == 3);
+                                               .SingleOrDefault(m => m.Id == 1 && m.Standard == std);
 
                 TempData["qData"] = SingleQuestion;
                 return RedirectToAction("Questions");
@@ -69,7 +69,7 @@ namespace Scholarship.Controllers
             else
             {
                 tblQuestion SingleQuestion = db.tblQuestions
-                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == 3);
+                                               .SingleOrDefault(m => m.Id == drp.QuestionNo && m.Standard == std);
                 int qus = (int)drp.QuestionNo;
                 return View(SingleQuestion);
             }
@@ -93,14 +93,15 @@ namespace Scholarship.Controllers
                 qNo = (int)Session["a"];
                 ViewBag.questionNo = qNo;
             }
+            int std = Convert.ToInt32(Session["Std"]);
 
-            var totalQues = db.tblQuestions.Where(m => m.Standard == 3).ToList();
+            var totalQues = db.tblQuestions.Where(m => m.Standard == std).ToList();
 
             ViewBag.questionNo = totalQues;
             ViewBag.TotalquestionNo = totalQues.Count;
             Session["questionNo"] = totalQues;
             ViewBag.skipQues = qNo;
-            tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == 3);
+            tblQuestion a = db.tblQuestions.SingleOrDefault(m => m.Id == qNo && m.Standard == std);
 
             //tblQuestion a = (tblQuestion)TempData["qData"];
             ViewBag.SkipQuesList = (List<int>)Session["SkipQuest"];
@@ -130,7 +131,7 @@ namespace Scholarship.Controllers
                     Session["correctAns"] = Convert.ToInt32(Session["correctAns"]) - 0.25;
                 }
                 AttemptedQue.Add((int)aaa.Id);
-                numberNames.Add((int)aaa.Id, aaa.selectedvalue);
+                SelectedAnswerWithQuestinId.Add((int)aaa.Id, aaa.selectedvalue);
             }
 
             var selectedData = (Dictionary<int, string>)Session["DateCollections"];
@@ -139,17 +140,17 @@ namespace Scholarship.Controllers
             {
                 foreach (var item in selectedData)
                 {
-                    var data = numberNames.Where(x => x.Key == item.Key).Count();
+                    var data = SelectedAnswerWithQuestinId.Where(x => x.Key == item.Key).Count();
 
                     if (data > 0)
                     {
-                        numberNames.Remove(item.Key);
+                        SelectedAnswerWithQuestinId.Remove(item.Key);
                     }
-                    numberNames.Add(item.Key, item.Value);
+                    SelectedAnswerWithQuestinId.Add(item.Key, item.Value);
                 }
             }
 
-            Session["DateCollections"] = numberNames;
+            Session["DateCollections"] = SelectedAnswerWithQuestinId;
             var marks = Session["correctAns"];
 
             var totalQues = db.tblQuestions.Where(m => m.Standard == std).ToList();
@@ -218,7 +219,8 @@ namespace Scholarship.Controllers
 
             if (!string.IsNullOrEmpty(Finished))
             {
-                return RedirectToAction("Index", "Result",new {std= std, StdId = stdId });
+                string dt = Request.Form["Country"].ToString();
+                return RedirectToAction("Index", "Result",new {std= std, StdId = stdId, time= dt.Trim() });
             }
             return RedirectToAction("Questions");
         }
@@ -278,7 +280,7 @@ namespace Scholarship.Controllers
                 return RedirectToAction("Create", "Result");
             }
             int qId = (int)aaa.Id + 1;
-            int std = Convert.ToInt32(ViewBag.std);
+            int std = Convert.ToInt32(Session["Std"]);
 
             tblQuestion SingleQuestion = db.tblQuestions
                                            .SingleOrDefault(m => m.Id == qId && m.Standard == std);

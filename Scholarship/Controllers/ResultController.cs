@@ -12,19 +12,22 @@ namespace Scholarship.Controllers
         ScholarshipEntities db = new ScholarshipEntities();
 
         // GET: Result
-        public ActionResult Index(int Std, int StdId)
+        public ActionResult Index(int Std, int StdId,string time)
         {
             try
             {
-                string score = Session["correctAns"].ToString();
+                string score = "0";
+
+                if (!string.IsNullOrEmpty(Session["correctAns"].ToString()))
+                    score = Session["correctAns"].ToString();
                 int std = Std;
                 int stdId = StdId;
-                int totalTime = (int)Session["totalTime"];
+                string totalTime = time;
 
                 tblStudentResult mObj = new tblStudentResult();
                 mObj.Standard = stdId;
                 mObj.StudentId = std;
-                mObj.Time = Convert.ToString(totalTime);
+                mObj.Time = totalTime;
                 mObj.CreataionDate = DateTime.Now;
                 mObj.result = score;
 
